@@ -1,0 +1,73 @@
+.header {
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: black;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.search input {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+.search button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icons img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  background: #0d6e4d;
+  padding: 10px 20px;
+  gap: 20px;
+}
+
+.nav a,
+.departamentos {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.departamentos {
+  background: none;
+  border: none;
+}

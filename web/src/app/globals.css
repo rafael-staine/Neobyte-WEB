@@ -1,0 +1,31 @@
+:root {
+    --verde: #137969;
+    --verde-escuro: #0F4B41;
+    --branco: #FFFFFF;
+    --cinza: #71706E;
+    --cinza-escuro: #303030;
+    --preto: #000000;
+    --vermelho: #C30D0D;
+    --amarelo: #FFC300;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+section {
+  scroll-margin-top: 120px;
+}
+
