@@ -8,31 +8,56 @@
   justify-content: space-between;
   align-items: center;
   background: black;
-  padding: 10px 20px;
+  padding: 15px 100px;
   color: white;
 }
 
 .logo h1 {
   margin: 0;
   font-size: 1.5rem;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .search {
   display: flex;
   align-items: center;
-  gap: 5px;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 40px;
+  overflow: hidden;
+  width: 300px;
+  height: 35px;
 }
 
 .search input {
-  padding: 5px 10px;
-  border-radius: 20px;
+  flex: 1;
+  padding: 0 15px;
+  background: black;
+  color: white;
   border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.search input::placeholder {
+  color: #ccc;
 }
 
 .search button {
-  background: none;
+  background: white;
   border: none;
+  width: 40px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+}
+
+.search button img {
+  width: 18px;
+  height: 18px;
 }
 
 .icons {
@@ -42,8 +67,8 @@
 }
 
 .icons img {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
   object-fit: contain;
 }
@@ -51,9 +76,10 @@
 .nav {
   display: flex;
   align-items: center;
-  background: #0d6e4d;
-  padding: 10px 20px;
-  gap: 20px;
+  justify-content: center;
+  background: #137969;
+  padding: 10px 40px;
+  gap: 100px;
 }
 
 .nav a,
@@ -63,11 +89,53 @@
   font-weight: bold;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .departamentos {
-  background: none;
+  background: #0F4B41;
+  padding: 8px 15px;
+  border-radius: 8px;
   border: none;
 }
+
+.departamentos img {
+  width: 16px;
+  height: 16px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.departamentosOpen {
+  border-radius: 8px 8px 0 0;
+}
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #0F4B41;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.dropdownMenu a {
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-weight: normal;
+  transition: background 0.2s;
+}
+
+.dropdownMenu a:hover {
+  background: #137969;
+}
+

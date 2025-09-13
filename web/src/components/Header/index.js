@@ -1,7 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className={styles.header}>
       <div className={styles.topBar}>
@@ -12,7 +16,7 @@ export default function Header() {
         <div className={styles.search}>
           <input type="text" placeholder="Pesquise aqui..." />
           <button>
-            <img src="/buscar.svg" alt="Buscar" />
+            <img src="/Neobyte/pesquisa.svg" alt="Buscar" />
           </button>
         </div>
 
@@ -24,10 +28,27 @@ export default function Header() {
       </div>
 
       <nav className={styles.nav}>
-        <button className={styles.departamentos}>
-          <img src="/menu.svg" alt="Menu" />
-          DEPARTAMENTOS
-        </button>
+        <div className={styles.dropdown}>
+          <button
+            type="button"
+            className={`${styles.departamentos} ${open ? styles.departamentosOpen : ""}`}
+            onClick={() => setOpen(!open)}
+          >
+            <img src="/Neobyte/navegação.svg" alt="Menu" />
+            DEPARTAMENTOS
+          </button>
+
+          {open && (
+            <div className={styles.dropdownMenu}>
+              <a href="#">Placa de Vídeo</a>
+              <a href="#">Placa Mãe</a>
+              <a href="#">Processadores</a>
+              <a href="#">Memória RAM</a>
+              <a href="#">Armazenamento</a>
+            </div>
+          )}
+        </div>
+
         <a href="#">PROMOÇÕES</a>
         <a href="#">HARDWARE</a>
         <a href="#">GAMER</a>
