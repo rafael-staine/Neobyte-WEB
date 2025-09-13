@@ -12,6 +12,13 @@
   color: white;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
 .logo h1 {
   margin: 0;
   font-size: 1.5rem;

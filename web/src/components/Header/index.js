@@ -44,7 +44,13 @@ export default function Header() {
               <a href="#">Placa Mãe</a>
               <a href="#">Processadores</a>
               <a href="#">Memória RAM</a>
-              <a href="#">Armazenamento</a>
+              <a href="#">SSD/HD</a>
+              <a href="#">Monitores</a>
+              <a href="#">Gabinetes</a>
+              <a href="#">Headeset</a>
+              <a href="#">Teclados</a>
+              <a href="#">Mouses</a>
+              <a href="#">Cadeiras</a>
             </div>
           )}
         </div>
