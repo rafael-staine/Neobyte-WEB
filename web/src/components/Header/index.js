@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -21,9 +22,15 @@ export default function Header() {
         </div>
 
         <div className={styles.icons}>
-          <img src="/Neobyte/perfil.svg" alt="Perfil" />
-          <img src="/Neobyte/favorito.svg" alt="Favorito" />
-          <img src="/Neobyte/carrinho.svg" alt="Carrinho" />
+          <Link href="/Cadastro">
+            <img src="/Neobyte/perfil.svg" alt="Perfil" />
+          </Link>
+          <Link href="/Favoritos">
+            <img src="/Neobyte/favorito.svg" alt="Favorito" />
+          </Link>
+          <Link href="/Carrinho">
+            <img src="/Neobyte/carrinho.svg" alt="Carrinho" />
+          </Link>
         </div>
       </div>
 
@@ -31,7 +38,9 @@ export default function Header() {
         <div className={styles.dropdown}>
           <button
             type="button"
-            className={`${styles.departamentos} ${open ? styles.departamentosOpen : ""}`}
+            className={`${styles.departamentos} ${
+              open ? styles.departamentosOpen : ""
+            }`}
             onClick={() => setOpen(!open)}
           >
             <img src="/Neobyte/navegação.svg" alt="Menu" />
@@ -40,25 +49,25 @@ export default function Header() {
 
           {open && (
             <div className={styles.dropdownMenu}>
-              <a href="#">Placa de Vídeo</a>
-              <a href="#">Placa Mãe</a>
-              <a href="#">Processadores</a>
-              <a href="#">Memória RAM</a>
-              <a href="#">SSD/HD</a>
-              <a href="#">Monitores</a>
-              <a href="#">Gabinetes</a>
-              <a href="#">Headeset</a>
-              <a href="#">Teclados</a>
-              <a href="#">Mouses</a>
-              <a href="#">Cadeiras</a>
+              <Link href="/placas-de-video">Placa de Vídeo</Link>
+              <Link href="/placas-mae">Placa Mãe</Link>
+              <Link href="/processadores">Processadores</Link>
+              <Link href="/memoria-ram">Memória RAM</Link>
+              <Link href="/armazenamento">SSD/HD</Link>
+              <Link href="/monitores">Monitores</Link>
+              <Link href="/gabinetes">Gabinetes</Link>
+              <Link href="/headsets">Headset</Link>
+              <Link href="/teclados">Teclados</Link>
+              <Link href="/mouses">Mouses</Link>
+              <Link href="/cadeiras">Cadeiras</Link>
             </div>
           )}
         </div>
 
-        <a href="#">PROMOÇÕES</a>
-        <a href="#">HARDWARE</a>
-        <a href="#">GAMER</a>
-        <a href="#">ATENDIMENTO</a>
+        <Link href="/promocoes">PROMOÇÕES</Link>
+        <Link href="/hardware">HARDWARE</Link>
+        <Link href="/gamer">GAMER</Link>
+        <Link href="/atendimento">ATENDIMENTO</Link>
       </nav>
     </header>
   );

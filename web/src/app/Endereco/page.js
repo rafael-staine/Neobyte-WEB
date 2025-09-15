@@ -10,7 +10,10 @@ export default function Home() {
       </section>
 
       <section>
-        <SubHeader />
+        <SubHeader 
+          logo="/Neobyte/endereco.svg"
+          title="Meus Endereços"
+        />
       </section>
 
       <section>

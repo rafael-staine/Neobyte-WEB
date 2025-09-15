@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,7 +11,10 @@ export default function Home() {
       </section>
 
       <section>
-        <SubHeader />
+        <SubHeader 
+          logo="/Neobyte/carrinho.svg"
+          title="Meu Carrinho"
+        />
       </section>
 
       <section>

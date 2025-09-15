@@ -10,7 +10,10 @@ export default function Home() {
       </section>
 
       <section>
-        <SubHeader />
+        <SubHeader 
+          logo="/Neobyte/pedidos.svg"
+          title="Meus Pedidos"
+        />
       </section>
 
       <section>
