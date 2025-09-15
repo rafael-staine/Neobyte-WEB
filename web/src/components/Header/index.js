@@ -64,10 +64,10 @@ export default function Header() {
           )}
         </div>
 
-        <Link href="/promocoes">PROMOÇÕES</Link>
-        <Link href="/hardware">HARDWARE</Link>
-        <Link href="/gamer">GAMER</Link>
-        <Link href="/atendimento">ATENDIMENTO</Link>
+        <Link href="/">PROMOÇÕES</Link>
+        <Link href="/">HARDWARE</Link>
+        <Link href="/">GAMER</Link>
+        <Link href="/">ATENDIMENTO</Link>
       </nav>
     </header>
   );

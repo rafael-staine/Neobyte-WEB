@@ -1,7 +1,12 @@
+"use client"; // precisa porque usamos hook do Next
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./SubHeader.module.css";
 
 export default function SubHeader({ logo, title }) {
+    const pathname = usePathname();
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -16,22 +21,37 @@ export default function SubHeader({ logo, title }) {
             </header>
 
             <nav className={styles.menu}>
-                <Link href="/Cadastro" className={`${styles.tab} ${styles.active}`}>
+                <Link
+                    href="/Cadastro"
+                    className={`${styles.tab} ${pathname === "/Cadastro" ? styles.active : ""}`}
+                >
                     Meu Cadastro
                 </Link>
-                <Link href="/Pedidos" className={styles.tab}>
+                <Link
+                    href="/Favoritos"
+                    className={`${styles.tab} ${pathname === "/Favoritos" ? styles.active : ""}`}
+                >
+                    Meus Favoritos
+                </Link>
+                <Link
+                    href="/Carrinho"
+                    className={`${styles.tab} ${pathname === "/Carrinho" ? styles.active : ""}`}
+                >
+                    Meu Carrinho
+                </Link>
+                <Link
+                    href="/Pedidos"
+                    className={`${styles.tab} ${pathname === "/Pedidos" ? styles.active : ""}`}
+                >
                     Meus Pedidos
                 </Link>
-                <Link href="/Endereco" className={styles.tab}>
+                <Link
+                    href="/Endereco"
+                    className={`${styles.tab} ${pathname === "/Endereco" ? styles.active : ""}`}
+                >
                     Meus Endereços
-                </Link>
-                <Link href="/Favoritos" className={styles.tab}>
-                    Meus Favoritos
                 </Link>
             </nav>
         </div>
     );
 }
-
-
-

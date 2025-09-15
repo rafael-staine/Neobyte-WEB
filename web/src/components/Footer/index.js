@@ -13,7 +13,7 @@ export default function Footer() {
                     <div className={styles.topRow}>
                         <div className={styles.centerContent}>
                             <span className={styles.sac}>SAC: 3888-8899</span>
-                            <a href="/sobre" className={styles.link}>Sobre nós</a>
+                            <a href="/" className={styles.link}>Sobre nós</a>
                         </div>
                         <div className={styles.icons}>
                             <img src="/Neobyte/facebook.svg" alt="Facebook" />

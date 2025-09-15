@@ -13,7 +13,7 @@ export default function Home() {
       <section>
         <SubHeader 
           logo="/Neobyte/carrinho.svg"
-          title="Meu Carrinho"
+          title="Carrinho"
         />
       </section>
 
