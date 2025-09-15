@@ -11,7 +11,9 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.topBar}>
         <div className={styles.logo}>
-          <h1>NEOBYTE</h1>
+          <a href="/" className={styles.logoLink}>
+            <h1>NEOBYTE</h1>
+          </a>
         </div>
 
         <div className={styles.search}>
@@ -38,9 +40,8 @@ export default function Header() {
         <div className={styles.dropdown}>
           <button
             type="button"
-            className={`${styles.departamentos} ${
-              open ? styles.departamentosOpen : ""
-            }`}
+            className={`${styles.departamentos} ${open ? styles.departamentosOpen : ""
+              }`}
             onClick={() => setOpen(!open)}
           >
             <img src="/Neobyte/navegação.svg" alt="Menu" />
@@ -49,17 +50,17 @@ export default function Header() {
 
           {open && (
             <div className={styles.dropdownMenu}>
-              <Link href="/placas-de-video">Placa de Vídeo</Link>
-              <Link href="/placas-mae">Placa Mãe</Link>
-              <Link href="/processadores">Processadores</Link>
-              <Link href="/memoria-ram">Memória RAM</Link>
-              <Link href="/armazenamento">SSD/HD</Link>
-              <Link href="/monitores">Monitores</Link>
-              <Link href="/gabinetes">Gabinetes</Link>
-              <Link href="/headsets">Headset</Link>
-              <Link href="/teclados">Teclados</Link>
-              <Link href="/mouses">Mouses</Link>
-              <Link href="/cadeiras">Cadeiras</Link>
+              <Link href="/">Placa de Vídeo</Link>
+              <Link href="/">Placa Mãe</Link>
+              <Link href="/">Processadores</Link>
+              <Link href="/">Memória RAM</Link>
+              <Link href="/">SSD/HD</Link>
+              <Link href="/">Monitores</Link>
+              <Link href="/">Gabinetes</Link>
+              <Link href="/">Headset</Link>
+              <Link href="/">Teclados</Link>
+              <Link href="/">Mouses</Link>
+              <Link href="/">Cadeiras</Link>
             </div>
           )}
         </div>

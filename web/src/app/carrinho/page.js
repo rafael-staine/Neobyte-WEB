@@ -1,9 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
-import Link from "next/link";
 
-export default function Home() {
+export default function Carrinho() {
   return (
     <div>
       <section>

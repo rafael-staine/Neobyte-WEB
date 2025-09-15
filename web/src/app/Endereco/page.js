@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
 
-export default function Home() {
+export default function Endereco() {
   return (
     <div>
       <section>

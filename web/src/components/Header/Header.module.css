@@ -26,6 +26,12 @@
   font-style: italic;
 }
 
+.logoLink {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
 .search {
   display: flex;
   align-items: center;
@@ -82,8 +88,8 @@
 }
 
 .icons img:hover {
-    opacity: 0.7;
-    cursor: pointer;
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .nav {
@@ -126,6 +132,7 @@
 .departamentosOpen {
   border-radius: 8px 8px 0 0;
 }
+
 .dropdownMenu {
   position: absolute;
   top: 100%;
@@ -135,7 +142,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  min-width: 180px;
+  min-width: 182px;
   z-index: 100;
   overflow: hidden;
 }
@@ -151,4 +158,3 @@
 .dropdownMenu a:hover {
   background: #137969;
 }
-
