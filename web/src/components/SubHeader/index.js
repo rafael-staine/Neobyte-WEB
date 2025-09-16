@@ -22,10 +22,10 @@ export default function SubHeader({ logo, title }) {
 
             <nav className={styles.menu}>
                 <Link
-                    href="/Cadastro"
-                    className={`${styles.tab} ${pathname === "/Cadastro" ? styles.active : ""}`}
+                    href="/Perfil"
+                    className={`${styles.tab} ${pathname === "/Perfil" ? styles.active : ""}`}
                 >
-                    Meu Cadastro
+                    Meus Dados
                 </Link>
                 <Link
                     href="/Favoritos"

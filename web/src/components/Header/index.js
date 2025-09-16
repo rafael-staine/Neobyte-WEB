@@ -24,7 +24,7 @@ export default function Header() {
         </div>
 
         <div className={styles.icons}>
-          <Link href="/Cadastro">
+          <Link href="/Perfil">
             <img src="/Neobyte/perfil.svg" alt="Perfil" />
           </Link>
           <Link href="/Favoritos">

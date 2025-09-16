@@ -7,9 +7,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: black;
+  background: var(--preto);
   padding: 15px 100px;
-  color: white;
+  color: var(--branco);
 }
 
 .logo {
@@ -20,6 +20,7 @@
 }
 
 .logo h1 {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
@@ -35,8 +36,8 @@
 .search {
   display: flex;
   align-items: center;
-  background-color: black;
-  border: 1px solid white;
+  background-color: var(--preto);
+  border: 1px solid var(--branco);
   border-radius: 40px;
   overflow: hidden;
   width: 300px;
@@ -46,8 +47,8 @@
 .search input {
   flex: 1;
   padding: 0 15px;
-  background: black;
-  color: white;
+  background: var(--preto);
+  color: var(--branco);
   border: none;
   outline: none;
   font-size: 0.9rem;
@@ -58,7 +59,7 @@
 }
 
 .search button {
-  background: white;
+  background: var(--branco);
   border: none;
   width: 40px;
   height: 100%;
@@ -96,14 +97,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #137969;
+  background: var(--verde);
   padding: 10px 40px;
   gap: 100px;
 }
 
 .nav a,
 .departamentos {
-  color: white;
+  color: var(--branco);
   text-decoration: none;
   font-weight: bold;
   display: flex;
@@ -114,7 +115,8 @@
 }
 
 .departamentos {
-  background: #0F4B41;
+  min-width: 185px;
+  background: var(--verde-escuro);
   padding: 8px 15px;
   border-radius: 8px;
   border: none;
@@ -134,27 +136,29 @@
 }
 
 .dropdownMenu {
+  font-family: 'Poppins', sans-serif;
   position: absolute;
   top: 100%;
   left: 0;
-  background: #0F4B41;
+  background: var(--verde-escuro);
   border-radius: 0 0 6px 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  min-width: 182px;
+  min-width: 185px;
   z-index: 100;
   overflow: hidden;
 }
 
 .dropdownMenu a {
   padding: 10px 15px;
-  color: white;
+  color:var(--branco);
   text-decoration: none;
-  font-weight: normal;
-  transition: background 0.2s;
+  font-weight: 500;
+  transition: background 0.2s, padding-left 0.2s;
 }
 
 .dropdownMenu a:hover {
-  background: #137969;
+  background: var(--verde);
+  padding-left: 20px;
 }

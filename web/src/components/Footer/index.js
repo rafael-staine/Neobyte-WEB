@@ -5,9 +5,9 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={styles.contentWrapper}>
                 <div className={styles.leftBox}>
-                    <div className={styles.logo}>
+                    <a href="/" className={styles.logo}>
                         <h1>NEOBYTE</h1>
-                    </div>
+                    </a>
                 </div>
                 <div className={styles.rightBox}>
                     <div className={styles.topRow}>
