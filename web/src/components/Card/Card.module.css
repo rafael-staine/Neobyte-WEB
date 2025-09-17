@@ -1,0 +1,55 @@
+.produtos {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--cinza-escuro);
+}
+
+.card_produto {
+    position: relative;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    border: 3px solid transparent;
+    background-color: var(--branco);
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.card_produto:hover {
+    transform: translateY(-5px);
+    border: 3px solid #137969;
+    box-shadow: 0 10px 20px #0000007a;
+}
+
+.produto_card {
+    width: 286px;
+    height: 100%;
+    margin: 30px 0px;
+}
+
+.tituloProduto {
+    font-size: 1.1rem;
+    text-align: start;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.desconto { 
+    color: red;
+    text-decoration:line-through 1px red; 
+}
+.preco {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #137969;
+}
+
+.par {
+    font-size: 0.95rem;
+    color: #71706E;
+    font-weight: 600;
+}
