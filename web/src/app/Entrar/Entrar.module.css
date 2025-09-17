@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  height: 100vh;
+  background: var(--cinza-escuro);
+  justify-content: center;
+  align-items: center;
+}
+
+.left, .right {
+  width: 50%;
+  height: 500px;
+  border-radius: 10px;
+}
+
+.left {
+  background: var(--branco);
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  background: var(--verde);
+  color: var(--branco);
+  width: 600px;
+  padding: 40px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  width: 160px;
+  height: auto;
+}
+
+.text {
+  width: 300px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.emailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+}
+
+.senhaContainer {
+  position: relative;
+}
+
+.icone {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.icone img {
+  width: 20px;
+  height: 20px;
+}
+
+.button {
+  background: var(--verde);
+  color: #0f4b41;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid var(--branco);
+  color: var(--branco);
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100px;
+}
+
+.register {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.register a {
+  color: #ccefe6;
+  text-decoration: underline;
+}

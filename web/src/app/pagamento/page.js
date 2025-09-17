@@ -1,14 +1,18 @@
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
 
-export default function Pagamento() {
+export default function Favoritos() {
   return (
     <div>
+      <section>
+        <Header />
+      </section>
 
       <section>
         <SubHeader 
           logo="/Neobyte/carrinho.svg"
-          title="Metodos de Pagamento"
+          title="Escolha o Metodos de Pagamento"
         />
       </section>
 
