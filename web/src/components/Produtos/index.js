@@ -7,7 +7,7 @@ export default function Produtos() {
             <Card
             nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
             imagemProd="/ImgProdutos/placa-mae.png"
-            desconto="R$ 788,22"
+            desconto="788.22"
             preco="575.99"
             />
             <Card/>

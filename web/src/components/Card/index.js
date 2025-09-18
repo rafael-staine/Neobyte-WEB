@@ -9,7 +9,7 @@ export default function Card(props) {
                         <img src={props.imagemProd} alt={props.nomeProduto}></img>
                     </picture>
                     <h3 className={styles.tituloProduto}>{props.nomeProduto}</h3>
-                    <p className={styles.desconto}>{props.desconto}</p>
+                    <p className={styles.desconto}>{`R$ ${props.desconto}`}</p>
                     <p className={styles.preco}>{`R$ ${props.preco}`}</p>
                     <p className={styles.par}>À vista no pix ou até 10x de</p>
                     <span className={styles.precoPar}>R$ {calcProd}</span>
