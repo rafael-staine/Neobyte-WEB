@@ -1,0 +1,150 @@
+.container {
+    display: flex;
+    height: 100vh;
+    background: var(--cinza-escuro);
+    justify-content: center;
+    align-items: center;
+}
+
+.left,
+.right {
+    height: 500px;
+}
+
+.left {
+    background: #F5F5F5;
+    color: var(--verde);
+    width: 600px;
+    padding: 40px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right {
+    background: var(--verde);
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.logo {
+    width: 160px;
+    height: auto;
+}
+
+.text {
+    width: 300px;
+    height: auto;
+    margin-top: 20px;
+}
+
+.title {
+    color: var(--verde);
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.subtitle {
+    color: var(--verde);
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulario p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.input {
+    background-color: var(--verde);
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    width: 100%;
+}
+
+.input::placeholder {
+    color: var(--branco);
+}
+
+.senhaContainer {
+    position: relative;
+}
+
+.icone {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.button {
+    background: var(--branco);
+    color: var(--verde);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    border: 2px solid var(--verde);
+    cursor: pointer;
+    transition: 0.3s;
+    width: 160px;
+    display: block;
+    margin: 0 auto;
+}
+
+.button:hover {
+    background: var(--branco);
+    color: var(--verde);
+    border: 2px solid var(--verde);
+}
+
+.register {
+    font-weight: bold;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.cadastrar {
+    color: var(--verde);
+    text-decoration: underline;
+}
+
+.pergunta {
+    color: var(--preto);
+}

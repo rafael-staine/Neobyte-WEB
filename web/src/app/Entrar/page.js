@@ -4,30 +4,35 @@ export default function Login() {
     return (
         <div className={styles.container}>
 
+            {/* Lado esquerdo com logo e o texto */}
             <div className={styles.left}>
                 <img src="/logo-neobyte.png" alt="Logo" className={styles.logo} />
                 <img src="/text-neobyte.png" alt="text" className={styles.text} />
             </div>
 
+            {/* Lado direito com o formulário */}
             <div className={styles.right}>
                 <h1 className={styles.title}>NEOBYTE</h1>
                 <p className={styles.subtitle}>Bem-vindo de volta!</p>
 
-                <form className={styles.emailContainer}>
-                    <label>Email</label>
+                <form className={styles.formulario}>
+                    <p>Email</p>
+
                     <input
                         type="email"
                         placeholder="Digite seu email..."
                         className={styles.input}
                     />
 
-                    <label>Senha</label>
+                    <p>Senha</p>
                     <div className={styles.senhaContainer}>
+                        
                         <input
                             type="password"
                             placeholder="Digite sua senha..."
                             className={styles.input}
                         />
+
                         <button type="button" className={styles.icone}>
                             <img src="./NeoByte/vizualizar.svg" alt="Visualizar senha" />
                         </button>
@@ -37,7 +42,8 @@ export default function Login() {
                 </form>
 
                 <p className={styles.register}>
-                    Não possui uma conta? <a href="#">Clique aqui para se cadastrar</a>
+                    <span className={styles.pergunta}>Não possui uma conta?</span>{" "}
+                    <a href="#" className={styles.cadastrar}>Clique aqui para se cadastrar!</a>
                 </p>
             </div>
         </div>

@@ -6,19 +6,20 @@
   align-items: center;
 }
 
-.left, .right {
-  width: 50%;
+.left,
+.right {
   height: 500px;
-  border-radius: 10px;
 }
 
 .left {
-  background: var(--branco);
+  background: #F5F5F5;
   width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .right {
@@ -45,20 +46,31 @@
 }
 
 .title {
-  font-size: 26px;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin: 0;
   font-weight: bold;
-  margin-bottom: 5px;
+  font-style: italic;
 }
 
 .subtitle {
-  font-size: 16px;
+  font-size: 25px;
+  font-weight: bold;
   margin-bottom: 30px;
+  text-align: center;
+  margin-top: 15px;
 }
 
-.emailContainer {
+.formulario {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+.formulario p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .input {
@@ -68,6 +80,10 @@
   outline: none;
   font-size: 14px;
   width: 100%;
+}
+
+.input::placeholder {
+  color: var(--verde);
 }
 
 .senhaContainer {
@@ -83,32 +99,49 @@
   border: none;
   cursor: pointer;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icone img {
   width: 20px;
   height: 20px;
+  display: block;
 }
 
 .button {
   background: var(--verde);
-  color: #0f4b41;
+  color: var(--branco);
   font-weight: bold;
   padding: 10px;
   border-radius: 6px;
   border: 2px solid var(--branco);
-  color: var(--branco);
   cursor: pointer;
   transition: 0.3s;
-  width: 100px;
+  width: 160px;
+  display: block;
+  margin: 0 auto;
+}
+
+.button:hover {
+  background: var(--branco);
+  color: var(--verde);
+  border: 2px solid var(--verde);
 }
 
 .register {
-  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
   margin-top: 20px;
 }
 
-.register a {
-  color: #ccefe6;
+.cadastrar {
+  color: var(--branco);
   text-decoration: underline;
+}
+
+.pergunta {
+  color: var(--preto);
 }
