@@ -10,20 +10,55 @@ export default function Produtos() {
             desconto="788.22"
             preco="575.99"
             />
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            <Card
+            nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+            imagemProd="/ImgProdutos/placa-mae.png"
+            desconto="788.22"
+            preco="575.99"
+            />
+            
         </section>
     );
 }

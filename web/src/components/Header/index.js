@@ -1,11 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -37,7 +51,7 @@ export default function Header() {
       </div>
 
       <nav className={styles.nav}>
-        <div className={styles.dropdown}>
+        <div className={styles.dropdown} ref={dropdownRef}>
           <button
             type="button"
             className={`${styles.departamentos} ${open ? styles.departamentosOpen : ""

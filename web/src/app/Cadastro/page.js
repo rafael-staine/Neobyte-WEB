@@ -26,7 +26,7 @@ export default function Login() {
                             className={styles.input}
                         />
                         <button type="button" className={styles.icone}>
-                            <img src="./NeoByte/vizualizar.svg" alt="Visualizar senha" />
+                            <img src="./NeoByte/vizualizar-b.svg" alt="Visualizar senha" />
                         </button>
                     </div>
 
@@ -41,8 +41,8 @@ export default function Login() {
 
             {/* Lado direito agora fica logo e texto */}
             <div className={styles.right}>
-                <img src="/Logo-branca.svg" alt="Logo" className={styles.logo} />
-                <img src="/text-branco.svg" alt="text" className={styles.text} />
+                <img src="/logo/logo-branca.svg" alt="Logo" className={styles.logo} />
+                <img src="/logo/text-branco.svg" alt="text" className={styles.text} />
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ export default function Home() {
         <title>Neobyte</title>
         <meta name="description" content="O melhor e-commerce tecnológico do mercado" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="./favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
       <section>
@@ -24,25 +24,3 @@ export default function Home() {
     </>
   );
 }
-
-/* export default function Home() {
-  return (
-    <div>
-      <section>
-        <Header />
-      </section>
-
-      <section>
-        <Banner />
-      </section>
-
-      <section>
-        <Produtos />
-      </section>
-
-      <section>
-        <Footer />
-      </section>
-    </div>
-  );
-} */
