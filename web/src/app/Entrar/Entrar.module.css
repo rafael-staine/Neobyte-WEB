@@ -10,9 +10,9 @@
 .right {
   height: 500px;
 }
-
+  
 .left {
-  background: #F5F5F5;
+  background: var(--branco);
   width: 600px;
   display: flex;
   flex-direction: column;

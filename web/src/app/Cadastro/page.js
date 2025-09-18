@@ -41,8 +41,8 @@ export default function Login() {
 
             {/* Lado direito agora fica logo e texto */}
             <div className={styles.right}>
-                <img src="/logo-neobyte.png" alt="Logo" className={styles.logo} />
-                <img src="/text-neobyte.png" alt="text" className={styles.text} />
+                <img src="/Logo-branca.svg" alt="Logo" className={styles.logo} />
+                <img src="/text-branco.svg" alt="text" className={styles.text} />
             </div>
         </div>
     );

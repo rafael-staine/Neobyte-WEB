@@ -12,7 +12,7 @@
 }
 
 .left {
-    background: #F5F5F5;
+    background: var(--branco);
     color: var(--verde);
     width: 600px;
     padding: 40px;

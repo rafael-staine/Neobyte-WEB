@@ -6,8 +6,8 @@ export default function Login() {
 
             {/* Lado esquerdo com logo e o texto */}
             <div className={styles.left}>
-                <img src="/logo-neobyte.png" alt="Logo" className={styles.logo} />
-                <img src="/text-neobyte.png" alt="text" className={styles.text} />
+                <img src="/logo-verde.svg" alt="Logo" className={styles.logo} />
+                <img src="/text-verde.svg" alt="text" className={styles.text} />
             </div>
 
             {/* Lado direito com o formulário */}
@@ -26,7 +26,7 @@ export default function Login() {
 
                     <p>Senha</p>
                     <div className={styles.senhaContainer}>
-                        
+
                         <input
                             type="password"
                             placeholder="Digite sua senha..."
