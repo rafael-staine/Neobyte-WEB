@@ -1,10 +1,3 @@
-.produtos {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: var(--cinza-escuro);
-}
-
 .card_produto {
     position: relative;
     padding: 20px 15px;
@@ -52,4 +45,10 @@
     font-size: 0.95rem;
     color: #71706E;
     font-weight: 600;
+}
+
+.precoPar {
+    font-size: 1.1rem;
+    color: #71706E;
+    font-weight: 700;
 }
