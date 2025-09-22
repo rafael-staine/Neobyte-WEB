@@ -11,12 +11,12 @@ export default function SubHeader({ logo, title }) {
         <div className={styles.container}>
             <header className={styles.header}>
                 <div className={styles.icons}>
-                    <img src={logo} alt="logo" />
+                    <Image src={logo} alt="logo" width={26} height={26} />
                     <span className={styles.info}>{title}</span>
                 </div>
 
                 <Link href="/" className={styles.sair}>
-                    <img src="/Neobyte/sair.svg" alt="Sair" /> Sair
+                    <Image src="/Neobyte/sair.svg" alt="Sair" width={26} height={26} /> Sair
                 </Link>
             </header>
 

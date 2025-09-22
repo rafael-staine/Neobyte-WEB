@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Header.module.css";
+import Image from "next/image";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -25,27 +26,27 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.topBar}>
         <div className={styles.logo}>
-          <a href="/" className={styles.logoLink}>
+          <Link href="/" className={styles.logoLink}>
             <h1>NEOBYTE</h1>
-          </a>
+          </Link>
         </div>
 
         <div className={styles.search}>
           <input type="text" placeholder="Pesquise aqui..." />
           <button>
-            <img src="/Neobyte/pesquisa.svg" alt="Buscar" />
+            <Image src="/Neobyte/pesquisa.svg" alt="Buscar" width={26} height={26} />
           </button>
         </div>
 
         <div className={styles.icons}>
           <Link href="/Perfil">
-            <img src="/Neobyte/perfil.svg" alt="Perfil" />
+            <Image src="/Neobyte/perfil.svg" alt="Perfil" width={26} height={26} />
           </Link>
           <Link href="/Favoritos">
-            <img src="/Neobyte/favorito.svg" alt="Favorito" />
+            <Image src="/Neobyte/favorito.svg" alt="Favorito" width={26} height={26} />
           </Link>
           <Link href="/Carrinho">
-            <img src="/Neobyte/carrinho.svg" alt="Carrinho" />
+            <Image src="/Neobyte/carrinho.svg" alt="Carrinho" width={26} height={26} />
           </Link>
         </div>
       </div>
@@ -58,7 +59,7 @@ export default function Header() {
               }`}
             onClick={() => setOpen(!open)}
           >
-            <img src="/Neobyte/navegação.svg" alt="Menu" />
+            <Image src="/Neobyte/navegação.svg" alt="Menu" width={26} height={26} />
             DEPARTAMENTOS
           </button>
 
