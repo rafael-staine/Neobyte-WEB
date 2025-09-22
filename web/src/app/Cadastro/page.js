@@ -35,7 +35,7 @@ export default function Login() {
 
                 <p className={styles.register}>
                     <span className={styles.pergunta}>Já possui uma conta?</span>{" "}
-                    <a href="#" className={styles.cadastrar}>Clique aqui para entrar!</a>
+                    <a href="/Entrar" className={styles.cadastrar}>Clique aqui para entrar!</a>
                 </p>
             </div>
 

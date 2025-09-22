@@ -1,4 +1,4 @@
-"use client"; // precisa porque usamos hook do Next
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -40,8 +40,8 @@ export default function SubHeader({ logo, title }) {
                     Meu Carrinho
                 </Link>
                 <Link
-                    href="/Pedidos"
-                    className={`${styles.tab} ${pathname === "/Pedidos" ? styles.active : ""}`}
+                    href="/Pedido"
+                    className={`${styles.tab} ${pathname === "/Pedido" ? styles.active : ""}`}
                 >
                     Meus Pedidos
                 </Link>
