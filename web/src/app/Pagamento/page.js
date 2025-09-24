@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import styles from "./Pagamento.module.css";
 import Link from "next/link";
 
-export default function Favoritos() {
+export default function Pagamento() {
   return (
     <div>
       <div className={styles.container}>
