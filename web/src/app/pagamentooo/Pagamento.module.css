@@ -95,11 +95,25 @@
     background: var(--cinza);
 }
 
-.metodos input {
+.metodos input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--branco);
+    border-radius: 50%;
+    background: transparent;
     cursor: pointer;
+    transition: all 0.2s;
 }
 
-.metodos img {
+.metodos input[type="radio"]:checked {
+    background: var(--verde);
+    border-color: var(--verde);
+}
+
+.metodos img {  
     width: 40px;
     height: 40px;
     object-fit: contain;

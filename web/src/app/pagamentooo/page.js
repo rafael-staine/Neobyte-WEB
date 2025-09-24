@@ -24,19 +24,23 @@ export default function Favoritos() {
 
           <div className={styles.containerMetodos}>
             <label className={styles.metodos}>
+              <input type="radio" name="metodo" />
               <img src="/Neobyte/pix.svg" alt="PIX" />
               <span>PIX</span>
             </label>
 
             <label className={styles.metodos}>
+              <input type="radio" name="metodo" />
               <img src="/Neobyte/cartao.svg" alt="Cartão de Crédito" />
               <span>Cartão de Crédito</span>
             </label>
 
             <label className={styles.metodos}>
+              <input type="radio" name="metodo" />
               <img src="/Neobyte/boleto.svg" alt="Boleto Flash" />
               <span>Boleto Flash</span>
             </label>
+
           </div>
 
           <div className={styles.containerTotal}>
