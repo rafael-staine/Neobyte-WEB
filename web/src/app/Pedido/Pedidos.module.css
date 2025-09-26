@@ -4,4 +4,57 @@
     min-height: 100vh;
     padding: 20px 40px;
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pedidos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.pedidos li {
+    background-color: var(--cinza);
+    width: 80%;
+    min-height: 150px;
+    border-radius: 20px;
+    border: 1px solid var(--branco);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pedidos li:hover {
+    background: var(--verde);
+    cursor: pointer;
+    transition: background 0.5s ease;
+}
+
+.pedidos li img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.info p {
+    margin: 40px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.info p:first-child {
+    max-width: 600px;
 }

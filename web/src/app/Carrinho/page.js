@@ -18,7 +18,7 @@ export default function Carrinho() {
       </section>
 
       <div className={styles.container}>
-      
+
       </div>
 
       <section>

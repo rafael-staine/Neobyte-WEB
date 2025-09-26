@@ -48,7 +48,7 @@
 
 .sair:hover {
     border: 2px solid var(--branco);
-    transition: all 0.2s;
+    transition: all 0.2s
 }
 
 .sair img {
@@ -105,7 +105,7 @@
     border-radius: 50%;
     background: transparent;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.1s;
 }
 
 .metodos input[type="radio"]:checked {
@@ -113,7 +113,7 @@
     border-color: var(--verde);
 }
 
-.metodos img {  
+.metodos img {
     width: 40px;
     height: 40px;
     object-fit: contain;
@@ -152,7 +152,7 @@
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
+    color: var(--branco);
     cursor: pointer;
     transition: all 0.2s;
 }
