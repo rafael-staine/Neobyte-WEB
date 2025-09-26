@@ -32,9 +32,9 @@ export default function Header() {
 
         <div className={styles.search}>
           <input type="text" placeholder="Pesquise aqui..." />
-          <button>
+          <a href="/Pesquisa" className={styles.searchButton}>
             <img src="/Neobyte/pesquisa.svg" alt="Buscar" />
-          </button>
+          </a>
         </div>
 
         <div className={styles.icons}>

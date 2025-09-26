@@ -18,6 +18,9 @@ export default function Home() {
       <Header/>
       <section>
         <Banner/>
+        <h2 className={styles.titleHome}>Mais Vendidos</h2>
+        <Produtos/>
+        <h2 className={styles.titleHome}>Acabaram de Chegar</h2>
         <Produtos/>
       </section>
       <Footer/>

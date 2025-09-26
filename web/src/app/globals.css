@@ -30,4 +30,5 @@ img {
 
 section {
   scroll-margin-top: 120px;
+  background-color: var(--cinza-escuro);
 }
