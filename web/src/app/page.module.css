@@ -1,5 +1,23 @@
+.containerCards {
+    padding: 0 40px;
+}
+
 .titleHome {
-    margin-top: 50px;
-    padding-left: 112px;
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 60px;
+    padding-left: 80px;
     color: var(--branco);
+}
+
+.gridCards1 {
+    display: grid;
+    grid-template-columns: repeat(5, 0fr);
+    justify-content: center;
+}
+
+.gridCards2 {
+    display: grid;
+    grid-template-columns: repeat(5, 0fr);
+    justify-content: center;
 }

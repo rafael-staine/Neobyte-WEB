@@ -15,13 +15,12 @@
 
 .card_produto:hover {
     transform: translateY(-5px);
-    border: 3px solid #137969;
+    border: 3px solid var(--verde);
     box-shadow: 0 10px 20px #0000007a;
 }
 
 .produto_card {
     width: 286px;
-    height: 100%;
     margin: 30px 30px;
 }
 
@@ -38,17 +37,17 @@
 .preco {
     font-weight: 800;
     font-size: 1.3rem;
-    color: #137969;
+    color: var(--verde);
 }
 
 .par {
     font-size: 0.95rem;
-    color: #71706E;
+    color: var(--cinza);
     font-weight: 600;
 }
 
 .precoPar {
     font-size: 1.1rem;
-    color: #71706E;
+    color: var(--cinza);
     font-weight: 700;
 }

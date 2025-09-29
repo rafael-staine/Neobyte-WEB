@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./Pesquisa.module.css";
 import Head from "next/head";
 import Header from "@/components/Header";
@@ -9,27 +9,48 @@ import Footer from "@/components/Footer";
 
 export default function Pesquisa() {
   const [sort, setSort] = useState("menor-preco");
-  const [price, setPrice] = useState([20, 1800]);
+  const [price, setPrice] = useState([10, 20000]);
   const [brands, setBrands] = useState({
     amd: false,
     nvidia: false,
   });
 
+  const rangeRef = useRef(null);
+
   const handleBrandChange = (brand) => {
     setBrands({ ...brands, [brand]: !brands[brand] });
   };
+
+  // sempre que o preço mudar, atualiza o fundo da barra
+  useEffect(() => {
+    if (rangeRef.current) {
+      const value = price[1];
+      const min = 10;
+      const max = 20000;
+
+      const percent = ((value - min) / (max - min)) * 100;
+
+      rangeRef.current.style.background = `
+        linear-gradient(to right,
+          #137969 0%,
+          #137969 ${percent}%,
+          #fff ${percent}%,
+          #fff 100%
+        )
+      `;
+    }
+  }, [price]);
 
   return (
     <>
       <Header />
       <Banner />
 
-      
-
       <section className={styles.itensPesquisa}>
-        <h2 className={styles.titlePage}>Você Pesquisou por: "placa de video"</h2>
+        <h2 className={styles.titlePage}>
+          Você Pesquisou por: "placa de video"
+        </h2>
         <div className={styles.container}>
-
           {/* Filtro */}
           <div className={styles.filtro}>
             <h3 className={styles.tituloFiltro}>Filtros</h3>
@@ -78,14 +99,16 @@ export default function Pesquisa() {
               </label>
             </div>
 
+            {/* Slider Preço */}
             <div className={styles.sectionValue}>
               <p className={styles.titleItem}>Preço</p>
               <input
+                ref={rangeRef}
                 type="range"
-                min="20"
+                min="10"
                 max="20000"
                 value={price[1]}
-                onChange={(e) => setPrice([20, parseInt(e.target.value)])}
+                onChange={(e) => setPrice([10, parseInt(e.target.value)])}
                 className={styles.range}
               />
               <div className={styles.priceValues}>

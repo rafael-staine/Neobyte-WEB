@@ -79,9 +79,9 @@ export default function Header() {
           )}
         </div>
 
-        <Link href="/">PROMOÇÕES</Link>
-        <Link href="/">HARDWARE</Link>
-        <Link href="/">GAMER</Link>
+        <Link href="./Promocoes">PROMOÇÕES</Link>
+        <Link href="./Hardware">HARDWARE</Link>
+        <Link href="./Gamer">GAMER</Link>
         <Link href="/">ATENDIMENTO</Link>
       </nav>
     </header>
