@@ -4,6 +4,27 @@ import SubHeader from "@/components/SubHeader";
 import styles from "./Carrinho.module.css";
 
 export default function Carrinho() {
+  const produtos = [
+    {
+      id: 1,
+      img: "/gabinete.png",
+      nome: "Gabinete Gamer Rise Mode Galaxy Glass M Mini, M-ATX, Lateral e Frontal em Vidro Temperado, Preto",
+      preco: "1 x R$ 209,99",
+    },
+    {
+      id: 2,
+      img: "/processador.png",
+      nome: "Processador AMD Ryzen 5 5500, 3.6GHz (4.2GHz Max Turbo), Cache 19MB, AM4, Sem Vídeo",
+      preco: "1 x R$ 549,99",
+    },
+    {
+      id: 3,
+      img: "/monitor.png",
+      nome: 'Monitor Gamer Curvo MSI MAG 27" FHD, 280Hz, 0.5ms, VA, Adaptive-Sync, DP e HDMI, HDR, Preto',
+      preco: "1 x R$ 1.999,99",
+    },
+  ];
+
   return (
     <div>
       <section>
@@ -11,14 +32,41 @@ export default function Carrinho() {
       </section>
 
       <section>
-        <SubHeader
-          logo="/Neobyte/carrinho.svg"
-          title="Carrinho"
-        />
+        <SubHeader logo="/Neobyte/carrinho.svg" title="Carrinho" />
       </section>
 
       <div className={styles.container}>
+        <div className={styles.header}>
+          <span>Produtos</span>
+          <span>Descrição</span>
+          <span>Qtdd</span>
+          <span>Preço à vista no PIX</span>
+          <span></span>
+        </div>
 
+        <ul className={styles.pedidos}>
+          {produtos.map((item) => (
+            <li key={item.id} className={styles.row}>
+              <div className={styles.produto}>
+                <img src={item.img} alt={item.nome} />
+              </div>
+              <div className={styles.descricao}>
+                <p>{item.nome}</p>
+              </div>
+              <div className={styles.quantidade}>
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+              <div className={styles.preco}>
+                <p>{item.preco}</p>
+              </div>
+              <div className={styles.acao}>
+                <img src="/Neobyte/lixeira-vermelha.svg" alt="Lixeira" />
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
 
       <section>

@@ -25,7 +25,7 @@ export default function Pedidos() {
               <p>Gabinete Gamer Rise Mode Galaxy Glass M Mini, M-ATX, Lateral e Frontal em Vidro Temperado, Preto</p>
               <p>Quantidade: 1</p>
               <p>R$209,99</p>
-              <p>Em processamento</p>
+              <p>Em processamento</p> 
             </div>
           </li>
         </ul>
