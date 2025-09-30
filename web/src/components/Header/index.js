@@ -54,8 +54,9 @@ export default function Header() {
         <div className={styles.dropdown} ref={dropdownRef}>
           <button
             type="button"
-            className={`${styles.departamentos} ${open ? styles.departamentosOpen : ""
-              }`}
+            className={`${styles.departamentos} ${
+              open ? styles.departamentosOpen : ""
+            }`}
             onClick={() => setOpen(!open)}
           >
             <img src="/Neobyte/navegação.svg" alt="Menu" />
@@ -64,8 +65,8 @@ export default function Header() {
 
           {open && (
             <div className={styles.dropdownMenu}>
-              <Link href="/">Placa de Vídeo</Link>
-              <Link href="/">Placa Mãe</Link>
+              <Link href="./PlacaDeVideo">Placa de Vídeo</Link>
+              <Link href="./PlacaMae">Placa Mãe</Link>
               <Link href="/">Processadores</Link>
               <Link href="/">Memória RAM</Link>
               <Link href="/">SSD/HD</Link>
@@ -82,7 +83,17 @@ export default function Header() {
         <Link href="./Promocoes">PROMOÇÕES</Link>
         <Link href="./Hardware">HARDWARE</Link>
         <Link href="./Gamer">GAMER</Link>
-        <Link href="/">ATENDIMENTO</Link>
+        <a
+          href="#footer"
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById("numeroAtendimento");
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          }}>
+          ATENDIMENTO
+        </a>
       </nav>
     </header>
   );

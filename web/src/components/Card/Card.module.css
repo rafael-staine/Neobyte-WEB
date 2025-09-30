@@ -1,4 +1,5 @@
 .card_produto {
+    height: 500px;
     position: relative;
     padding: 20px 15px;
     display: flex;
@@ -24,16 +25,40 @@
     margin: 30px 30px;
 }
 
-.tituloProduto {
-    font-size: 1.1rem;
-    text-align: start;
-    margin-bottom: 5px;
-    font-weight: 700;
+.imgCard {
+    width: 200px;
+    height: 200px;
+    display: block;       /* transforma em bloco */
+    margin: 0 auto;
 }
+
+.infoCard {
+  display: flex;
+  flex-direction: column; /* empilha os itens em coluna */
+  gap: 8px;               /* espaço entre cada texto */
+}
+
+.tituloProduto {
+  font-size: 1.1rem;
+  text-align: start;
+  font-weight: 700;
+  display: -webkit-box;          /* necessário */
+  -webkit-line-clamp: 3;         /* número de linhas */
+  -webkit-box-orient: vertical;  /* orientação vertical */
+  overflow: hidden;              /* esconde o resto */
+  text-overflow: ellipsis;       /* coloca os "..." */
+}
+
 .desconto { 
     color: red;
-    text-decoration:line-through 1px red; 
+    text-decoration:line-through 1px red;
+    
 }
+
+.hidden {
+    visibility: hidden;
+}
+
 .preco {
     font-weight: 800;
     font-size: 1.3rem;
