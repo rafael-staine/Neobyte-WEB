@@ -1,7 +1,9 @@
-.container {
-    background: var(--cinza-escuro);
-    color: var(--branco);
-    min-height: 100vh;
+.cardsContainer {
     padding: 20px 40px;
-    font-family: Arial, sans-serif;
 }
+
+.linkCard {
+  color: inherit;
+  text-decoration: none;
+}
+.linkCard:visited { color: inherit; }

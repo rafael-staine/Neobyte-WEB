@@ -5,35 +5,29 @@ import styles from "./Pedidos.module.css";
 
 export default function Pedidos() {
   return (
-    <div>
-      <section>
-        <Header />
-      </section>
+    <>
+      <Header />
+      <SubHeader logo="/Neobyte/pedidos.svg" title="Pedidos" />
 
       <section>
-        <SubHeader
-          logo="/Neobyte/pedidos.svg"
-          title="Pedidos"
-        />
+        <div className={styles.container}>
+          <ul className={styles.pedidos}>
+            <li>
+              <img src="./imgProdutos/placamae1.svg" alt="Placa mae" className={styles.imgCard} />
+              <div className={styles.info}>
+                <p>
+                  Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto
+                </p>
+                <p>Quantidade: 1</p>
+                <p>R$ 575,99</p>
+                <p>Em processamento</p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </section>
 
-      <div className={styles.container}>
-        <ul className={styles.pedidos}>
-          <li>
-            <img src="/gabinete.png" alt="Gabinete Gamer" />
-            <div className={styles.info}>
-              <p>Gabinete Gamer Rise Mode Galaxy Glass M Mini, M-ATX, Lateral e Frontal em Vidro Temperado, Preto</p>
-              <p>Quantidade: 1</p>
-              <p>R$209,99</p>
-              <p>Em processamento</p> 
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <section>
-        <Footer />
-      </section>
-    </div>
+      <Footer />
+    </>
   );
 }

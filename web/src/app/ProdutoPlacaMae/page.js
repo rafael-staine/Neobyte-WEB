@@ -2,6 +2,7 @@ import styles from "./ProdutoPlacaMae.module.css";
 import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const avaliacoes = [
   {
@@ -55,11 +56,13 @@ export default function ProdutoPlacaMae() {
                 <span>★</span>
                 <span>☆</span> {/* estrela vazia */}
               </div>
-              <img
-                className={styles.coracao}
-                src="./Neobyte/coracao.svg"
-                alt="Adicionar aos favoritos"
-              />
+              <Link href="./Favoritos">
+                <img
+                  className={styles.coracao}
+                  src="./Neobyte/coracao.svg"
+                  alt="Adicionar aos favoritos"
+                />
+              </Link>
             </div>
 
             <h1 className={styles.tituloProduto1}>
@@ -116,14 +119,16 @@ export default function ProdutoPlacaMae() {
                 </button>
               </a>
 
-              <button className={styles.btnCarrinho}>
-                <img
-                  src="./Neobyte/carrinho.svg"
-                  alt="Adicionar ao carrinho"
-                  className={styles.iconCar}
-                />
-                Adicionar ao carrinho
-              </button>
+              <a href="/Carrinho">
+                <button className={styles.btnCarrinho}>
+                  <img
+                    src="./Neobyte/carrinho.svg"
+                    alt="Adicionar ao carrinho"
+                    className={styles.iconCar}
+                  />
+                  Adicionar ao carrinho
+                </button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,12 +1,12 @@
 .container {
     background: var(--cinza-escuro);
     color: var(--branco);
-    min-height: 100vh;
-    padding: 20px 40px;
-    font-family: Arial, sans-serif;
+    padding: 40px 0px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    margin-bottom: 40px;
+    height: 100%;
 }
 
 .cadastro {

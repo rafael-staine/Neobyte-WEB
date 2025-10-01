@@ -1,9 +1,8 @@
 .container {
     background: var(--cinza-escuro);
     color: var(--branco);
-    min-height: 100vh;
     padding: 20px 40px;
-    font-family: Arial, sans-serif;
+    margin-bottom: 262px;
 }
 
 .containerEnderecos {

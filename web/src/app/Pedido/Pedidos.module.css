@@ -1,12 +1,11 @@
 .container {
     background: var(--cinza-escuro);
     color: var(--branco);
-    min-height: 100vh;
     padding: 20px 40px;
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    margin-bottom: 272px;
 }
 
 .pedidos {
@@ -20,6 +19,13 @@
     gap: 20px;
 }
 
+.imgCard {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px 0 0 20px;
+}
+
 .pedidos li {
     background-color: var(--cinza);
     width: 80%;
@@ -29,12 +35,6 @@
     display: flex;
     align-items: center;
     gap: 20px;
-}
-
-.pedidos li:hover {
-    background: var(--verde);
-    cursor: pointer;
-    transition: background 0.5s ease;
 }
 
 .pedidos li img {
@@ -47,6 +47,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .info p {

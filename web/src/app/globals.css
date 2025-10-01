@@ -23,6 +23,10 @@
   list-style: none;
 }
 
+body {
+  background: var(--cinza-escuro);
+}
+
 img {
   width: 100%;
   height: 100%; 
