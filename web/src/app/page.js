@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import Card from "@/components/Card";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -25,12 +26,14 @@ export default function Home() {
           <h2 className={styles.titleHome}>Mais Vendidos</h2>
 
           <div className={styles.gridCards1}>
-            <Card
-              nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
-              imagemProd="/ImgProdutos/placamae1.svg"
-              desconto="788.22"
-              preco="575.99"
-            />
+            <Link href="/ProdutoPlacaMae" className={styles.linkCard}>
+              <Card
+                nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
+                imagemProd="/ImgProdutos/placamae1.svg"
+                desconto="788.22"
+                preco="575.99"
+              />
+            </Link>
             <Card
               nomeProduto="Headset Gamer Havit, Drivers 53mm, Microfone Plugável, 3.5mm, PC, PS4, XBOX ONE, Preto"
               imagemProd="/ImgProdutos/headset1.svg"

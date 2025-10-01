@@ -21,3 +21,9 @@
     grid-template-columns: repeat(5, 0fr);
     justify-content: center;
 }
+
+.linkCard {
+  color: inherit;
+  text-decoration: none;
+}
+.linkCard:visited { color: inherit; }
