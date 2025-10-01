@@ -79,11 +79,12 @@ export default function Header() {
             </div>
           )}
         </div>
-
-        <Link href="/">PROMOÇÕES</Link>
-        <Link href="/">HARDWARE</Link>
-        <Link href="/">GAMER</Link>
-        <Link href="/">ATENDIMENTO</Link>
+        <div className={styles.headerBtnS}>
+          <Link href="/" className={styles.headerBtn}>PROMOÇÕES</Link>
+          <Link href="/" className={styles.headerBtn}>HARDWARE</Link>
+          <Link href="/" className={styles.headerBtn}>GAMER</Link>
+          <Link href="/" className={styles.headerBtn}>ATENDIMENTO</Link>
+        </div>
       </nav>
     </header>
   );

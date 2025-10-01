@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./SubHeader.module.css";
+import Image from "next/image";
 
 export default function SubHeader({ logo, title }) {
     const pathname = usePathname();
