@@ -44,7 +44,7 @@ export default function Pagamento() {
           </div>
 
           <div className={styles.containerTotal}>
-            <p>Total: <strong>R$ 2.759,97</strong></p>
+            <p>Total: <strong>R$ 575,99</strong></p>
             <p className={styles.desconto}>Desconto: R$ 00,00</p>
           </div>
 

@@ -32,9 +32,9 @@ export default function Header() {
 
         <div className={styles.search}>
           <input type="text" placeholder="Pesquise aqui..." />
-          <button>
+          <a href="/Pesquisa" className={styles.searchButton}>
             <img src="/Neobyte/pesquisa.svg" alt="Buscar" />
-          </button>
+          </a>
         </div>
 
         <div className={styles.icons}>
@@ -54,8 +54,9 @@ export default function Header() {
         <div className={styles.dropdown} ref={dropdownRef}>
           <button
             type="button"
-            className={`${styles.departamentos} ${open ? styles.departamentosOpen : ""
-              }`}
+            className={`${styles.departamentos} ${
+              open ? styles.departamentosOpen : ""
+            }`}
             onClick={() => setOpen(!open)}
           >
             <img src="/Neobyte/navegação.svg" alt="Menu" />
@@ -64,8 +65,8 @@ export default function Header() {
 
           {open && (
             <div className={styles.dropdownMenu}>
-              <Link href="/">Placa de Vídeo</Link>
-              <Link href="/">Placa Mãe</Link>
+              <Link href="./PlacaDeVideo">Placa de Vídeo</Link>
+              <Link href="./PlacaMae">Placa Mãe</Link>
               <Link href="/">Processadores</Link>
               <Link href="/">Memória RAM</Link>
               <Link href="/">SSD/HD</Link>
@@ -79,10 +80,20 @@ export default function Header() {
           )}
         </div>
 
-        <Link href="/">PROMOÇÕES</Link>
-        <Link href="/">HARDWARE</Link>
-        <Link href="/">GAMER</Link>
-        <Link href="/">ATENDIMENTO</Link>
+        <Link href="./Promocoes">PROMOÇÕES</Link>
+        <Link href="./Hardware">HARDWARE</Link>
+        <Link href="./Gamer">GAMER</Link>
+        <a
+          href="#footer"
+          onClick={(e) => {
+            e.preventDefault();
+            const target = document.getElementById("numeroAtendimento");
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          }}>
+          ATENDIMENTO
+        </a>
       </nav>
     </header>
   );

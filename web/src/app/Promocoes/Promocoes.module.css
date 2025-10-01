@@ -10,20 +10,8 @@
     color: var(--branco);
 }
 
-.gridCards1 {
+.gridCards {
     display: grid;
     grid-template-columns: repeat(5, 0fr);
     justify-content: center;
 }
-
-.gridCards2 {
-    display: grid;
-    grid-template-columns: repeat(5, 0fr);
-    justify-content: center;
-}
-
-.linkCard {
-  color: inherit;
-  text-decoration: none;
-}
-.linkCard:visited { color: inherit; }

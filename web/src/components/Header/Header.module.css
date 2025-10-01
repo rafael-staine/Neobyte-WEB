@@ -58,7 +58,7 @@
   color: #ccc;
 }
 
-.search button {
+.searchButton {
   background: var(--branco);
   border: none;
   width: 40px;
@@ -69,7 +69,7 @@
   cursor: pointer;
 }
 
-.search button img {
+.searchButton img {
   width: 18px;
   height: 18px;
 }

@@ -2,7 +2,7 @@ import styles from "./Footer.module.css";
 
 export default function Footer() {
     return (
-        <footer className={styles.footer}>
+        <footer className={styles.footer} id="footer">
             <div className={styles.contentWrapper}>
                 <div className={styles.leftBox}>
                     <a href="/" className={styles.logo}>
@@ -12,7 +12,7 @@ export default function Footer() {
                 <div className={styles.rightBox}>
                     <div className={styles.topRow}>
                         <div className={styles.centerContent}>
-                            <span className={styles.sac}>SAC: 3888-8899</span>
+                            <span className={styles.sac} id="numeroAtendimento">SAC: 3888-8899</span>
                             <a href="/" className={styles.link}>Sobre nós</a>
                         </div>
                         <div className={styles.icons}>
