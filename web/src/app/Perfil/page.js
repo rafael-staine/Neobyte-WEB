@@ -1,9 +1,20 @@
+"use client";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
 import styles from "./Perfil.module.css";
+import { useRouter } from "next/navigation";
 
 export default function Cadastro() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Remove apenas o status de logado, mantendo os dados do usuário
+    localStorage.removeItem("neobyteLoggedIn");
+    // Redireciona para a página de login
+    router.push("/Entrar");
+  };
   return (
     <>
       <Header />
@@ -74,7 +85,10 @@ export default function Cadastro() {
             </div>
 
             <div className={styles.botoes}>
-              <button className={styles.excluir}>Excluir minha conta</button>
+              <div className={styles.botoesEsquerda}>
+                <button className={styles.excluir}>Excluir minha conta</button>
+                <button onClick={handleLogout} className={styles.logout}>Sair</button>
+              </div>
               <button className={styles.salvar}>Salvar</button>
             </div>
           </div>

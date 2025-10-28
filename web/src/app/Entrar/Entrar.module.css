@@ -10,7 +10,7 @@
 .right {
   height: 500px;
 }
-  
+
 .left {
   background: var(--branco);
   width: 600px;
@@ -144,4 +144,19 @@
 
 .pergunta {
   color: var(--preto);
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff0000;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.errorText {
+  color: #ff0000;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
 }
