@@ -20,6 +20,7 @@
   align-items: center;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  position: relative;
 }
 
 .right {
@@ -62,27 +63,25 @@
 }
 
 .header {
-  width: 100%;
-  margin-bottom: 20px;
+  position: absolute;
+  top: 15px;
+  left: 20px;
 }
 
 .backButton {
   background: none;
+  color: var(--preto);
   border: none;
-  color: var(--branco);
   border-radius: 20px;
-  border: 3px solid var(--branco);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
   padding: 5px 10px;
   transition: all 0.2s;
 }
 
 .backButton:hover {
-  border: 3px solid var(--preto);
   color: var(--verde);
-  background: var(--branco);
 }
 
 .formulario {

@@ -315,6 +315,7 @@ export default function Cadastro() {
         <div className={styles.container}>
           <div className={styles.cadastro}>
             <h2>Meu Cadastro - Conta Pessoal</h2>
+            
             <div className={styles.campo}>
               <p>
                 Nome Completo
@@ -330,6 +331,7 @@ export default function Cadastro() {
                 onChange={e => setNome(e.target.value)}
               />
             </div>
+
             <div className={styles.dados}>
               <div className={styles.campo}>
                 <p>
@@ -380,6 +382,7 @@ export default function Cadastro() {
                 />
               </div>
             </div>
+
             <div className={styles.contatos}>
               <div className={styles.campo}>
                 <p>

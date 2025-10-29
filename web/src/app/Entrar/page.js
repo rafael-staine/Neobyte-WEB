@@ -65,15 +65,17 @@ export default function Login() {
     <div className={styles.container}>
       {/* Lado esquerdo com logo e o texto */}
       <div className={styles.left}>
+
+        <div className={styles.header}>
+          <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
+        </div>
+        
         <img src="/logo/logo-verde.svg" alt="Logo" className={styles.logo} />
         <img src="/logo/text-verde.svg" alt="text" className={styles.text} />
       </div>
 
       {/* Lado direito com o formulário */}
       <div className={styles.right}>
-        <div className={styles.header}>
-          <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
-        </div>
         <h1 className={styles.title}>NEOBYTE</h1>
         <p className={styles.subtitle}>Bem-vindo de volta!</p>
 
@@ -108,8 +110,6 @@ export default function Login() {
               <img src="/Neobyte/vizualizar.svg" alt="Visualizar senha" />
             </button>
           </div>
-
-
 
           <button type="submit" className={styles.button} disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}

@@ -13,7 +13,7 @@
   color: var(--branco);
   border-radius: 12px;
   padding: 28px;
-  max-width: 720px; /* maior */
+  max-width: 720px;
   width: 94%;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
   position: relative;
@@ -25,7 +25,7 @@
   top: 8px;
   border: none;
   background: transparent;
-  font-size: 28px; /* maior X */
+  font-size: 28px;
   color: var(--branco);
   line-height: 1;
   cursor: pointer;
@@ -37,7 +37,7 @@
 }
 
 .content p {
-  color: rgba(255,255,255,0.95);
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 18px;
 }
 
@@ -47,21 +47,25 @@
   justify-content: flex-end;
 }
 
-.btnPrimary {
+.btnPrimary,
+.btnSecondary {
   background: var(--branco);
-  color: var(--verde-escuro);
-  padding: 10px 16px;
+  color: var(--verde);
+  padding: 10px 18px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 700;
+  border: 2px solid var(--verde-escuro);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btnSecondary {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.25);
+.btnPrimary:hover,
+.btnSecondary:hover {
+  background: var(--verde);
   color: var(--branco);
-  padding: 10px 14px;
-  border-radius: 8px;
-  text-decoration: none;
+  border-color: var(--branco);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
-
