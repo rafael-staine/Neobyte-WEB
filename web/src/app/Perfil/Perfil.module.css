@@ -149,4 +149,5 @@
     gap: 8px;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.2s;
 }

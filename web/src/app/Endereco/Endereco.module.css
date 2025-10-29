@@ -1,40 +1,167 @@
 .container {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    padding: 40px;
     background: var(--cinza-escuro);
-    color: var(--branco);
-    padding: 20px 40px;
-    margin-bottom: 262px;
+    min-height: 80vh;
+    flex-direction: column;
 }
 
 .containerEnderecos {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    align-items: center;
-    justify-content: center;
 }
 
+
 .enderecos {
-    background: var(--cinza);
-    border: 1px solid var(--branco);
     width: 400px;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: var(--branco);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .enderecos h2 {
-    font-size: 18px;
-    margin-top: 0;
+    margin-bottom: 8px;
 }
 
-.enderecos p {
-    font-size: 14px;
-    margin: 5px 0;
+.enderecos input {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
 }
 
-.enderecos:hover {
-    background: var(--verde);
+.acoes {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.acoes button {
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: background 0.5s ease;
+    font-size: 16px;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+.btnAdicionar,
+.btnSalvar {
+    font-size: 17px;
+    background: var(--azul);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.btnAdicionar:hover {
+    color: var(--verde);
+    transition: 0.2s ease;
+    font-weight: bold;
+}
+
+.novoEndereco {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.semEndereco {
+    margin-top: 60px;
+    color: #aaa;
+    font-size: 20px;
+}
+
+.topBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+.txtEditar {
+    color: var(--verde);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.txtSalvar {
+    color: var(--verde);
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.txtExcluir {
+    color: var(--vermelho);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.txtCancelar {
+    color: var(--vermelho);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+/* Popup */
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    background: var(--branco);
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.popup input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.popupAcoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
 }
