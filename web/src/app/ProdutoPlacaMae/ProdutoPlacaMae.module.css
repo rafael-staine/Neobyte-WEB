@@ -249,6 +249,20 @@
     padding: 20px;
 }
 
+.comentarBtn {
+    background: var(--verde);
+    color: var(--branco);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.comentarBtn:hover {
+    opacity: 0.95;
+}
+
 .tituloSecao {
     text-align: center;
     color: var(--verde);

@@ -160,3 +160,20 @@
   margin: 0;
   text-align: center;
 }
+
+/* Botão "< Voltar" simples: apenas texto verde, sem fundo nem borda */
+.backButton {
+  background: transparent;
+  border: none;
+  color: var(--verde);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.backButton:focus {
+  outline: none;
+  text-decoration: underline;
+}

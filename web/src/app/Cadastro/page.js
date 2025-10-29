@@ -13,6 +13,12 @@ export default function Login() {
 
   const router = useRouter();
 
+  // Botão voltar para header inicial
+  const handleBack = (e) => {
+    e.preventDefault();
+    router.push("/");
+  };
+
   function gerarTokenSimples() {
     // Token simples para demo (não use em produção)
     return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
@@ -90,6 +96,7 @@ export default function Login() {
     <div className={styles.container}>
       {/* Lado esquerdo agora fica o formulário */}
       <div className={styles.left}>
+      <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
         <h1 className={styles.title}>NEOBYTE</h1>
         <p className={styles.subtitle}>Cadastre-se!</p>
 

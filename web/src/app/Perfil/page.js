@@ -12,8 +12,8 @@ export default function Cadastro() {
   const handleLogout = () => {
     // Remove apenas o status de logado, mantendo os dados do usuário
     localStorage.removeItem("neobyteLoggedIn");
-    // Redireciona para a página de login
-    router.push("/Entrar");
+    // Redireciona para a página inicial (header inicial)
+    router.push("/");
   };
   return (
     <>

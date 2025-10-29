@@ -33,6 +33,7 @@
   display: inline-block;
 }
 
+/* centraliza a barra de pesquisa */
 .search {
   display: flex;
   align-items: center;
@@ -40,8 +41,9 @@
   border: 1px solid var(--branco);
   border-radius: 40px;
   overflow: hidden;
-  width: 300px;
+  width: 400px;
   height: 35px;
+  margin: 0 auto;
 }
 
 .search input {
@@ -74,10 +76,17 @@
   height: 18px;
 }
 
+/* área que agrupa ícones + login */
+.iconsArea {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
 .icons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 
 .icons img {
@@ -93,6 +102,28 @@
   cursor: pointer;
 }
 
+/* login e cadastrar lado dos ícones */
+.loginArea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.loginLink,
+.cadastrarLink {
+  color: var(--branco);
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.divisor {
+  color: var(--branco);
+  font-weight: 500;
+}
+
+/* menu inferior */
 .nav {
   display: flex;
   align-items: center;
@@ -152,7 +183,7 @@
 
 .dropdownMenu a {
   padding: 10px 15px;
-  color:var(--branco);
+  color: var(--branco);
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s, padding-left 0.2s;

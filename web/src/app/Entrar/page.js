@@ -21,6 +21,12 @@ export default function Login() {
     }
   }, [router]);
 
+  // Voltar para o header inicial
+  const handleBack = (e) => {
+    e.preventDefault();
+    router.push("/");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
@@ -78,6 +84,7 @@ export default function Login() {
 
       {/* Lado direito com o formulário */}
       <div className={styles.right}>
+        <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
         <h1 className={styles.title}>NEOBYTE</h1>
         <p className={styles.subtitle}>Bem-vindo de volta!</p>
 

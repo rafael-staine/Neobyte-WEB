@@ -1,8 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import styles from "./ProdutoPlacaMae.module.css";
 import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import AuthPrompt from "@/components/AuthPrompt";
 
 const avaliacoes = [
   {
@@ -29,6 +33,18 @@ const avaliacoes = [
 ];
 
 export default function ProdutoPlacaMae() {
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+
+  function requireAuth(e) {
+    e.preventDefault();
+    const isLogged = typeof window !== "undefined" && localStorage.getItem("neobyteLoggedIn") === "true";
+    if (!isLogged) {
+      setShowAuthPrompt(true);
+      return false;
+    }
+    return true;
+  }
+
   return (
     <>
       <Head>
@@ -54,15 +70,15 @@ export default function ProdutoPlacaMae() {
                 <span>★</span>
                 <span>★</span>
                 <span>★</span>
-                <span>☆</span> {/* estrela vazia */}
+                <span>☆</span>
               </div>
-              <Link href="./Favoritos">
+              <a href="./Favoritos" onClick={(e) => { if (!requireAuth(e)) return; }}>
                 <img
                   className={styles.coracao}
                   src="./Neobyte/coracao.svg"
                   alt="Adicionar aos favoritos"
                 />
-              </Link>
+              </a>
             </div>
 
             <h1 className={styles.tituloProduto1}>
@@ -108,7 +124,7 @@ export default function ProdutoPlacaMae() {
             </p>
 
             <div className={styles.botoesProduto}>
-              <a href="/Pagamento">
+              <a href="/Pagamento" onClick={(e) => { if (!requireAuth(e)) return; }}>
                 <button className={styles.btnComprar}>
                   <img
                     src="./Neobyte/sacola.svg"
@@ -119,7 +135,7 @@ export default function ProdutoPlacaMae() {
                 </button>
               </a>
 
-              <a href="/Carrinho">
+              <a href="/Carrinho" onClick={(e) => { if (!requireAuth(e)) return; }}>
                 <button className={styles.btnCarrinho}>
                   <img
                     src="./Neobyte/carrinho.svg"
@@ -449,7 +465,10 @@ export default function ProdutoPlacaMae() {
         <div className={styles.divisor}></div>
 
         <div className={styles.avaliacoesContainer}>
-          <h2 className={styles.tituloSecao}>AVALIAÇÕES DOS USUÁRIOS</h2>
+          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+            <h2 className={styles.tituloSecao}>AVALIAÇÕES DOS USUÁRIOS</h2>
+            <button className={styles.comentarBtn} onClick={(e) => { if (!requireAuth(e)) return; }}>Comentar</button>
+          </div>
           {avaliacoes.map((avaliacao, index) => (
             <div key={index} className={styles.avaliacaoCard}>
               <div className={styles.cabecalho}>
@@ -465,7 +484,8 @@ export default function ProdutoPlacaMae() {
           ))}
         </div>
       </section>
-      <Footer />
+  <AuthPrompt open={showAuthPrompt} onClose={() => setShowAuthPrompt(false)} />
+  <Footer />
     </>
   );
 }
