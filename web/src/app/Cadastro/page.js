@@ -96,12 +96,17 @@ export default function Login() {
     <div className={styles.container}>
       {/* Lado esquerdo agora fica o formulário */}
       <div className={styles.left}>
-      <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
+        <div className={styles.header}>
+          <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
+        </div>
         <h1 className={styles.title}>NEOBYTE</h1>
         <p className={styles.subtitle}>Cadastre-se!</p>
 
         <form className={styles.formulario} onSubmit={handleSubmit}>
-          <p>Email</p>
+          <div className={styles.emailEerror}>
+            <p className={styles.labelsES}>Email</p>
+            {error && <p className={styles.error}>{error}</p>}
+          </div>
 
           <input
             type="email"
@@ -111,7 +116,7 @@ export default function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <p>Senha</p>
+          <p className={styles.labelsES}>Senha</p>
           <div className={styles.senhaContainer}>
             <input
               type="password"
@@ -125,7 +130,7 @@ export default function Login() {
             </button>
           </div>
 
-          {error && <p className={styles.error}>{error}</p>}
+
 
           <button type="submit" className={styles.button} disabled={saving}>
             {saving ? "Salvando..." : "Cadastrar"}

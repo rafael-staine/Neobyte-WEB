@@ -33,27 +33,14 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // Busca usuário no localStorage
-      const savedUserJSON = localStorage.getItem("neobyteUser");
-      if (!savedUserJSON) {
-        setError("Usuário não encontrado. Por favor, cadastre-se.");
-        setLoading(false);
-        return;
-      }
+      // Busca a lista de usuários e verifica as credenciais
+      const usersListJSON = localStorage.getItem("neobyteUsers");
+      const usersList = usersListJSON ? JSON.parse(usersListJSON) : [];
+      const foundUser = usersList.find(user => user.email === email.trim());
 
-      const savedUser = JSON.parse(savedUserJSON);
-
-      // Verifica se o email coincide
-      if (savedUser.email !== email.trim()) {
-        setError("Email não encontrado.");
-        setLoading(false);
-        return;
-      }
-
-      // Em um app real, NUNCA faríamos verificação de senha no frontend
-      // Este é apenas um exemplo simulado para demonstração
-      if (password.length < 4) {
-        setError("Senha inválida.");
+      // Se não encontrou o usuário ou a senha está incorreta
+      if (!foundUser || foundUser.password !== password) {
+        setError("Usuário não encontrado, Senha ou Email incorretos.");
         setLoading(false);
         return;
       }
@@ -84,12 +71,17 @@ export default function Login() {
 
       {/* Lado direito com o formulário */}
       <div className={styles.right}>
-        <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
+        <div className={styles.header}>
+          <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
+        </div>
         <h1 className={styles.title}>NEOBYTE</h1>
         <p className={styles.subtitle}>Bem-vindo de volta!</p>
 
         <form className={styles.formulario} onSubmit={handleSubmit}>
-          <p>Email</p>
+          <div className={styles.errorEemail}>
+            <p className={styles.labelsES}>Email</p>
+            {error && <p className={`${styles.error} ${styles.errorText}`}>{error}</p>}
+          </div>
 
           <input
             type="email"
@@ -100,7 +92,7 @@ export default function Login() {
             required
           />
 
-          <p>Senha</p>
+          <p className={styles.labelsES}>Senha</p>
           <div className={styles.senhaContainer}>
             <input
               type="password"
@@ -117,7 +109,7 @@ export default function Login() {
             </button>
           </div>
 
-          {error && <p className={`${styles.error} ${styles.errorText}`}>{error}</p>}
+
 
           <button type="submit" className={styles.button} disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}

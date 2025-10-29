@@ -15,8 +15,8 @@ export default function SubHeader({ logo, title }) {
                     <span className={styles.info}>{title}</span>
                 </div>
 
-                <Link href="/" className={styles.sair}>
-                    <img src="/Neobyte/sair.svg" alt="Sair" /> Sair
+                <Link href="/" className={styles.Voltar}>
+                    <img src="/Neobyte/sair.svg" alt="Voltar" /> Voltar
                 </Link>
             </header>
 
