@@ -8,7 +8,7 @@
 
 .left,
 .right {
-    height: 500px;
+    height: 550px;
 }
 
 .left {
@@ -20,7 +20,31 @@
     border-bottom-left-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    color: var(--verde);
+    border-radius: 20px;
+    border: 3px solid var(--verde);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.2s;
+}
+
+.backButton:hover {
+    background-color: var(--verde);
+    color: var(--branco);
+    border: 3px solid var(--preto);
 }
 
 .right {
@@ -60,7 +84,7 @@
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .formulario {
@@ -69,7 +93,7 @@
     gap: 15px;
 }
 
-.formulario p {
+.labelsES {
     margin: 0;
     font-weight: bold;
     font-size: 20px;
@@ -119,7 +143,7 @@
     font-weight: bold;
     padding: 10px;
     border-radius: 6px;
-    border: 2px solid var(--verde);
+    border: 3px solid var(--verde);
     cursor: pointer;
     transition: 0.3s;
     width: 160px;
@@ -128,9 +152,9 @@
 }
 
 .button:hover {
-    background: var(--branco);
-    color: var(--verde);
-    border: 2px solid var(--verde);
+    background: var(--verde);
+    color: var(--branco);
+    border: 3px solid var(--preto);
 }
 
 .register {
@@ -147,4 +171,18 @@
 
 .pergunta {
     color: var(--preto);
+}
+
+.error {
+    text-decoration: underline;
+    font-size: 14.3px;
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.emailEerror {
+    display: flex;
+    gap: 145px;
+    align-items: center;
 }

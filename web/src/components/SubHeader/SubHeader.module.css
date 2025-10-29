@@ -1,7 +1,6 @@
 .container {
-    background: #303030;
-    color: #fff;
-    min-height: 100vh;
+    background: var(--cinza-escuro);
+    color: var(--branco);
     padding: 20px 40px;
     font-family: Arial, sans-serif;
 }
@@ -10,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #137969;
+    border-bottom: 2px solid var(--verde);
     padding-bottom: 10px;
 }
 
@@ -33,21 +32,33 @@
     font-weight: bold;
 }
 
-.sair {
-    background: #C30D0D;
-    border: none;
-    color: white;
+.Voltar {
+    background: var(--verde);
+    border: 2px solid var(--branco);
+    color: var(--branco);
+    height: 30px;
     padding: 8px 20px;
-    border-radius: 50px; 
+    border-radius: 50px;
     display: flex;
     align-items: center;
-    gap: 8px; 
+    gap: 8px;
     font-size: 16px;
 }
 
-.sair img {
-    width: 20px;
-    height: 20px;
+.Voltar:hover {
+    border: 2px solid var(--verde);
+    background-color: var(--branco);
+    color: var(--verde);
+    transition: all 0.2s;
+}
+
+.Voltar img {
+    width: 18px;
+    height: 18px;
+}
+
+.Voltar:hover img {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(97%) saturate(374%) hue-rotate(121deg) brightness(98%) contrast(90%);
 }
 
 .menu {
@@ -60,10 +71,10 @@
 
 .tab {
     padding: 15px 20px;
-    border: 2px solid #71706E;
+    border: 2px solid var(--cinza);
     border-radius: 10px;
     background: transparent;
-    color: white;
+    color: var(--branco);
     cursor: pointer;
     transition: all 0.3s;
     text-align: center;
@@ -72,6 +83,6 @@
 
 
 .active {
-    background: #137969;
-    border-color: white;
+    background: var(--verde);
+    border-color: var(--branco);
 }

@@ -1,0 +1,40 @@
+.container {
+    background: var(--cinza-escuro);
+    color: var(--branco);
+    padding: 20px 40px;
+    margin-bottom: 262px;
+}
+
+.containerEnderecos {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.enderecos {
+    background: var(--cinza);
+    border: 1px solid var(--branco);
+    width: 400px;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.enderecos h2 {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.enderecos p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.enderecos:hover {
+    background: var(--verde);
+    cursor: pointer;
+    transition: background 0.5s ease;
+}

@@ -1,0 +1,314 @@
+.container {
+  background: var(--cinza-escuro);
+  color: var(--branco);
+  min-height: 100vh;
+  padding: 20px 40px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.cartContainer {
+  flex: 1;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resumo {
+  width: 300px;
+  background: var(--cinza);
+  border-radius: 10px;
+  padding: 20px;
+  height: fit-content;
+}
+
+.resumo h2 {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.valores {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--branco);
+}
+
+.pixInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 15px 0;
+  border-top: 1px solid var(--branco);
+}
+
+.pixInfo span {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--branco);
+}
+
+.pixInfo small {
+  color: var(--branco);
+  opacity: 0.8;
+}
+
+.comprar,
+.limpar {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 15px;
+  border: 1px solid var(--branco);
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.comprar img,
+.limpar img {
+  width: 20px;
+  height: 20px;
+}
+
+.comprar {
+  background: var(--verde);
+  color: var(--branco);
+}
+
+.limpar {
+  background: var(--vermelho);
+  color: var(--branco);
+}
+
+.comprar:hover,
+.limpar:hover {
+  opacity: 0.9;
+}
+
+.headerCard {
+  display: grid;
+  grid-template-columns: 150px 1fr 120px 200px 50px;
+  width: 100%;
+  background: var(--cinza);
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  font-weight: bold;
+  border: 1px solid var(--branco);
+}
+
+.headerCard span {
+  text-align: center;
+}
+
+.pedidos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lixeira {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 150px 1fr 120px 200px 50px;
+  align-items: center;
+  background: var(--cinza);
+  border: 1px solid var(--branco);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.produto {
+  display: flex;
+  justify-content: center;
+}
+
+.row img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.descricao p {
+  margin: 0;
+  text-align: left;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.quantidade {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantidade button {
+  background: none;
+  border: 1px solid var(--branco);
+  color: var(--branco);
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.quantidade span {
+  min-width: 20px;
+  text-align: center;
+}
+
+.quantidade button:hover {
+  background: var(--verde);
+  border-color: var(--verde);
+}
+
+.preco {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.preco p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.preco small {
+  color: var(--branco);
+  opacity: 0.8;
+  font-size: 0.8em;
+}
+
+.acao {
+  display: flex;
+  justify-content: center;
+}
+
+.lixeiraBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.lixeiraBtn img {
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.2s;
+}
+
+.lixeiraBtn:hover img {
+  opacity: 0.8;
+}
+
+.cupomContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  width: 400px;
+}
+
+.cupomInput {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--branco);
+  border-radius: 10px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+}
+
+.cupomInput label {
+  font-weight: bold;
+  font-style: italic;
+  align-self: flex-start;
+  padding: 10px;
+}
+
+.cupomInput {
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--branco);
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+
+.inputGroup {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.cupomInput input {
+  flex: 1;
+  background: var(--verde);
+  border: 1px solid var(--branco);
+  border-radius: 0 30px 30px 0;
+  padding: 10px 15px;
+  color: var(--branco);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.cupomInput input::placeholder {
+  color: var(--branco);
+  opacity: 0.8;
+}
+
+.cupomInput button {
+  flex: 1;
+  background: var(--verde);
+  border: 1px solid var(--branco);
+  border-radius: 30px 0 0 30px;
+  padding: 10px 15px;
+  color: var(--branco);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.cupomInput button:hover {
+  opacity: 0.9;
+}
+  

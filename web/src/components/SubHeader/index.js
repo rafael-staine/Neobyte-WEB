@@ -1,4 +1,4 @@
-"use client"; // precisa porque usamos hook do Next
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,8 +16,13 @@ export default function SubHeader({ logo, title }) {
                     <span className={styles.info}>{title}</span>
                 </div>
 
+<<<<<<< HEAD
                 <Link href="/" className={styles.sair}>
                     <Image src="/Neobyte/sair.svg" alt="Sair" width={26} height={26} /> Sair
+=======
+                <Link href="/" className={styles.Voltar}>
+                    <img src="/Neobyte/sair.svg" alt="Voltar" /> Voltar
+>>>>>>> origin/master
                 </Link>
             </header>
 
@@ -41,8 +46,8 @@ export default function SubHeader({ logo, title }) {
                     Meu Carrinho
                 </Link>
                 <Link
-                    href="/Pedidos"
-                    className={`${styles.tab} ${pathname === "/Pedidos" ? styles.active : ""}`}
+                    href="/Pedido"
+                    className={`${styles.tab} ${pathname === "/Pedido" ? styles.active : ""}`}
                 >
                     Meus Pedidos
                 </Link>

@@ -1,0 +1,271 @@
+.container {
+    background: var(--cinza-escuro);
+    color: var(--branco);
+    padding: 40px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    height: 100%;
+}
+
+.cadastro {
+    background-color: var(--cinza-escuro);
+    width: 80%;
+    border-radius: 20px;
+    border: 1px solid var(--branco);
+    padding: 20px;
+}
+
+.cadastro h2 {
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+
+.cadastro p {
+    font-size: 16px;
+    margin: 20px 0 8px 0;
+    font-weight: 600;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.campo p {
+    font-size: 16px;
+    margin: 10px 0 6px 0;
+    font-weight: 600;
+}
+
+.inputNome {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    color: var(--branco);
+    border: 1px solid var(--branco);
+    background-color: var(--cinza-escuro);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.inputNome::placeholder,
+.inputDados::placeholder,
+.inputContatos::placeholder {
+    color: #ccc;
+}
+
+.dados {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.inputDados {
+    flex: 1;
+    padding: 10px;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    color: var(--branco);
+    border: 1px solid var(--branco);
+    background-color: var(--cinza-escuro);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.contatos {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.inputContatos {
+    flex: 1;
+    padding: 10px;
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    color: var(--branco);
+    border: 1px solid var(--branco);
+    background-color: var(--cinza-escuro);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.botoesEsquerda {
+    display: flex;
+    gap: 10px;
+}
+
+.excluir {
+    background: var(--vermelho);
+    border: 2px solid var(--vermelho);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.salvar {
+    background: var(--verde);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.excluir:hover,
+.salvar:hover,
+.logout:hover {
+    border: 2px solid var(--branco);
+    transition: all 0.2s;
+}
+
+.logout {
+    background: var(--cinza-claro);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.senhaSection {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--branco);
+}
+
+.senhaSection h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.senhaCampos {
+    display: flex;
+    gap: 20px;
+}
+
+.senhaInput {
+    flex: 1;
+    padding: 12px 14px;
+    color: var(--branco);
+    border: 1px solid var(--branco);
+    background-color: var(--cinza-escuro);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.senhaInput::placeholder {
+    color: #ccc;
+}
+
+.alterarSenha {
+    background: var(--verde);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.alterarSenha:hover {
+    border: 2px solid var(--branco);
+    transition: all 0.2s;
+}
+
+.toggleSenha {
+    background: var(--verde);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.toggleSenha:hover {
+    border: 2px solid var(--branco);
+    transition: all 0.2s;
+}
+
+.formSenha {
+    margin-top: 20px;
+}
+
+.inputSenha {
+    width: 100%;
+    padding: 12px 14px;
+    color: var(--branco);
+    border: 1px solid var(--branco);
+    background-color: var(--cinza-escuro);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.inputSenha::placeholder {
+    color: #ccc;
+}
+
+.salvarSenha {
+    background: var(--verde);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.salvarSenha:hover {
+    border: 2px solid var(--branco);
+    transition: all 0.2s;
+}
+
+.error {
+    color: var(--vermelho);
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.success {
+    color: var(--verde);
+    margin: 10px 0;
+    font-size: 14px;
+}

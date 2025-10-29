@@ -1,0 +1,9 @@
+.cardsContainer {
+    padding: 20px 40px;
+}
+
+.linkCard {
+  color: inherit;
+  text-decoration: none;
+}
+.linkCard:visited { color: inherit; }

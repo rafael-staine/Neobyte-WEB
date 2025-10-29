@@ -33,6 +33,7 @@
   display: inline-block;
 }
 
+/* centraliza a barra de pesquisa */
 .search {
   display: flex;
   align-items: center;
@@ -40,8 +41,13 @@
   border: 3px solid var(--verde);
   border-radius: 30px;
   overflow: hidden;
+<<<<<<< HEAD
   width: 360px;
+=======
+  width: 400px;
+>>>>>>> origin/master
   height: 35px;
+  margin: 0 auto;
 }
 
 .search input {
@@ -58,8 +64,13 @@
   color: #ccc;
 }
 
+<<<<<<< HEAD
 .search button {
   background: var(--verde);
+=======
+.searchButton {
+  background: var(--branco);
+>>>>>>> origin/master
   border: none;
   width: 40px;
   height: 100%;
@@ -69,16 +80,27 @@
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .search button img {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(23%) hue-rotate(248deg) brightness(115%) contrast(91%);
+=======
+.searchButton img {
+>>>>>>> origin/master
   width: 18px;
   height: 18px;
+}
+
+/* área que agrupa ícones + login */
+.iconsArea {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .icons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
 }
 
 .icons img {
@@ -94,6 +116,28 @@
   cursor: pointer;
 }
 
+/* login e cadastrar lado dos ícones */
+.loginArea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.loginLink,
+.cadastrarLink {
+  color: var(--branco);
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.divisor {
+  color: var(--branco);
+  font-weight: 500;
+}
+
+/* menu inferior */
 .nav {
   display: flex;
   align-items: center;
@@ -163,6 +207,7 @@
   background: var(--verde);
   padding-left: 20px;
 }
+<<<<<<< HEAD
 
 .headerBtnS {
   display: flex;
@@ -186,3 +231,5 @@
 .headerBtn:hover {
   background: var(--verde-escuro);
 }
+=======
+>>>>>>> origin/master
