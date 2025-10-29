@@ -115,6 +115,7 @@
     align-items: center;
     gap: 8px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .salvar {
@@ -213,6 +214,71 @@
     gap: 8px;
     font-size: 16px;
     cursor: pointer;
+}
+
+.senhaSection {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--branco);
+}
+
+.senhaSection h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.senhaCampos {
+    display: flex;
+    gap: 20px;
+}
+
+.senhaInput {
+    flex: 1;
+    padding: 12px 14px;
+    color: var(--branco);
+    border: 1px solid var(--branco);
+    background-color: var(--cinza-escuro);
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.senhaInput::placeholder {
+    color: #ccc;
+}
+
+.alterarSenha {
+    background: var(--verde);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.alterarSenha:hover {
+    border: 2px solid var(--branco);
+    transition: all 0.2s;
+}
+
+.toggleSenha {
+    background: var(--verde);
+    border: 2px solid var(--verde);
+    color: var(--branco);
+    height: 30px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 .toggleSenha:hover {

@@ -54,6 +54,7 @@ export default function Header() {
         <div className={styles.topBar}>
           <div className={styles.logo}>
             <a href="/" className={styles.logoLink}>
+            <img src="/logo/logo-branca.svg" alt="Logo Neobyte" />
               <h1>NEOBYTE</h1>
             </a>
           </div>

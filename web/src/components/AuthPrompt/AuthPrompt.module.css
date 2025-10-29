@@ -25,10 +25,16 @@
   top: 8px;
   border: none;
   background: transparent;
-  font-size: 28px;
+  font-size: 34px;
   color: var(--branco);
   line-height: 1;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close:hover {
+  color: red;
+  transform: rotate(-180deg);
 }
 
 .content h3 {

@@ -17,7 +17,13 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  transition: transform 0.2s;
 }
+
+.logo:hover {
+  transform: rotate(-2.3deg) scale(1.05);
+}
+
 
 .logo h1 {
   font-family: 'Roboto', sans-serif;
@@ -25,12 +31,26 @@
   font-size: 1.5rem;
   font-weight: bold;
   font-style: italic;
+  transition: all 0.4s  ease;
 }
 
 .logoLink {
   text-decoration: none;
   color: inherit;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoLink img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  transition: filter 0.4s;
+}
+
+.logo:hover .logoLink img {
+filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-rotate(121deg) brightness(96%) contrast(90%);
 }
 
 /* centraliza a barra de pesquisa */
@@ -38,7 +58,7 @@
   display: flex;
   align-items: center;
   background-color: var(--preto);
-  border: 1px solid var(--branco);
+  border: 2px solid var(--verde);
   border-radius: 40px;
   overflow: hidden;
   width: 400px;
@@ -61,7 +81,7 @@
 }
 
 .searchButton {
-  background: var(--branco);
+  background: var(--verde);
   border: none;
   width: 40px;
   height: 100%;
@@ -69,11 +89,17 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.searchButton:hover {
+  background: var(--verde-escuro);
 }
 
 .searchButton img {
   width: 18px;
   height: 18px;
+  filter: invert(1);
 }
 
 /* área que agrupa ícones + login */
@@ -94,11 +120,11 @@
   height: 22px;
   cursor: pointer;
   object-fit: contain;
-  transition: opacity 0.2s;
+  transition: filter 0.3s;
 }
 
 .icons img:hover {
-  opacity: 0.7;
+  filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-rotate(121deg) brightness(96%) contrast(90%);
   cursor: pointer;
 }
 
@@ -113,9 +139,15 @@
 .loginLink,
 .cadastrarLink {
   color: var(--branco);
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+.loginLink:hover,
+.cadastrarLink:hover {
+  text-decoration: underline;
+  color: var(--verde);
 }
 
 .divisor {
@@ -132,7 +164,20 @@
   padding: 10px 40px;
   gap: 100px;
 }
+.nav a {
+  background-color: var(--verde);
+  display: flex;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  transition: 0.3s ease all;
+}
 
+.nav a:hover {
+  background-color: var(--verde-escuro);
+}
 .nav a,
 .departamentos {
   color: var(--branco);
@@ -171,7 +216,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--verde-escuro);
+  background: var(--verde);
   border-radius: 0 0 6px 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   display: flex;
