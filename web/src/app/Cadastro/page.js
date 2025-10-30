@@ -130,8 +130,6 @@ export default function Login() {
             </button>
           </div>
 
-
-
           <button type="submit" className={styles.button} disabled={saving}>
             {saving ? "Salvando..." : "Cadastrar"}
           </button>

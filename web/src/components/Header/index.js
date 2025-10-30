@@ -143,11 +143,15 @@ export default function Header() {
             )}
           </div>
 
-          <Link href="./Promocoes">PROMOÇÕES</Link>
-          <Link href="./Hardware">HARDWARE</Link>
-          <Link href="./Gamer">GAMER</Link>
+          <div className={styles.mainLinks}>
+            <Link href="./Promocoes">PROMOÇÕES</Link>
+            <Link href="./Hardware">HARDWARE</Link>
+            <Link href="./Gamer">GAMER</Link>
+          </div>
+
           <a
             href="#footer"
+            className={styles.mainLinks}
             onClick={(e) => {
               e.preventDefault();
               const target = document.getElementById("numeroAtendimento");

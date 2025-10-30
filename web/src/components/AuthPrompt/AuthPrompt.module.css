@@ -33,7 +33,7 @@
 }
 
 .close:hover {
-  color: red;
+  color: var(--verde-escuro);
   transform: rotate(-180deg);
 }
 

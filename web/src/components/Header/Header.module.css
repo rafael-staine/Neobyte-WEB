@@ -24,7 +24,6 @@
   transform: rotate(-2.3deg) scale(1.05);
 }
 
-
 .logo h1 {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -53,7 +52,6 @@
 filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-rotate(121deg) brightness(96%) contrast(90%);
 }
 
-/* centraliza a barra de pesquisa */
 .search {
   display: flex;
   align-items: center;
@@ -102,7 +100,6 @@ filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-r
   filter: invert(1);
 }
 
-/* área que agrupa ícones + login */
 .iconsArea {
   display: flex;
   align-items: center;
@@ -128,7 +125,6 @@ filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-r
   cursor: pointer;
 }
 
-/* login e cadastrar lado dos ícones */
 .loginArea {
   display: flex;
   align-items: center;
@@ -142,42 +138,91 @@ filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-r
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
+  position: relative;
+}
+
+.loginLink::after,
+.cadastrarLink::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--verde);
   transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
-.loginLink:hover,
-.cadastrarLink:hover {
-  text-decoration: underline;
-  color: var(--verde);
+
+.loginLink:hover::after,
+.cadastrarLink:hover::after {
+  width: 100%;
 }
+
 
 .divisor {
   color: var(--branco);
   font-weight: 500;
 }
 
-/* menu inferior */
 .nav {
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--verde);
   padding: 10px 40px;
-  gap: 100px;
+  gap: 130px;
 }
-.nav a {
-  background-color: var(--verde);
+
+.mainLinks {
   display: flex;
-  padding-top: 8px;
+  align-items: center;
+  gap: 130px;
+}
+
+.nav a {
+  display: flex;
+  padding-top: 8px; 
   padding-bottom: 8px;
   padding-left: 16px;
   padding-right: 16px;
   border-radius: 10px;
   transition: 0.3s ease all;
+  text-decoration: none;
+  color: var(--branco);
+  font-weight: bold;
+}
+
+.mainLinks a {
+  background-color: var(--verde);
+}
+
+.mainLinks a:hover {
+  background-color: var(--verde-escuro);
+}
+
+.dropdownMenu a {
+  background-color: var(--verde-escuro);
+}
+
+.dropdownMenu a:hover {
+  background-color: var(--preto);
+}
+
+.mainLinks {
+  display: flex;
+  align-items: center;
+  gap: 130px;
+}
+
+.mainLinks a:hover {
+  background-color: var(--verde-escuro);
 }
 
 .nav a:hover {
   background-color: var(--verde-escuro);
 }
+
 .nav a,
 .departamentos {
   color: var(--branco);
@@ -216,7 +261,7 @@ filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-r
   position: absolute;
   top: 100%;
   left: 0;
-  background: var(--verde);
+  background: var(--verde-escuro);
   border-radius: 0 0 6px 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   display: flex;
