@@ -175,7 +175,7 @@
 }
 
 .errorText {
-  color: #ffaaaa;
+  color: var(--preto);
   text-decoration: underline;
   font-size: 14.3px;
   margin: 0;

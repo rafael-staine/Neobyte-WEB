@@ -40,6 +40,33 @@
     font-weight: 600;
 }
 
+.senhaContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.senhaContainer input {
+    width: 100%;
+}
+
+.senhaContainer .icone {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.senhaContainer .icone img {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-rotate(121deg) brightness(96%) contrast(90%);
+}
+
 .inputNome {
     width: 100%;
     padding: 12px 14px;
