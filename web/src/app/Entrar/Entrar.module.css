@@ -38,12 +38,13 @@
 .logo {
   width: 160px;
   height: auto;
+  margin-bottom: 10px;
 }
 
 .text {
   width: 300px;
   height: auto;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .title {
@@ -87,7 +88,9 @@
 .formulario {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .labelsES {

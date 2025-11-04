@@ -6,6 +6,7 @@ export default function Footer() {
             <div className={styles.contentWrapper}>
                 <div className={styles.leftBox}>
                     <a href="/" className={styles.logo}>
+                        <img src="/logo/logo-branca.svg" alt="Logo Neobyte" />
                         <h1>NEOBYTE</h1>
                     </a>
                 </div>
@@ -16,9 +17,15 @@ export default function Footer() {
                             <a href="/" className={styles.link}>Sobre nós</a>
                         </div>
                         <div className={styles.icons}>
-                            <img src="/Neobyte/facebook.svg" alt="Facebook" />
-                            <img src="/Neobyte/instagram.svg" alt="Instagram" />
-                            <img src="/Neobyte/twitter.svg" alt="Twitter" />
+                            <a href="#">
+                                <img src="/Neobyte/facebook.svg" alt="Facebook" />
+                            </a>
+                            <a href="#">
+                                <img src="/Neobyte/instagram.svg" alt="Instagram" />
+                            </a>
+                            <a href="#">
+                                <img src="/Neobyte/twitter.svg" alt="Twitter" />
+                            </a>
                         </div>
                     </div>
                     <div className={styles.line}></div>
