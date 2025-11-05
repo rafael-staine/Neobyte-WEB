@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -119,18 +120,24 @@ export default function Login() {
           <p className={styles.labelsES}>Senha</p>
           <div className={styles.senhaContainer}>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Digite sua senha..."
               className={styles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="button" className={styles.icone} aria-label="Visualizar senha">
-              <img src="/Neobyte/vizualizar-b.svg" alt="Visualizar senha" />
+            <button 
+              type="button" 
+              className={styles.icone} 
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Ocultar senha" : "Visualizar senha"}
+            >
+              <img 
+                src={showPassword ? "/Neobyte/vizualizar-b-off.svg" : "/Neobyte/vizualizar-b.svg"} 
+                alt={showPassword ? "Ocultar senha" : "Visualizar senha"} 
+              />
             </button>
           </div>
-
-
 
           <button type="submit" className={styles.button} disabled={saving}>
             {saving ? "Salvando..." : "Cadastrar"}

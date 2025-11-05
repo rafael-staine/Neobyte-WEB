@@ -99,6 +99,7 @@ export default function Header() {
         <div className={styles.topBar}>
           <div className={styles.logo}>
             <a href="/" className={styles.logoLink}>
+            <img src="/logo/logo-branca.svg" alt="Logo Neobyte" />
               <h1>NEOBYTE</h1>
             </a>
           </div>
@@ -198,11 +199,15 @@ export default function Header() {
             )}
           </div>
 
-          <Link href="./Promocoes">PROMOÇÕES</Link>
-          <Link href="./Hardware">HARDWARE</Link>
-          <Link href="./Gamer">GAMER</Link>
+          <div className={styles.mainLinks}>
+            <Link href="./Promocoes">PROMOÇÕES</Link>
+            <Link href="./Hardware">HARDWARE</Link>
+            <Link href="./Gamer">GAMER</Link>
+          </div>
+
           <a
             href="#footer"
+            className={styles.mainLinks}
             onClick={(e) => {
               e.preventDefault();
               const target = document.getElementById("numeroAtendimento");

@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -94,6 +93,8 @@ export default function Cadastro() {
   // Estados auxiliares
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -315,6 +316,7 @@ export default function Cadastro() {
         <div className={styles.container}>
           <div className={styles.cadastro}>
             <h2>Meu Cadastro - Conta Pessoal</h2>
+            
             <div className={styles.campo}>
               <p>
                 Nome Completo
@@ -330,6 +332,7 @@ export default function Cadastro() {
                 onChange={e => setNome(e.target.value)}
               />
             </div>
+
             <div className={styles.dados}>
               <div className={styles.campo}>
                 <p>
@@ -380,6 +383,7 @@ export default function Cadastro() {
                 />
               </div>
             </div>
+
             <div className={styles.contatos}>
               <div className={styles.campo}>
                 <p>
@@ -423,27 +427,54 @@ export default function Cadastro() {
               >
                 {showChangePassword ? "Cancelar alteração" : "Alterar senha"}
               </button>
+
               {showChangePassword && (
                 <div className={styles.formSenha}>
                   <div className={styles.campo}>
                     <p>Senha atual</p>
-                    <input
-                      type="password"
-                      value={oldPassword}
-                      onChange={(e) => setOldPassword(e.target.value)}
-                      placeholder="Digite sua senha atual"
-                      className={styles.inputSenha}
-                    />
+                    <div className={styles.senhaContainer}>
+                      <input
+                        type={showOldPassword ? "text" : "password"}
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
+                        placeholder="Digite sua senha atual"
+                        className={styles.inputSenha}
+                      />
+                      <button 
+                        type="button" 
+                        className={styles.icone}
+                        onClick={() => setShowOldPassword(!showOldPassword)}
+                        aria-label={showOldPassword ? "Ocultar senha atual" : "Visualizar senha atual"}
+                      >
+                        <img 
+                          src={showOldPassword ? "/Neobyte/vizualizar-b-off.svg" : "/Neobyte/vizualizar-b.svg"} 
+                          alt={showOldPassword ? "Ocultar senha" : "Visualizar senha"} 
+                        />
+                      </button>
+                    </div>
                   </div>
                   <div className={styles.campo}>
                     <p>Nova senha</p>
-                    <input
-                      type="password"
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                      placeholder="Digite a nova senha"
-                      className={styles.inputSenha}
-                    />
+                    <div className={styles.senhaContainer}>
+                      <input
+                        type={showNewPassword ? "text" : "password"}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        placeholder="Digite a nova senha"
+                        className={styles.inputSenha}
+                      />
+                      <button 
+                        type="button" 
+                        className={styles.icone}
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        aria-label={showNewPassword ? "Ocultar nova senha" : "Visualizar nova senha"}
+                      >
+                        <img 
+                          src={showNewPassword ? "/Neobyte/vizualizar-off.svg" : "/Neobyte/vizualizar.svg"} 
+                          alt={showNewPassword ? "Ocultar senha" : "Visualizar senha"} 
+                        />
+                      </button>
+                    </div>
                   </div>
                   {error && <p className={styles.error}>{error}</p>}
                   {success && <p className={styles.success}>{success}</p>}

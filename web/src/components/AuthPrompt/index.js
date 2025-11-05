@@ -13,7 +13,7 @@ export default function AuthPrompt({ open, onClose, message }) {
         <button className={styles.close} onClick={onClose} aria-label="Fechar">×</button>
 
         <div className={styles.content}>
-          <h3>Você precisa entrar</h3>
+          <h3>Você precisa entrar!</h3>
           <p>{message || "Para continuar, faça login ou cadastre-se."}</p>
 
           <div className={styles.actions}>

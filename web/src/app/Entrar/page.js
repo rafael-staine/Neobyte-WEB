@@ -9,6 +9,7 @@ import Image from "next/image";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -65,15 +66,17 @@ export default function Login() {
     <div className={styles.container}>
       {/* Lado esquerdo com logo e o texto */}
       <div className={styles.left}>
+
+        <div className={styles.header}>
+          <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
+        </div>
+        
         <img src="/logo/logo-verde.svg" alt="Logo" className={styles.logo} />
         <img src="/logo/text-verde.svg" alt="text" className={styles.text} />
       </div>
 
       {/* Lado direito com o formulário */}
       <div className={styles.right}>
-        <div className={styles.header}>
-          <button onClick={handleBack} className={styles.backButton} aria-label="Voltar para o início">&lt; Voltar</button>
-        </div>
         <h1 className={styles.title}>NEOBYTE</h1>
         <p className={styles.subtitle}>Bem-vindo de volta!</p>
 
@@ -95,7 +98,7 @@ export default function Login() {
           <p className={styles.labelsES}>Senha</p>
           <div className={styles.senhaContainer}>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Digite sua senha..."
               className={styles.input}
               value={password}
@@ -104,12 +107,18 @@ export default function Login() {
               minLength={4}
             />
 
-            <button type="button" className={styles.icone}>
-              <img src="/Neobyte/vizualizar.svg" alt="Visualizar senha" />
+            <button 
+              type="button" 
+              className={styles.icone}
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Ocultar senha" : "Visualizar senha"}
+            >
+              <img 
+                src={showPassword ? "/Neobyte/vizualizar-off.svg" : "/Neobyte/vizualizar.svg"} 
+                alt={showPassword ? "Ocultar senha" : "Visualizar senha"} 
+              />
             </button>
           </div>
-
-
 
           <button type="submit" className={styles.button} disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
