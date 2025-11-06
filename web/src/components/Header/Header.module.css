@@ -251,6 +251,28 @@ filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-r
   background-color: var(--verde-escuro);
 }
 
+@keyframes highlightPulse {
+  0% {
+    background-color: transparent;
+  }
+  25% {
+    background-color: rgba(var(--verde-rgb), 0.2);
+  }
+  75% {
+    background-color: rgba(var(--verde-rgb), 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.highlight {
+  animation: highlightPulse 1.5s ease-in-out;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: -4px -8px;
+}
+
 .nav a,
 .departamentos {
   color: var(--branco);

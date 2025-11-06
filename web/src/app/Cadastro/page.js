@@ -140,7 +140,7 @@ export default function Login() {
           </div>
 
           <button type="submit" className={styles.button} disabled={saving}>
-            {saving ? "Salvando..." : "Cadastrar"}
+            {saving ? "Cadastrando..." : "Cadastrar"}
           </button>
         </form>
 
