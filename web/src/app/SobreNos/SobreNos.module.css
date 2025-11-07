@@ -1,3 +1,22 @@
+.NeobyteLogos {
+  background: var(--cinza-escuro);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+}
+
+.logo {
+  height: 70px;
+  width: auto;
+}
+
+.text {
+  height: 45px;
+  width: auto;
+}
+
 .main {
   background: var(--cinza-escuro);
   min-height: calc(100vh - 300px);
@@ -34,13 +53,14 @@
 
 .leftSection h2,
 .rightSection h2 {
+  color: var(--branco);
   font-size: 28px;
   margin-bottom: 30px;
   text-align: center;
   font-weight: bold;
 }
 
-.teamGrid {
+.integrContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto auto;
@@ -49,48 +69,58 @@
   position: relative;
 }
 
-.teamGrid .teamMember:nth-child(3) {
+.integrContainer .integrante:nth-child(3) {
   grid-column: 1 / -1;
   justify-self: center;
 }
 
-.teamMember {
+.integrante {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 }
 
-.memberImage {
+.imgIntegrante {
   width: 120px;
   height: 120px;
   object-fit: contain;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
-.teamMember span {
+.imgIntegrante:hover {
+  transform: scale(1.05);
+}
+
+.integrante span {
   font-size: 16px;
   font-weight: 500;
 }
 
-.description {
+.instaLink {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--branco);
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.2s;
+}
+
+.instaLink:hover {
+  opacity: 0.8;
+}
+
+.instaIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.descricao {
   padding: 20px;
   font-size: 16px;
   line-height: 1.6;
   text-align: justify;
-}
-
-@media (max-width: 768px) {
-  .content {
-    flex-direction: column;
-  }
-
-  .teamGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .leftSection,
-  .rightSection {
-    width: 100%;
-    padding: 20px;
-  }
 }
