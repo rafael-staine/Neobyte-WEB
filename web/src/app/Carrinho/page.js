@@ -1,9 +1,16 @@
+"use client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
 import styles from "./Carrinho.module.css";
+import { useEffect } from "react";
 
 export default function Carrinho() {
+  useEffect(async () => {
+    const response = await fetch(`http://localhost:4000/cart/${user_id}`);
+    console.log(response);
+  }, []);
+
   const produtos = [
     {
       id: 1,
@@ -81,13 +88,11 @@ export default function Carrinho() {
               </div>
             </div>
           </div>
-
         </div>
 
         <div className={styles.resumo}>
           <h2>Resumo</h2>
           <div className={styles.valores}>
-
             <div className={styles.linha}>
               <span>Subtotal</span>
               <span>R$ 579,99</span>
@@ -115,7 +120,6 @@ export default function Carrinho() {
             <img src="/Neobyte/lixeira-branca.svg" alt="Lixeira" />
             Limpar carrinho
           </button>
-
         </div>
       </div>
 
