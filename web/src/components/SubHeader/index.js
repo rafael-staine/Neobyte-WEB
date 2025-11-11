@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import styles from "./SubHeader.module.css";
 import Image from "next/image";
 
-export default function SubHeader({ logo, title }) {
+export default function SubHeader({ logo, title, hideMenu }) {
     const pathname = usePathname();
 
     return (
@@ -17,47 +17,49 @@ export default function SubHeader({ logo, title }) {
                 </div>
 
 <<<<<<< HEAD
-                <Link href="/" className={styles.sair}>
-                    <Image src="/Neobyte/sair.svg" alt="Sair" width={26} height={26} /> Sair
+    <Link href="/" className={styles.sair}>
+        <Image src="/Neobyte/sair.svg" alt="Sair" width={26} height={26} /> Sair
 =======
                 <Link href="/" className={styles.Voltar}>
-                    <img src="/Neobyte/sair.svg" alt="Voltar" /> Voltar
+            <img src="/Neobyte/sair.svg" alt="Voltar" /> Voltar
 >>>>>>> origin/master
-                </Link>
-            </header>
+        </Link>
+    </header>
 
-            <nav className={styles.menu}>
-                <Link
-                    href="/Perfil"
-                    className={`${styles.tab} ${pathname === "/Perfil" ? styles.active : ""}`}
-                >
-                    Meus Dados
-                </Link>
-                <Link
-                    href="/Favoritos"
-                    className={`${styles.tab} ${pathname === "/Favoritos" ? styles.active : ""}`}
-                >
-                    Meus Favoritos
-                </Link>
-                <Link
-                    href="/Carrinho"
-                    className={`${styles.tab} ${pathname === "/Carrinho" ? styles.active : ""}`}
-                >
-                    Meu Carrinho
-                </Link>
-                <Link
-                    href="/Pedido"
-                    className={`${styles.tab} ${pathname === "/Pedido" ? styles.active : ""}`}
-                >
-                    Meus Pedidos
-                </Link>
-                <Link
-                    href="/Endereco"
-                    className={`${styles.tab} ${pathname === "/Endereco" ? styles.active : ""}`}
-                >
-                    Meus Endereços
-                </Link>
-            </nav>
-        </div>
+    {
+        !hideMenu && <nav className={styles.menu}>
+            <Link
+                href="/Perfil"
+                className={`${styles.tab} ${pathname === "/Perfil" ? styles.active : ""}`}
+            >
+                Meus Dados
+            </Link>
+            <Link
+                href="/Favoritos"
+                className={`${styles.tab} ${pathname === "/Favoritos" ? styles.active : ""}`}
+            >
+                Meus Favoritos
+            </Link>
+            <Link
+                href="/Carrinho"
+                className={`${styles.tab} ${pathname === "/Carrinho" ? styles.active : ""}`}
+            >
+                Meu Carrinho
+            </Link>
+            <Link
+                href="/Pedido"
+                className={`${styles.tab} ${pathname === "/Pedido" ? styles.active : ""}`}
+            >
+                Meus Pedidos
+            </Link>
+            <Link
+                href="/Endereco"
+                className={`${styles.tab} ${pathname === "/Endereco" ? styles.active : ""}`}
+            >
+                Meus Endereços
+            </Link>
+        </nav>
+    }
+        </div >
     );
 }

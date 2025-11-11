@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import styles from "./Entrar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function Login() {
   const [email, setEmail] = useState("");

@@ -178,6 +178,8 @@
 }
 
 .error {
+    color: #1a1a1a;
+    font-weight: bold;
     text-decoration: underline;
     font-size: 14.3px;
     margin: 0;
