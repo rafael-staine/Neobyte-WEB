@@ -5,21 +5,116 @@ import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
 import styles from "./Perfil.module.css";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Cadastro() {
   const router = useRouter();
 
+  const [user, setUser] = useState(null);
+  const [nome, setNome] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [rg, setRg] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // tenta obter perfil do localStorage
+    const saved = localStorage.getItem("neobyteUser");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setUser(parsed);
+        setNome(parsed.nome || "");
+        setCpf(parsed.cpf || "");
+        setEmail(parsed.email || "");
+        setTelefone(parsed.telefone ? String(parsed.telefone) : "");
+        // campos que não existem no banco (data nascimento, rg) ficam vazios
+        setDataNascimento("");
+        setRg("");
+      } catch (err) {
+        console.error("Erro ao parsear usuário no localStorage:", err);
+      }
+    }
+  }, []);
+
   const handleLogout = () => {
-    // Remove apenas o status de logado, mantendo os dados do usuário
+    // Limpa dados de sessão
     localStorage.removeItem("neobyteLoggedIn");
-    // Redireciona para a página inicial (header inicial)
+    localStorage.removeItem("neobyteUser");
     router.push("/");
   };
+
+  const handleSave = async () => {
+    if (!user || !user.id) return;
+    setLoading(true);
+
+    // monta payload mesclando dados existentes com as alterações do formulário
+    const payload = {
+      ...user,
+      nome: nome,
+      cpf: cpf,
+      email: email,
+      telefone: telefone ? Number(telefone) : null,
+    };
+
+    try {
+      const resp = await fetch(`http://localhost:4000/user/${user.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!resp.ok) {
+        console.error("Falha ao salvar perfil", resp.status);
+        setLoading(false);
+        return;
+      }
+
+      const data = await resp.json();
+      // atualiza localStorage com o novo perfil
+      localStorage.setItem("neobyteUser", JSON.stringify(data));
+      setUser(data);
+      setLoading(false);
+      alert("Perfil atualizado com sucesso.");
+    } catch (err) {
+      console.error("Erro ao salvar perfil:", err);
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!user || !user.id) return;
+
+    const confirmDelete = confirm("Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.");
+    if (!confirmDelete) return;
+
+    try {
+      const resp = await fetch(`http://localhost:4000/user/${user.id}`, {
+        method: "DELETE",
+      });
+
+      if (!resp.ok) {
+        console.error("Falha ao excluir conta", resp.status);
+        return;
+      }
+
+      // limpar sessão e redirecionar
+      localStorage.removeItem("neobyteLoggedIn");
+      localStorage.removeItem("neobyteUser");
+      alert("Conta excluída com sucesso.");
+      router.push("/");
+    } catch (err) {
+      console.error("Erro ao excluir conta:", err);
+    }
+  };
+
   return (
     <>
       <Header />
 
-      <SubHeader logo="/Neobyte/perfil.svg" title="Olá, Usuário" />
+      <SubHeader logo="/Neobyte/perfil.svg" title={`Olá, ${user?.nome || 'Usuário'}`} />
 
       <section>
         <div className={styles.container}>
@@ -32,6 +127,8 @@ export default function Cadastro() {
                 type="text"
                 placeholder="Editar nome"
                 className={styles.inputNome}
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
               />
             </div>
 
@@ -42,6 +139,8 @@ export default function Cadastro() {
                   type="text"
                   placeholder="Editar data"
                   className={styles.inputDados}
+                  value={dataNascimento}
+                  onChange={(e) => setDataNascimento(e.target.value)}
                 />
               </div>
 
@@ -51,6 +150,8 @@ export default function Cadastro() {
                   type="text"
                   placeholder="Editar CPF"
                   className={styles.inputDados}
+                  value={cpf}
+                  onChange={(e) => setCpf(e.target.value)}
                 />
               </div>
 
@@ -60,6 +161,8 @@ export default function Cadastro() {
                   type="text"
                   placeholder="Editar RG"
                   className={styles.inputDados}
+                  value={rg}
+                  onChange={(e) => setRg(e.target.value)}
                 />
               </div>
             </div>
@@ -71,6 +174,8 @@ export default function Cadastro() {
                   type="text"
                   placeholder="Editar e-mail"
                   className={styles.inputContatos}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -80,16 +185,18 @@ export default function Cadastro() {
                   type="text"
                   placeholder="Editar telefone"
                   className={styles.inputContatos}
+                  value={telefone}
+                  onChange={(e) => setTelefone(e.target.value)}
                 />
               </div>
             </div>
 
             <div className={styles.botoes}>
               <div className={styles.botoesEsquerda}>
-                <button className={styles.excluir}>Excluir minha conta</button>
+                <button onClick={handleDelete} className={styles.excluir} disabled={loading}>Excluir minha conta</button>
                 <button onClick={handleLogout} className={styles.logout}>Sair</button>
               </div>
-              <button className={styles.salvar}>Salvar</button>
+              <button onClick={handleSave} className={styles.salvar} disabled={loading}>{loading ? 'Salvando...' : 'Salvar'}</button>
             </div>
           </div>
         </div>

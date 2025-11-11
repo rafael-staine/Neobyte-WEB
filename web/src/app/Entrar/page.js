@@ -31,47 +31,47 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
+    // Chama o backend para buscar o usuário pelo email
+    (async () => {
+      try {
+        const resp = await fetch(`http://localhost:4000/user/email/${encodeURIComponent(
+          email.trim()
+        )}`);
 
-    try {
-      // Busca usuário no localStorage
-      const savedUserJSON = localStorage.getItem("neobyteUser");
-      if (!savedUserJSON) {
-        setError("Usuário não encontrado. Por favor, cadastre-se.");
+        if (!resp.ok) {
+          if (resp.status === 404) {
+            setError("Usuário não encontrado. Por favor, cadastre-se.");
+          } else {
+            setError("Erro ao buscar usuário. Tente novamente.");
+          }
+          setLoading(false);
+          return;
+        }
+
+        const data = await resp.json();
+        const profile = data.profile || data;
+
+        // Verifica senha (observação: backend atualmente não faz autenticação JWT)
+        if (!profile || profile.senha !== password) {
+          setError("Email ou senha incorretos.");
+          setLoading(false);
+          return;
+        }
+
+        // Salva perfil no localStorage e marca como logado
+        localStorage.setItem("neobyteUser", JSON.stringify(profile));
+        localStorage.setItem("neobyteLoggedIn", "true");
+
+        setTimeout(() => {
+          setLoading(false);
+          router.push("/");
+        }, 700);
+      } catch (err) {
+        console.error("Erro ao verificar login:", err);
+        setError("Erro ao fazer login. Tente novamente.");
         setLoading(false);
-        return;
       }
-
-      const savedUser = JSON.parse(savedUserJSON);
-
-      // Verifica se o email coincide
-      if (savedUser.email !== email.trim()) {
-        setError("Email não encontrado.");
-        setLoading(false);
-        return;
-      }
-
-      // Em um app real, NUNCA faríamos verificação de senha no frontend
-      // Este é apenas um exemplo simulado para demonstração
-      if (password.length < 4) {
-        setError("Senha inválida.");
-        setLoading(false);
-        return;
-      }
-
-      // Login bem sucedido
-      localStorage.setItem("neobyteLoggedIn", "true");
-
-      // Pequeno delay para feedback visual
-      setTimeout(() => {
-        setLoading(false);
-        router.push("/");
-      }, 700);
-
-    } catch (err) {
-      console.error("Erro ao verificar login:", err);
-      setError("Erro ao fazer login. Tente novamente.");
-      setLoading(false);
-    }
+    })();
   };
 
   return (
