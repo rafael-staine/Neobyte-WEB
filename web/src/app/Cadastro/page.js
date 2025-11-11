@@ -25,7 +25,7 @@ export default function Login() {
     return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -41,56 +41,22 @@ export default function Login() {
     setSaving(true);
 
     const newUser = {
+      nome: "Nome do usuario",
       email: email.trim(),
-      password: password,
-      token: gerarTokenSimples(),
-      createdAt: new Date().toISOString(),
+      senha: password,
     };
 
-    try {
-      // Recupera a lista existente de usuários ou cria uma nova
-      let usersList = [];
-      const existingUsersJSON = localStorage.getItem("neobyteUsers");
-      if (existingUsersJSON) {
-        usersList = JSON.parse(existingUsersJSON);
-      }
-
-      // Adiciona o novo usuário à lista
-      usersList.push(newUser);
-
-      // Salva a lista atualizada
-      localStorage.setItem("neobyteUsers", JSON.stringify(usersList));
-
-      // Define este usuário como o atual
-      localStorage.setItem("neobyteUser", JSON.stringify(newUser));
-      localStorage.setItem("neobyteLoggedIn", "true");
-
-      // Mostra todos os usuários cadastrados no console
-      console.log("=== Usuários Cadastrados ===");
-      usersList.forEach((user, index) => {
-        console.log(`\nUsuário ${index + 1}:`);
-        console.log("Email:", user.email);
-        console.log("Senha:", user.password);
-        console.log("Data de cadastro:", new Date(user.createdAt).toLocaleString());
-        console.log("Token:", user.token);
+      const response = await fetch("http://localhost:4000/user",
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
       });
 
-      console.log("\n=== Usuário Atual (Logado) ===");
-      console.log("Email:", newUser.email);
-      console.log("Senha:", newUser.password);
-      console.log("Data de cadastro:", new Date(newUser.createdAt).toLocaleString());
-
-      // Pequeno atraso para UX
       setTimeout(() => {
-        setSaving(false);
-        // Redireciona para página inicial após cadastro
+
         router.push("/");
       }, 700);
-    } catch (err) {
-      console.error("Erro ao salvar no localStorage:", err);
-      setError("Não foi possível salvar os dados localmente.");
-      setSaving(false);
-    }
   };
 
   return (
