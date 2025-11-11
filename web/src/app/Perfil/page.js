@@ -67,20 +67,24 @@ export default function Cadastro() {
       });
 
       if (!resp.ok) {
-        console.error("Falha ao salvar perfil", resp.status);
+        const text = await resp.text();
+        console.error("Falha ao salvar perfil", resp.status, text);
         setLoading(false);
+        alert("Falha ao salvar perfil. Tente novamente.");
         return;
       }
 
       const data = await resp.json();
+      const profile = data.profile || data;
       // atualiza localStorage com o novo perfil
-      localStorage.setItem("neobyteUser", JSON.stringify(data));
-      setUser(data);
+      localStorage.setItem("neobyteUser", JSON.stringify(profile));
+      setUser(profile);
       setLoading(false);
       alert("Perfil atualizado com sucesso.");
     } catch (err) {
       console.error("Erro ao salvar perfil:", err);
       setLoading(false);
+      alert("Erro ao salvar perfil. Tente novamente.");
     }
   };
 
@@ -96,7 +100,9 @@ export default function Cadastro() {
       });
 
       if (!resp.ok) {
-        console.error("Falha ao excluir conta", resp.status);
+        const txt = await resp.text();
+        console.error("Falha ao excluir conta", resp.status, txt);
+        alert("Falha ao excluir conta. Tente novamente.");
         return;
       }
 
@@ -107,6 +113,7 @@ export default function Cadastro() {
       router.push("/");
     } catch (err) {
       console.error("Erro ao excluir conta:", err);
+      alert("Erro ao excluir conta. Tente novamente.");
     }
   };
 

@@ -18,6 +18,7 @@ export default function Endereco() {
     bairro: "",
     cep: "",
     cidade: "",
+    estado: "",
   });
 
   // Ao montar: carrega usuário da sessão (localStorage) e busca endereços do backend
@@ -42,15 +43,18 @@ export default function Endereco() {
     bairro: a.bairro || "",
     cep: a.complemento || "",
     cidade: a.cidade || "",
+    estado: a.estado || "",
   });
 
   const mapFrontendToBackend = (f) => ({
     nome: f.titulo,
     rua: f.rua,
+    cep: f.cep,
     numero: f.numero ? Number(f.numero) : null,
     bairro: f.bairro,
     complemento: f.cep,
     cidade: f.cidade,
+    estado: f.estado,
   });
 
   const fetchEnderecos = async (userId) => {
@@ -75,12 +79,13 @@ export default function Endereco() {
       return;
     }
 
-    if (!novoEndereco.titulo || !novoEndereco.rua || !novoEndereco.numero) {
-      alert("Preencha pelo menos o título, rua e número.");
+    if (!novoEndereco.titulo || !novoEndereco.rua || !novoEndereco.numero || !novoEndereco.estado) {
+      alert("Preencha pelo menos o título, rua, número e estado.");
       return;
     }
 
     const payload = { ...mapFrontendToBackend(novoEndereco), user_id: user.id };
+    console.log("Payload para criar endereço:", payload);
 
     (async () => {
       try {
@@ -103,7 +108,9 @@ export default function Endereco() {
           numero: "",
           bairro: "",
           cep: "",
+          complemento: "",
           cidade: "",
+          estado: "",
         });
         setMostrarPopup(false);
       } catch (err) {
@@ -295,6 +302,45 @@ export default function Endereco() {
                     }
                     placeholder="Cidade"
                   />
+                  <select
+                    value={endereco.estado || ""}
+                    onChange={(e) =>
+                      setEnderecos((prev) => {
+                        const novos = [...prev];
+                        novos[index].estado = e.target.value;
+                        return novos;
+                      })
+                    }
+                  >
+                    <option value="">Selecione o Estado</option>
+                    <option value="AC">Acre (AC)</option>
+                    <option value="AL">Alagoas (AL)</option>
+                    <option value="AP">Amapá (AP)</option>
+                    <option value="AM">Amazonas (AM)</option>
+                    <option value="BA">Bahia (BA)</option>
+                    <option value="CE">Ceará (CE)</option>
+                    <option value="DF">Distrito Federal (DF)</option>
+                    <option value="ES">Espírito Santo (ES)</option>
+                    <option value="GO">Goiás (GO)</option>
+                    <option value="MA">Maranhão (MA)</option>
+                    <option value="MT">Mato Grosso (MT)</option>
+                    <option value="MS">Mato Grosso do Sul (MS)</option>
+                    <option value="MG">Minas Gerais (MG)</option>
+                    <option value="PA">Pará (PA)</option>
+                    <option value="PB">Paraíba (PB)</option>
+                    <option value="PR">Paraná (PR)</option>
+                    <option value="PE">Pernambuco (PE)</option>
+                    <option value="PI">Piauí (PI)</option>
+                    <option value="RJ">Rio de Janeiro (RJ)</option>
+                    <option value="RN">Rio Grande do Norte (RN)</option>
+                    <option value="RS">Rio Grande do Sul (RS)</option>
+                    <option value="RO">Rondônia (RO)</option>
+                    <option value="RR">Roraima (RR)</option>
+                    <option value="SC">Santa Catarina (SC)</option>
+                    <option value="SP">São Paulo (SP)</option>
+                    <option value="SE">Sergipe (SE)</option>
+                    <option value="TO">Tocantins (TO)</option>
+                  </select>
                   <button
                     onClick={() => salvarEdicao(index, endereco)}
                     className={styles.txtSalvar}
@@ -313,6 +359,7 @@ export default function Endereco() {
                   <p>
                     CEP: {endereco.cep}
                     {endereco.cidade && `, ${endereco.cidade}`}
+                    {endereco.estado && ` - ${endereco.estado}`}
                   </p>
                   <div className={styles.acoes}>
                     <button
@@ -388,6 +435,41 @@ export default function Endereco() {
                 setNovoEndereco({ ...novoEndereco, cidade: e.target.value })
               }
             />
+            <select
+              value={novoEndereco.estado}
+              onChange={(e) =>
+                setNovoEndereco({ ...novoEndereco, estado: e.target.value })
+              }
+            >
+              <option value="">Selecione o Estado</option>
+              <option value="AC">Acre (AC)</option>
+              <option value="AL">Alagoas (AL)</option>
+              <option value="AP">Amapá (AP)</option>
+              <option value="AM">Amazonas (AM)</option>
+              <option value="BA">Bahia (BA)</option>
+              <option value="CE">Ceará (CE)</option>
+              <option value="DF">Distrito Federal (DF)</option>
+              <option value="ES">Espírito Santo (ES)</option>
+              <option value="GO">Goiás (GO)</option>
+              <option value="MA">Maranhão (MA)</option>
+              <option value="MT">Mato Grosso (MT)</option>
+              <option value="MS">Mato Grosso do Sul (MS)</option>
+              <option value="MG">Minas Gerais (MG)</option>
+              <option value="PA">Pará (PA)</option>
+              <option value="PB">Paraíba (PB)</option>
+              <option value="PR">Paraná (PR)</option>
+              <option value="PE">Pernambuco (PE)</option>
+              <option value="PI">Piauí (PI)</option>
+              <option value="RJ">Rio de Janeiro (RJ)</option>
+              <option value="RN">Rio Grande do Norte (RN)</option>
+              <option value="RS">Rio Grande do Sul (RS)</option>
+              <option value="RO">Rondônia (RO)</option>
+              <option value="RR">Roraima (RR)</option>
+              <option value="SC">Santa Catarina (SC)</option>
+              <option value="SP">São Paulo (SP)</option>
+              <option value="SE">Sergipe (SE)</option>
+              <option value="TO">Tocantins (TO)</option>
+            </select>
 
             <div className={styles.popupAcoes}>
               <button onClick={adicionarEndereco} className={styles.txtSalvar}>

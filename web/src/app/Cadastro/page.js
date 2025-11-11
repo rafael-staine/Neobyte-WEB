@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -24,7 +25,7 @@ export default function Login() {
     return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -40,54 +41,43 @@ export default function Login() {
     setSaving(true);
 
     const newUser = {
+      nome: "Nome do usuario",
       email: email.trim(),
-      password: password,
-      token: gerarTokenSimples(),
-      createdAt: new Date().toISOString(),
+      senha: password,
     };
 
     try {
-      // Recupera a lista existente de usuários ou cria uma nova
-      let usersList = [];
-      const existingUsersJSON = localStorage.getItem("neobyteUsers");
-      if (existingUsersJSON) {
-        usersList = JSON.parse(existingUsersJSON);
-      }
-
-      // Adiciona o novo usuário à lista
-      usersList.push(newUser);
-
-      // Salva a lista atualizada
-      localStorage.setItem("neobyteUsers", JSON.stringify(usersList));
-
-      // Define este usuário como o atual
-      localStorage.setItem("neobyteUser", JSON.stringify(newUser));
-      localStorage.setItem("neobyteLoggedIn", "true");
-
-      // Mostra todos os usuários cadastrados no console
-      console.log("=== Usuários Cadastrados ===");
-      usersList.forEach((user, index) => {
-        console.log(`\nUsuário ${index + 1}:`);
-        console.log("Email:", user.email);
-        console.log("Senha:", user.password);
-        console.log("Data de cadastro:", new Date(user.createdAt).toLocaleString());
-        console.log("Token:", user.token);
+      const response = await fetch("http://localhost:4000/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
       });
 
-      console.log("\n=== Usuário Atual (Logado) ===");
-      console.log("Email:", newUser.email);
-      console.log("Senha:", newUser.password);
-      console.log("Data de cadastro:", new Date(newUser.createdAt).toLocaleString());
-
-      // Pequeno atraso para UX
-      setTimeout(() => {
+      if (!response.ok) {
+        const errText = await response.text();
+        setError("Erro ao cadastrar: " + (errText || response.status));
         setSaving(false);
-        // Redireciona para página inicial após cadastro
-        router.push("/");
-      }, 700);
+        return;
+      }
+
+      const data = await response.json();
+      // backend retorna { message, profile }
+      const profile = data.profile || data;
+
+      // salva sessão/localStorage automaticamente após cadastro
+      try {
+        localStorage.setItem("neobyteUser", JSON.stringify(profile));
+        localStorage.setItem("neobyteLoggedIn", "true");
+      } catch (err) {
+        console.warn("Não foi possível salvar no localStorage:", err);
+      }
+
+      // vai para a página de perfil
+      router.push("/Perfil");
     } catch (err) {
-      console.error("Erro ao salvar no localStorage:", err);
-      setError("Não foi possível salvar os dados localmente.");
+      console.error("Erro ao cadastrar:", err);
+      setError("Erro ao cadastrar. Tente novamente.");
+    } finally {
       setSaving(false);
     }
   };
@@ -119,21 +109,27 @@ export default function Login() {
           <p className={styles.labelsES}>Senha</p>
           <div className={styles.senhaContainer}>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Digite sua senha..."
               className={styles.input}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="button" className={styles.icone} aria-label="Visualizar senha">
-              <img src="/Neobyte/vizualizar-b.svg" alt="Visualizar senha" />
+            <button 
+              type="button" 
+              className={styles.icone} 
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "Ocultar senha" : "Visualizar senha"}
+            >
+              <img 
+                src={showPassword ? "/Neobyte/vizualizar-b-off.svg" : "/Neobyte/vizualizar-b.svg"} 
+                alt={showPassword ? "Ocultar senha" : "Visualizar senha"} 
+              />
             </button>
           </div>
 
-
-
           <button type="submit" className={styles.button} disabled={saving}>
-            {saving ? "Salvando..." : "Cadastrar"}
+            {saving ? "Cadastrando..." : "Cadastrar"}
           </button>
         </form>
 
