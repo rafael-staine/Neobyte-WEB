@@ -19,6 +19,7 @@ export default function Endereco() {
     cep: "",
     cidade: "",
     estado: "",
+    complemento: "",
   });
 
   // Ao montar: carrega usuário da sessão (localStorage) e busca endereços do backend
@@ -41,7 +42,8 @@ export default function Endereco() {
     rua: a.rua || "",
     numero: a.numero != null ? String(a.numero) : "",
     bairro: a.bairro || "",
-    cep: a.complemento || "",
+    cep: a.cep || "",
+    complemento: a.complemento || "",
     cidade: a.cidade || "",
     estado: a.estado || "",
   });
@@ -52,7 +54,7 @@ export default function Endereco() {
     cep: f.cep,
     numero: f.numero ? Number(f.numero) : null,
     bairro: f.bairro,
-    complemento: f.cep,
+    complemento: f.complemento || null,
     cidade: f.cidade,
     estado: f.estado,
   });
@@ -302,6 +304,18 @@ export default function Endereco() {
                     }
                     placeholder="Cidade"
                   />
+                  <input
+                    type="text"
+                    value={endereco.complemento || ""}
+                    onChange={(e) =>
+                      setEnderecos((prev) => {
+                        const novos = [...prev];
+                        novos[index].complemento = e.target.value;
+                        return novos;
+                      })
+                    }
+                    placeholder="Complemento"
+                  />
                   <select
                     value={endereco.estado || ""}
                     onChange={(e) =>
@@ -313,33 +327,33 @@ export default function Endereco() {
                     }
                   >
                     <option value="">Selecione o Estado</option>
-                    <option value="AC">Acre (AC)</option>
-                    <option value="AL">Alagoas (AL)</option>
-                    <option value="AP">Amapá (AP)</option>
-                    <option value="AM">Amazonas (AM)</option>
-                    <option value="BA">Bahia (BA)</option>
-                    <option value="CE">Ceará (CE)</option>
-                    <option value="DF">Distrito Federal (DF)</option>
-                    <option value="ES">Espírito Santo (ES)</option>
-                    <option value="GO">Goiás (GO)</option>
-                    <option value="MA">Maranhão (MA)</option>
-                    <option value="MT">Mato Grosso (MT)</option>
-                    <option value="MS">Mato Grosso do Sul (MS)</option>
-                    <option value="MG">Minas Gerais (MG)</option>
-                    <option value="PA">Pará (PA)</option>
-                    <option value="PB">Paraíba (PB)</option>
-                    <option value="PR">Paraná (PR)</option>
-                    <option value="PE">Pernambuco (PE)</option>
-                    <option value="PI">Piauí (PI)</option>
-                    <option value="RJ">Rio de Janeiro (RJ)</option>
-                    <option value="RN">Rio Grande do Norte (RN)</option>
-                    <option value="RS">Rio Grande do Sul (RS)</option>
-                    <option value="RO">Rondônia (RO)</option>
-                    <option value="RR">Roraima (RR)</option>
-                    <option value="SC">Santa Catarina (SC)</option>
-                    <option value="SP">São Paulo (SP)</option>
-                    <option value="SE">Sergipe (SE)</option>
-                    <option value="TO">Tocantins (TO)</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
                   </select>
                   <button
                     onClick={() => salvarEdicao(index, endereco)}
@@ -359,6 +373,7 @@ export default function Endereco() {
                   <p>
                     CEP: {endereco.cep}
                     {endereco.cidade && `, ${endereco.cidade}`}
+                    {endereco.complemento && `, ${endereco.complemento}`}
                     {endereco.estado && ` - ${endereco.estado}`}
                   </p>
                   <div className={styles.acoes}>
@@ -435,6 +450,14 @@ export default function Endereco() {
                 setNovoEndereco({ ...novoEndereco, cidade: e.target.value })
               }
             />
+            <input
+              type="text"
+              placeholder="Complemento"
+              value={novoEndereco.complemento}
+              onChange={(e) =>
+                setNovoEndereco({ ...novoEndereco, complemento: e.target.value })
+              }
+            />
             <select
               value={novoEndereco.estado}
               onChange={(e) =>
@@ -442,33 +465,33 @@ export default function Endereco() {
               }
             >
               <option value="">Selecione o Estado</option>
-              <option value="AC">Acre (AC)</option>
-              <option value="AL">Alagoas (AL)</option>
-              <option value="AP">Amapá (AP)</option>
-              <option value="AM">Amazonas (AM)</option>
-              <option value="BA">Bahia (BA)</option>
-              <option value="CE">Ceará (CE)</option>
-              <option value="DF">Distrito Federal (DF)</option>
-              <option value="ES">Espírito Santo (ES)</option>
-              <option value="GO">Goiás (GO)</option>
-              <option value="MA">Maranhão (MA)</option>
-              <option value="MT">Mato Grosso (MT)</option>
-              <option value="MS">Mato Grosso do Sul (MS)</option>
-              <option value="MG">Minas Gerais (MG)</option>
-              <option value="PA">Pará (PA)</option>
-              <option value="PB">Paraíba (PB)</option>
-              <option value="PR">Paraná (PR)</option>
-              <option value="PE">Pernambuco (PE)</option>
-              <option value="PI">Piauí (PI)</option>
-              <option value="RJ">Rio de Janeiro (RJ)</option>
-              <option value="RN">Rio Grande do Norte (RN)</option>
-              <option value="RS">Rio Grande do Sul (RS)</option>
-              <option value="RO">Rondônia (RO)</option>
-              <option value="RR">Roraima (RR)</option>
-              <option value="SC">Santa Catarina (SC)</option>
-              <option value="SP">São Paulo (SP)</option>
-              <option value="SE">Sergipe (SE)</option>
-              <option value="TO">Tocantins (TO)</option>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
             </select>
 
             <div className={styles.popupAcoes}>
