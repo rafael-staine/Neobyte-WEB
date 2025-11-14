@@ -1,0 +1,95 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup {
+    background: var(--cinza-escuro);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    border: 2px solid var(--verde);
+}
+
+.closeButton {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    background: none;
+    border: none;
+    color: var(--branco);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: opacity 0.2s;
+}
+
+.closeButton:hover {
+    opacity: 0.8;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--branco);
+    text-align: center;
+}
+
+.foto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    border: 2px solid var(--verde);
+}
+
+.content h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.funcao {
+    color: var(--verde);
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.descricao {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.instaLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--branco);
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.2s;
+    background: var(--verde);
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.instaLink:hover {
+    opacity: 0.8;
+}
+
+.instaIcon {
+    width: 20px;
+    height: 20px;
+}

@@ -4,23 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./SubHeader.module.css";
 
-export default function SubHeader({ logo, title }) {
+export default function SubHeader({ logo, title, hideMenu }) {
     const pathname = usePathname();
 
     return (
         <div className={styles.container}>
             <header className={styles.header}>
                 <div className={styles.icons}>
-                    <img src={logo} alt="logo" />
+                    {logo && <img src={logo} alt="logo" />}
                     <span className={styles.info}>{title}</span>
                 </div>
 
-                <Link href="/" className={styles.sair}>
-                    <img src="/Neobyte/sair.svg" alt="Sair" /> Sair
+                <Link href="/" className={styles.Voltar}>
+                    <img src="/Neobyte/sair.svg" alt="Voltar" /> Voltar
                 </Link>
             </header>
 
-            <nav className={styles.menu}>
+            {!hideMenu && <nav className={styles.menu}>
                 <Link
                     href="/Perfil"
                     className={`${styles.tab} ${pathname === "/Perfil" ? styles.active : ""}`}
@@ -51,7 +51,7 @@ export default function SubHeader({ logo, title }) {
                 >
                     Meus Endereços
                 </Link>
-            </nav>
+            </nav>}
         </div>
     );
 }

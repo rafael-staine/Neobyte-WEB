@@ -17,6 +17,11 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: rotate(-2.3deg) scale(1.05);
 }
 
 .logo h1 {
@@ -25,20 +30,33 @@
   font-size: 1.5rem;
   font-weight: bold;
   font-style: italic;
+  transition: all 0.4s  ease;
 }
 
 .logoLink {
   text-decoration: none;
   color: inherit;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* centraliza a barra de pesquisa */
+.logoLink img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  transition: filter 0.4s;
+}
+
+.logo:hover .logoLink img {
+filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-rotate(121deg) brightness(96%) contrast(90%);
+}
+
 .search {
   display: flex;
   align-items: center;
   background-color: var(--preto);
-  border: 1px solid var(--branco);
+  border: 2px solid var(--verde);
   border-radius: 40px;
   overflow: hidden;
   width: 400px;
@@ -61,7 +79,7 @@
 }
 
 .searchButton {
-  background: var(--branco);
+  background: var(--verde);
   border: none;
   width: 40px;
   height: 100%;
@@ -69,14 +87,19 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.searchButton:hover {
+  background: var(--verde-escuro);
 }
 
 .searchButton img {
   width: 18px;
   height: 18px;
+  filter: invert(1);
 }
 
-/* área que agrupa ícones + login */
 .iconsArea {
   display: flex;
   align-items: center;
@@ -89,20 +112,42 @@
   gap: 12px;
 }
 
+.icons a {
+  position: relative;
+  padding-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.icons a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--verde);
+  transition: width 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.icons a:hover::after {
+  width: 100%;
+}
+
 .icons img {
   width: 22px;
   height: 22px;
   cursor: pointer;
   object-fit: contain;
-  transition: opacity 0.2s;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
 }
 
-.icons img:hover {
-  opacity: 0.7;
-  cursor: pointer;
+.icons a:hover img {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(47%) saturate(699%) hue-rotate(121deg) brightness(96%) contrast(90%);
 }
 
-/* login e cadastrar lado dos ícones */
 .loginArea {
   display: flex;
   align-items: center;
@@ -113,9 +158,34 @@
 .loginLink,
 .cadastrarLink {
   color: var(--branco);
-  text-decoration: underline;
+  text-decoration: none;
   font-weight: bold;
   cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.loginLink:hover,
+.cadastrarLink:hover {
+  color: var(--verde);
+}
+
+.loginLink::after,
+.cadastrarLink::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--verde);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.loginLink:hover::after,
+.cadastrarLink:hover::after {
+  width: 100%;
 }
 
 .divisor {
@@ -123,14 +193,84 @@
   font-weight: 500;
 }
 
-/* menu inferior */
 .nav {
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--verde);
   padding: 10px 40px;
-  gap: 100px;
+  gap: 130px;
+}
+
+.mainLinks {
+  display: flex;
+  align-items: center;
+  gap: 130px;
+}
+
+.nav a {
+  display: flex;
+  padding-top: 8px; 
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  transition: 0.3s ease all;
+  text-decoration: none;
+  color: var(--branco);
+  font-weight: bold;
+}
+
+.mainLinks a {
+  background-color: var(--verde);
+}
+
+.mainLinks a:hover {
+  background-color: var(--verde-escuro);
+}
+
+.dropdownMenu a {
+  background-color: var(--verde-escuro);
+}
+
+.dropdownMenu a:hover {
+  background-color: var(--preto);
+}
+
+.mainLinks {
+  display: flex;
+  align-items: center;
+  gap: 130px;
+}
+
+.mainLinks a:hover {
+  background-color: var(--verde-escuro);
+}
+
+.nav a:hover {
+  background-color: var(--verde-escuro);
+}
+
+@keyframes highlightPulse {
+  0% {
+    background-color: transparent;
+  }
+  25% {
+    background-color: rgba(var(--verde-rgb), 0.2);
+  }
+  75% {
+    background-color: rgba(var(--verde-rgb), 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.highlight {
+  animation: highlightPulse 1.5s ease-in-out;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: -4px -8px;
 }
 
 .nav a,

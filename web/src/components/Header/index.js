@@ -48,12 +48,49 @@ export default function Header() {
     setShowAuthPrompt(true);
   }
 
+  const scrollToAtendimento = (e) => {
+    e.preventDefault();
+    const target = document.getElementById("numeroAtendimento");
+    if (target) {
+      // First, calculate the target position
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - 50;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 1000; // Duration in milliseconds
+      let start = null;
+
+      function animation(currentTime) {
+        if (start === null) start = currentTime;
+        const timeElapsed = currentTime - start;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        // Easing function for smooth acceleration and deceleration
+        const ease = t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+
+        window.scrollTo(0, startPosition + distance * ease(progress));
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        } else {
+          // Add highlight effect after scrolling
+          target.classList.add(styles.highlight);
+          setTimeout(() => {
+            target.classList.remove(styles.highlight);
+          }, 1500);
+        }
+      }
+
+      requestAnimationFrame(animation);
+    }
+  };
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.topBar}>
           <div className={styles.logo}>
             <a href="/" className={styles.logoLink}>
+            <img src="/logo/logo-branca.svg" alt="Logo Neobyte" />
               <h1>NEOBYTE</h1>
             </a>
           </div>
@@ -142,18 +179,16 @@ export default function Header() {
             )}
           </div>
 
-          <Link href="./Promocoes">PROMOÇÕES</Link>
-          <Link href="./Hardware">HARDWARE</Link>
-          <Link href="./Gamer">GAMER</Link>
+          <div className={styles.mainLinks}>
+            <Link href="./Promocoes">PROMOÇÕES</Link>
+            <Link href="./Hardware">HARDWARE</Link>
+            <Link href="./Gamer">GAMER</Link>
+          </div>
+
           <a
             href="#footer"
-            onClick={(e) => {
-              e.preventDefault();
-              const target = document.getElementById("numeroAtendimento");
-              if (target) {
-                target.scrollIntoView({ behavior: "smooth", block: "center" });
-              }
-            }}
+            className={styles.mainLinks}
+            onClick={scrollToAtendimento}
           >
             ATENDIMENTO
           </a>

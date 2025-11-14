@@ -32,9 +32,9 @@
     font-weight: bold;
 }
 
-.sair {
-    background: var(--vermelho);
-    border: 2px solid var(--vermelho);
+.Voltar {
+    background: var(--verde);
+    border: 2px solid var(--branco);
     color: var(--branco);
     height: 30px;
     padding: 8px 20px;
@@ -45,14 +45,20 @@
     font-size: 16px;
 }
 
-.sair:hover {
-    border: 2px solid var(--branco);
+.Voltar:hover {
+    border: 2px solid var(--verde);
+    background-color: var(--branco);
+    color: var(--verde);
     transition: all 0.2s;
 }
 
-.sair img {
+.Voltar img {
     width: 18px;
     height: 18px;
+}
+
+.Voltar:hover img {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(97%) saturate(374%) hue-rotate(121deg) brightness(98%) contrast(90%);
 }
 
 .menu {
