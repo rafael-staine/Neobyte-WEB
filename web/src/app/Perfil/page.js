@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
 import styles from "./Perfil.module.css";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 
@@ -178,140 +179,159 @@ export default function Cadastro() {
     }
   };
 
+  const [user, setUser] = useState(null);
+  const [nome, setNome] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [rg, setRg] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // utilitárias de formatação
+  const onlyDigits = (str) => (str ? String(str).replace(/\D+/g, "") : "");
+
+  const formatCpf = (value) => {
+    const digits = onlyDigits(value).slice(0, 11);
+    if (!digits) return "";
+    // 000.000.000-00
+    return digits
+      .replace(/^(\d{3})(\d)/, "$1.$2")
+      .replace(/^(\d{3}\.\d{3})(\d)/, "$1.$2")
+      .replace(/^(\d{3}\.\d{3}\.\d{3})(\d{1,2})/, "$1-$2");
+  };
+
+  const formatPhone = (value) => {
+    const digits = onlyDigits(value).slice(0, 11);
+    if (!digits) return "";
+    // formatos: (00)0000-0000 ou (00)00000-0000
+    if (digits.length <= 10) {
+      return digits
+        .replace(/^(\d{2})(\d)/, "($1)$2")
+        .replace(/^(\(\d{2}\)\d{4})(\d)/, "$1-$2");
+    }
+    return digits
+      .replace(/^(\d{2})(\d)/, "($1)$2")
+      .replace(/^(\(\d{2}\)\d{5})(\d)/, "$1-$2");
+  };
+
+  useEffect(() => {
+    // tenta obter perfil do localStorage
+    const saved = localStorage.getItem("neobyteUser");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setUser(parsed);
+  setNome(parsed.nome || "");
+  // formata CPF e telefone ao preencher o formulário
+  setCpf(parsed.cpf ? formatCpf(String(parsed.cpf)) : "");
+  setEmail(parsed.email || "");
+  setTelefone(parsed.telefone ? formatPhone(String(parsed.telefone)) : "");
+        // campos que não existem no banco (data nascimento, rg) ficam vazios
+        setDataNascimento("");
+        setRg("");
+      } catch (err) {
+        console.error("Erro ao parsear usuário no localStorage:", err);
+      }
+    }
+  }, []);
+
   const handleLogout = () => {
-    // Remove apenas o status de logado, mantendo os dados do usuário
+    // Limpa dados de sessão
     localStorage.removeItem("neobyteLoggedIn");
-    //Redireciona para a página inicial (header inicial)
+    localStorage.removeItem("neobyteUser");
     router.push("/");
   };
 
-  const handleDeleteAccount = () => {
-    // Pede confirmação do usuário antes de deletar
-    const isConfirmed = window.confirm(
-      "Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita."
-    );
+  const handleSave = async () => {
+    if (!user || !user.id) return;
+    setLoading(true);
 
-    if (!isConfirmed) {
-      return; // Se o usuário cancelar, não faz nada
+    // monta payload mesclando dados existentes com as alterações do formulário
+    // envia apenas dígitos para o backend (o Prisma espera strings para cpf/telefone)
+    const payload = {
+      ...user,
+      nome: nome,
+      cpf: cpf ? onlyDigits(cpf) : null,
+      email: email,
+      telefone: telefone ? onlyDigits(telefone) : null,
+    };
+
+    // se usuário forneceu nova senha, inclui no payload para substituição
+    if (senha) {
+      if (senha.length < 4) {
+        alert('A nova senha deve ter ao menos 4 caracteres.');
+        setLoading(false);
+        return;
+      }
+      payload.senha = senha;
     }
 
     try {
-      // Recupera o usuário atual e a lista de usuários
-      const currentUserJSON = localStorage.getItem("neobyteUser");
-      const usersListJSON = localStorage.getItem("neobyteUsers");
+      const resp = await fetch(`http://localhost:4000/user/${user.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-      if (!currentUserJSON || !usersListJSON) {
-        console.error("Dados do usuário não encontrados");
+      if (!resp.ok) {
+        const text = await resp.text();
+        console.error("Falha ao salvar perfil", resp.status, text);
+        setLoading(false);
+        alert("Falha ao salvar perfil. Tente novamente.");
         return;
       }
 
-      const currentUser = JSON.parse(currentUserJSON);
-      const usersList = JSON.parse(usersListJSON);
+      const data = await resp.json();
+      const profile = data.profile || data;
+      // atualiza localStorage com o novo perfil
+      localStorage.setItem("neobyteUser", JSON.stringify(profile));
+      setUser(profile);
+      setLoading(false);
+      alert("Perfil atualizado com sucesso.");
+    } catch (err) {
+      console.error("Erro ao salvar perfil:", err);
+      setLoading(false);
+      alert("Erro ao salvar perfil. Tente novamente.");
+    }
+  };
 
-      // Remove o usuário atual da lista
-      const updatedUsersList = usersList.filter(user => user.email !== currentUser.email);
+  const handleDelete = async () => {
+    if (!user || !user.id) return;
 
-      // Atualiza a lista no localStorage
-      localStorage.setItem("neobyteUsers", JSON.stringify(updatedUsersList));
+    const confirmDelete = confirm("Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.");
+    if (!confirmDelete) return;
 
-      // Limpa os dados do usuário atual
-      localStorage.removeItem("neobyteUser");
+    try {
+      const resp = await fetch(`http://localhost:4000/user/${user.id}`, {
+        method: "DELETE",
+      });
+
+      if (!resp.ok) {
+        const txt = await resp.text();
+        console.error("Falha ao excluir conta", resp.status, txt);
+        alert("Falha ao excluir conta. Tente novamente.");
+        return;
+      }
+
+      // limpar sessão e redirecionar
       localStorage.removeItem("neobyteLoggedIn");
-
-      // Log para conferência
-      console.log("=== Conta Excluída ===");
-      console.log("Email removido:", currentUser.email);
-      console.log("Usuários restantes:", updatedUsersList.length);
-
-      // Redireciona para a página inicial
+      localStorage.removeItem("neobyteUser");
+      alert("Conta excluída com sucesso.");
       router.push("/");
     } catch (err) {
       console.error("Erro ao excluir conta:", err);
-    }
-  };
-  // Função para salvar alterações
-  function validarDataNascimento(data) {
-    // Espera dd/mm/aaaa
-    if (!/^\d{2}\/\d{2}\/\d{4}$/.test(data)) return { valido: false, erro: "Data de nascimento invalida" };
-    const [dia, mes, ano] = data.split("/").map(Number);
-    if (mes < 1 || mes > 12 || dia < 1) return { valido: false, erro: "Data de nascimento invalida" };
-    const diasNoMes = new Date(ano, mes, 0).getDate();
-    if (dia > diasNoMes) return { valido: false, erro: "Data de nascimento invalida" };
-    // Idade
-    const hoje = new Date();
-    const nascimento = new Date(ano, mes - 1, dia);
-    const idade = hoje.getFullYear() - ano - (hoje < new Date(hoje.getFullYear(), mes - 1, dia) ? 1 : 0);
-    if (idade < 0 || idade > 112) return { valido: false, erro: "Data de nascimento invalida" };
-    if (idade < 16) return { valido: false, erro: "A idade minima e de 16 anos" };
-    return { valido: true };
-  }
-
-  const handleSave = () => {
-    setError("");
-    setSuccess("");
-    // Só valida data de nascimento se o campo foi preenchido
-    if (dataNascimento !== "") {
-      const validacao = validarDataNascimento(dataNascimento);
-      if (!validacao.valido) {
-        setSuccess("");
-        setError(validacao.erro);
-        return;
-      }
-    }
-    // Só valida CPF se o campo foi preenchido
-    if (cpf !== "" && !validarCpf(cpf)) {
-      setSuccess("");
-      setError("CPF inválido");
-      return;
-    }
-    // Só valida RG se o campo foi preenchido
-    if (rg !== "" && !validarRg(rg)) {
-      setSuccess("");
-      setError("RG inválido");
-      return;
-    }
-    // Só valida telefone se o campo foi preenchido
-    if (telefone !== "" && !validarTelefone(telefone)) {
-      setSuccess("");
-      setError("Telefone inválido");
-      return;
-    }
-    try {
-      const currentUserJSON = localStorage.getItem("neobyteUser");
-      const usersListJSON = localStorage.getItem("neobyteUsers");
-      if (!currentUserJSON || !usersListJSON) {
-        setError("Erro ao acessar dados do usuário.");
-        return;
-      }
-      const currentUser = JSON.parse(currentUserJSON);
-      const usersList = JSON.parse(usersListJSON);
-      // Atualiza os dados do usuário
-      const updatedUser = {
-        ...currentUser,
-        nome: nome !== "" ? nome : currentUser.nome,
-        dataNascimento: dataNascimento !== "" ? dataNascimento : currentUser.dataNascimento,
-        cpf: cpf !== "" ? cpf : currentUser.cpf,
-        rg: rg !== "" ? rg : currentUser.rg,
-        email: email !== "" ? email : currentUser.email,
-        telefone: telefone !== "" ? telefone : currentUser.telefone,
-      };
-      // Atualiza na lista de usuários
-      const updatedUsersList = usersList.map(user =>
-        user.email === currentUser.email ? updatedUser : user
-      );
-      localStorage.setItem("neobyteUser", JSON.stringify(updatedUser));
-      localStorage.setItem("neobyteUsers", JSON.stringify(updatedUsersList));
-      setUserData(updatedUser);
-      setSuccess("Dados salvos com sucesso!");
-    } catch (err) {
-      setError("Erro ao salvar dados. Tente novamente.");
+      alert("Erro ao excluir conta. Tente novamente.");
     }
   };
 
   return (
     <>
       <Header />
-      <SubHeader logo="/Neobyte/perfil.svg" title="Olá, Usuário" />
+
+      <SubHeader logo="/Neobyte/perfil.svg" title={`Olá, ${user?.nome || 'Usuário'}`} />
+
       <section>
         <div className={styles.container}>
           <div className={styles.cadastro}>
@@ -329,9 +349,10 @@ export default function Cadastro() {
                 placeholder="Editar nome"
                 className={styles.inputNome}
                 value={nome}
-                onChange={e => setNome(e.target.value)}
+                onChange={(e) => setNome(e.target.value)}
               />
             </div>
+
 
             <div className={styles.dados}>
               <div className={styles.campo}>
@@ -362,26 +383,11 @@ export default function Cadastro() {
                   placeholder="Editar CPF"
                   className={styles.inputDados}
                   value={cpf}
-                  maxLength={14}
-                  onChange={e => setCpf(formatarCpf(e.target.value))}
+                  onChange={(e) => setCpf(formatCpf(e.target.value))}
                 />
               </div>
-              <div className={styles.campo}>
-                <p>
-                  RG
-                  <span style={{ fontSize: 13, color: '#aaa', marginLeft: 10 }}>
-                    {userLoaded && (userData.rg ? userData.rg : "Ainda nao cadastrado")}
-                  </span>
-                </p>
-                <input
-                  type="text"
-                  placeholder="Editar RG"
-                  className={styles.inputDados}
-                  value={rg}
-                  maxLength={12}
-                  onChange={e => setRg(formatarRg(e.target.value))}
-                />
-              </div>
+
+              
             </div>
 
             <div className={styles.contatos}>
@@ -397,7 +403,7 @@ export default function Cadastro() {
                   placeholder="Editar e-mail"
                   className={styles.inputContatos}
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className={styles.campo}>
@@ -412,8 +418,21 @@ export default function Cadastro() {
                   placeholder="Editar telefone"
                   className={styles.inputContatos}
                   value={telefone}
-                  maxLength={15}
-                  onChange={e => setTelefone(formatarTelefone(e.target.value))}
+                  onChange={(e) => setTelefone(formatPhone(e.target.value))}
+                />
+              </div>
+            </div>
+
+            <div className={styles.senhaSection}>
+              <h3>Alterar senha</h3>
+              <div className={styles.campo}>
+                <p>Nova senha</p>
+                <input
+                  type="password"
+                  placeholder="Nova senha"
+                  className={styles.inputContatos}
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
                 />
               </div>
             </div>
@@ -490,10 +509,10 @@ export default function Cadastro() {
             </div>
             <div className={styles.botoes}>
               <div className={styles.botoesEsquerda}>
-                <button onClick={handleDeleteAccount} className={styles.excluir}>Excluir minha conta</button>
+                <button onClick={handleDelete} className={styles.excluir} disabled={loading}>Excluir minha conta</button>
                 <button onClick={handleLogout} className={styles.logout}>Sair</button>
               </div>
-              <button className={styles.salvar} onClick={handleSave}>Salvar</button>
+              <button onClick={handleSave} className={styles.salvar} disabled={loading}>{loading ? 'Salvando...' : 'Salvar'}</button>
             </div>
             {error && <p className={styles.error}>{error}</p>}
             {success && <p className={styles.success}>{success}</p>}

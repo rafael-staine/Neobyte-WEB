@@ -46,17 +46,40 @@ export default function Login() {
       senha: password,
     };
 
-      const response = await fetch("http://localhost:4000/user",
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    try {
+      const response = await fetch("http://localhost:4000/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),
       });
 
-      setTimeout(() => {
+      if (!response.ok) {
+        const errText = await response.text();
+        setError("Erro ao cadastrar: " + (errText || response.status));
+        setSaving(false);
+        return;
+      }
 
-        router.push("/");
-      }, 700);
+      const data = await response.json();
+      // backend retorna { message, profile }
+      const profile = data.profile || data;
+
+      // salva sessão/localStorage automaticamente após cadastro
+      try {
+        localStorage.setItem("neobyteUser", JSON.stringify(profile));
+        localStorage.setItem("neobyteLoggedIn", "true");
+      } catch (err) {
+        console.warn("Não foi possível salvar no localStorage:", err);
+      }
+
+      // vai para a página de perfil
+      router.push("/Perfil");
+    } catch (err) {
+      console.error("Erro ao cadastrar:", err);
+      setError("Erro ao cadastrar. Tente novamente.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (

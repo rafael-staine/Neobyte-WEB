@@ -6,16 +6,8 @@ import SubHeader from "@/components/SubHeader";
 import styles from "./Endereco.module.css";
 
 export default function Endereco() {
-  // Inicializa diretamente a partir do localStorage para evitar
-  // sobrescrever os dados salvos durante o primeiro mount.
-  const [enderecos, setEnderecos] = useState(() => {
-    try {
-      const saved = typeof window !== "undefined" && localStorage.getItem("enderecos");
-      return saved ? JSON.parse(saved) : [];
-    } catch (e) {
-      return [];
-    }
-  });
+  const [user, setUser] = useState(null);
+  const [enderecos, setEnderecos] = useState([]);
 
   const [editando, setEditando] = useState(null);
   const [mostrarPopup, setMostrarPopup] = useState(false);
@@ -26,48 +18,153 @@ export default function Endereco() {
     bairro: "",
     cep: "",
     cidade: "",
+    estado: "",
+    complemento: "",
   });
 
-  // Salvar no localStorage sempre que `enderecos` mudar.
-  // A leitura já é feita na inicialização do state acima, assim
-  // evitamos o problema onde um efeito de salvar rodaria no mount
-  // e sobrescreveria dados previamente salvos.
+  // Ao montar: carrega usuário da sessão (localStorage) e busca endereços do backend
   useEffect(() => {
     try {
-      localStorage.setItem("enderecos", JSON.stringify(enderecos));
-    } catch (e) {
-      // falha silenciosa — localStorage pode estar indisponível
-      console.error("Erro ao salvar enderecos no localStorage:", e);
+      const saved = localStorage.getItem("neobyteUser");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setUser(parsed);
+        fetchEnderecos(parsed.id);
+      }
+    } catch (err) {
+      console.error("Erro ao obter usuário da sessão:", err);
     }
-  }, [enderecos]);
+  }, []);
+
+  const mapBackendToFrontend = (a) => ({
+    id: a.id,
+    titulo: a.nome || "",
+    rua: a.rua || "",
+    numero: a.numero != null ? String(a.numero) : "",
+    bairro: a.bairro || "",
+    cep: a.cep || "",
+    complemento: a.complemento || "",
+    cidade: a.cidade || "",
+    estado: a.estado || "",
+  });
+
+  const mapFrontendToBackend = (f) => ({
+    nome: f.titulo,
+    rua: f.rua,
+    cep: f.cep,
+    numero: f.numero ? Number(f.numero) : null,
+    bairro: f.bairro,
+    complemento: f.complemento || null,
+    cidade: f.cidade,
+    estado: f.estado,
+  });
+
+  const fetchEnderecos = async (userId) => {
+    if (!userId) return;
+    try {
+      const resp = await fetch(`http://localhost:4000/adress/user/${userId}`);
+      if (!resp.ok) {
+        console.error("Falha ao buscar endereços", resp.status);
+        return;
+      }
+      const data = await resp.json();
+      const list = Array.isArray(data.adress) ? data.adress.map(mapBackendToFrontend) : [];
+      setEnderecos(list);
+    } catch (err) {
+      console.error("Erro ao buscar endereços:", err);
+    }
+  };
 
   const adicionarEndereco = () => {
-    if (
-      !novoEndereco.titulo ||
-      !novoEndereco.rua ||
-      !novoEndereco.numero ||
-      !novoEndereco.cep
-    ) {
-      alert("Preencha pelo menos o título, rua, número e CEP.");
+    if (!user || !user.id) {
+      alert("Você precisa estar logado para adicionar um endereço.");
       return;
     }
 
-    setEnderecos([...enderecos, novoEndereco]);
-    setNovoEndereco({
-      titulo: "",
-      rua: "",
-      numero: "",
-      bairro: "",
-      cep: "",
-      cidade: "",
-    });
-    setMostrarPopup(false);
+    if (!novoEndereco.titulo || !novoEndereco.rua || !novoEndereco.numero || !novoEndereco.estado) {
+      alert("Preencha pelo menos o título, rua, número e estado.");
+      return;
+    }
+
+    const payload = { ...mapFrontendToBackend(novoEndereco), user_id: user.id };
+    console.log("Payload para criar endereço:", payload);
+
+    (async () => {
+      try {
+        const resp = await fetch("http://localhost:4000/adress/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!resp.ok) {
+          // tenta ler o corpo da resposta para depuração
+          let bodyText = "";
+          try {
+            bodyText = await resp.text();
+          } catch (e) {
+            console.error('Erro ao ler body da resposta:', e);
+          }
+          console.error("Falha ao criar endereço", resp.status, bodyText);
+          alert(`Erro ao criar endereço. status=${resp.status} body=${bodyText}`);
+          return;
+        }
+        const data = await resp.json();
+        const created = data.adress;
+        setEnderecos((prev) => [...prev, mapBackendToFrontend(created)]);
+        setNovoEndereco({
+          titulo: "",
+          rua: "",
+          numero: "",
+          bairro: "",
+          cep: "",
+          complemento: "",
+          cidade: "",
+          estado: "",
+        });
+        setMostrarPopup(false);
+      } catch (err) {
+        console.error("Erro ao criar endereço:", err);
+        alert("Erro ao criar endereço.");
+      }
+    })();
   };
 
   const deletarEndereco = (index) => {
-    const novos = [...enderecos];
-    novos.splice(index, 1);
-    setEnderecos(novos);
+    if (!user || !user.id) {
+      alert("Você precisa estar logado para excluir um endereço.");
+      return;
+    }
+
+    const endereco = enderecos[index];
+    if (!endereco || !endereco.id) {
+      // item local não possui id — remove localmente
+      const novos = [...enderecos];
+      novos.splice(index, 1);
+      setEnderecos(novos);
+      return;
+    }
+
+    (async () => {
+      try {
+        const resp = await fetch("http://localhost:4000/adress/", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify( {id_user_id: {id: endereco.id, user_id: user.id}}),
+        });
+        if (!resp.ok) {
+          console.error("Falha ao deletar endereço", resp.status);
+          alert("Erro ao deletar endereço.");
+          return;
+        }
+        // remove localmente
+        const novos = [...enderecos];
+        novos.splice(index, 1);
+        setEnderecos(novos);
+      } catch (err) {
+        console.error("Erro ao deletar endereço:", err);
+        alert("Erro ao deletar endereço.");
+      }
+    })();
   };
 
   const editarEndereco = (index) => {
@@ -75,10 +172,57 @@ export default function Endereco() {
   };
 
   const salvarEdicao = (index, enderecoEditado) => {
-    const novos = [...enderecos];
-    novos[index] = enderecoEditado;
-    setEnderecos(novos);
-    setEditando(null);
+    if (!user || !user.id) {
+      alert("Você precisa estar logado para editar um endereço.");
+      return;
+    }
+
+    const endereco = enderecoEditado;
+    // se o endereço não tiver id local, não há como editar no backend
+    if (!endereco.id) {
+      const novos = [...enderecos];
+      novos[index] = endereco;
+      setEnderecos(novos);
+      setEditando(null);
+      return;
+    }
+
+    // Validações antes de enviar para o backend (campos obrigatórios no schema Prisma)
+    if (!endereco.titulo || !endereco.rua || !endereco.numero || !endereco.estado) {
+      alert('Preencha pelo menos o título, rua, número e estado antes de salvar.');
+      return;
+    }
+
+    if (isNaN(Number(endereco.numero))) {
+      alert('Número do endereço deve ser um valor numérico.');
+      return;
+    }
+
+    const payload = { id: endereco.id, user_id: user.id, ...mapFrontendToBackend(endereco) };
+
+    (async () => {
+      try {
+        const resp = await fetch("http://localhost:4000/adress/", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!resp.ok) {
+          console.error("Falha ao editar endereço", resp.status);
+          alert("Erro ao editar endereço.");
+          return;
+        }
+        const data = await resp.json();
+        const updated = data.adress;
+        const novos = [...enderecos];
+        novos[index] = mapBackendToFrontend(updated);
+        setEnderecos(novos);
+        setEditando(null);
+      } catch (err) {
+        console.error("Erro ao editar endereço:", err);
+        alert("Erro ao editar endereço.");
+      }
+    })();
   };
 
   return (
@@ -178,6 +322,57 @@ export default function Endereco() {
                     }
                     placeholder="Cidade"
                   />
+                  <input
+                    type="text"
+                    value={endereco.complemento || ""}
+                    onChange={(e) =>
+                      setEnderecos((prev) => {
+                        const novos = [...prev];
+                        novos[index].complemento = e.target.value;
+                        return novos;
+                      })
+                    }
+                    placeholder="Complemento"
+                  />
+                  <select
+                    value={endereco.estado || ""}
+                    onChange={(e) =>
+                      setEnderecos((prev) => {
+                        const novos = [...prev];
+                        novos[index].estado = e.target.value;
+                        return novos;
+                      })
+                    }
+                  >
+                    <option value="">Selecione o Estado</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="DF">DF</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                  </select>
                   <button
                     onClick={() => salvarEdicao(index, endereco)}
                     className={styles.txtSalvar}
@@ -196,6 +391,8 @@ export default function Endereco() {
                   <p>
                     CEP: {endereco.cep}
                     {endereco.cidade && `, ${endereco.cidade}`}
+                    {endereco.complemento && `, ${endereco.complemento}`}
+                    {endereco.estado && ` - ${endereco.estado}`}
                   </p>
                   <div className={styles.acoes}>
                     <button
@@ -271,6 +468,49 @@ export default function Endereco() {
                 setNovoEndereco({ ...novoEndereco, cidade: e.target.value })
               }
             />
+            <input
+              type="text"
+              placeholder="Complemento"
+              value={novoEndereco.complemento}
+              onChange={(e) =>
+                setNovoEndereco({ ...novoEndereco, complemento: e.target.value })
+              }
+            />
+            <select
+              value={novoEndereco.estado}
+              onChange={(e) =>
+                setNovoEndereco({ ...novoEndereco, estado: e.target.value })
+              }
+            >
+              <option value="">Selecione o Estado</option>
+              <option value="AC">AC</option>
+              <option value="AL">AL</option>
+              <option value="AP">AP</option>
+              <option value="AM">AM</option>
+              <option value="BA">BA</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="ES">ES</option>
+              <option value="GO">GO</option>
+              <option value="MA">MA</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="MG">MG</option>
+              <option value="PA">PA</option>
+              <option value="PB">PB</option>
+              <option value="PR">PR</option>
+              <option value="PE">PE</option>
+              <option value="PI">PI</option>
+              <option value="RJ">RJ</option>
+              <option value="RN">RN</option>
+              <option value="RS">RS</option>
+              <option value="RO">RO</option>
+              <option value="RR">RR</option>
+              <option value="SC">SC</option>
+              <option value="SP">SP</option>
+              <option value="SE">SE</option>
+              <option value="TO">TO</option>
+            </select>
 
             <div className={styles.popupAcoes}>
               <button onClick={adicionarEndereco} className={styles.txtSalvar}>

@@ -35,6 +35,9 @@ const avaliacoes = [
 export default function ProdutoPlacaMae() {
   const [showAuthPrompt, setShowAuthPrompt] = useState(false);
 
+  // Assumimos product_id = 1 para esta página (ajuste conforme seu banco)
+  const PRODUCT_ID = 1;
+
   function requireAuth(e) {
     e.preventDefault();
     const isLogged = typeof window !== "undefined" && localStorage.getItem("neobyteLoggedIn") === "true";
@@ -43,6 +46,58 @@ export default function ProdutoPlacaMae() {
       return false;
     }
     return true;
+  }
+
+  const addFavorite = async (e) => {
+    e.preventDefault();
+    if (!requireAuth(e)) return;
+
+    const saved = localStorage.getItem('neobyteUser');
+    if (!saved) return alert('Usuário não encontrado.');
+    const user = JSON.parse(saved);
+
+    try {
+      const resp = await fetch('http://localhost:4000/favorite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: user.id, product_id: PRODUCT_ID }),
+      });
+
+      if (!resp.ok) {
+        console.error('Erro ao adicionar favorito', resp.status);
+        return;
+      }
+
+      alert('Adicionado aos favoritos.');
+    } catch (err) {
+      console.error('Erro ao adicionar favorito', err);
+    }
+  }
+
+  const addToCart = async (e) => {
+    e.preventDefault();
+    if (!requireAuth(e)) return;
+
+    const saved = localStorage.getItem('neobyteUser');
+    if (!saved) return alert('Usuário não encontrado.');
+    const user = JSON.parse(saved);
+
+    try {
+      const resp = await fetch('http://localhost:4000/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: user.id, produto_id: PRODUCT_ID, quantidade: 1 }),
+      });
+
+      if (!resp.ok) {
+        console.error('Erro ao adicionar ao carrinho', resp.status);
+        return;
+      }
+
+      alert('Produto adicionado ao carrinho.');
+    } catch (err) {
+      console.error('Erro ao adicionar ao carrinho', err);
+    }
   }
 
   return (
@@ -72,7 +127,7 @@ export default function ProdutoPlacaMae() {
                 <span>★</span>
                 <span>☆</span>
               </div>
-              <a href="./Favoritos" onClick={(e) => { if (!requireAuth(e)) return; }}>
+              <a href="#" onClick={addFavorite}>
                 <img
                   className={styles.coracao}
                   src="./Neobyte/coracao.svg"
@@ -135,7 +190,7 @@ export default function ProdutoPlacaMae() {
                 </button>
               </a>
 
-              <a href="/Carrinho" onClick={(e) => { if (!requireAuth(e)) return; }}>
+              <a href="#" onClick={addToCart}>
                 <button className={styles.btnCarrinho}>
                   <img
                     src="./Neobyte/carrinho.svg"
