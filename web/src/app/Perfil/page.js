@@ -17,7 +17,35 @@ export default function Cadastro() {
   const [rg, setRg] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
+  const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // utilitárias de formatação
+  const onlyDigits = (str) => (str ? String(str).replace(/\D+/g, "") : "");
+
+  const formatCpf = (value) => {
+    const digits = onlyDigits(value).slice(0, 11);
+    if (!digits) return "";
+    // 000.000.000-00
+    return digits
+      .replace(/^(\d{3})(\d)/, "$1.$2")
+      .replace(/^(\d{3}\.\d{3})(\d)/, "$1.$2")
+      .replace(/^(\d{3}\.\d{3}\.\d{3})(\d{1,2})/, "$1-$2");
+  };
+
+  const formatPhone = (value) => {
+    const digits = onlyDigits(value).slice(0, 11);
+    if (!digits) return "";
+    // formatos: (00)0000-0000 ou (00)00000-0000
+    if (digits.length <= 10) {
+      return digits
+        .replace(/^(\d{2})(\d)/, "($1)$2")
+        .replace(/^(\(\d{2}\)\d{4})(\d)/, "$1-$2");
+    }
+    return digits
+      .replace(/^(\d{2})(\d)/, "($1)$2")
+      .replace(/^(\(\d{2}\)\d{5})(\d)/, "$1-$2");
+  };
 
   useEffect(() => {
     // tenta obter perfil do localStorage
@@ -26,10 +54,11 @@ export default function Cadastro() {
       try {
         const parsed = JSON.parse(saved);
         setUser(parsed);
-        setNome(parsed.nome || "");
-        setCpf(parsed.cpf || "");
-        setEmail(parsed.email || "");
-        setTelefone(parsed.telefone ? String(parsed.telefone) : "");
+  setNome(parsed.nome || "");
+  // formata CPF e telefone ao preencher o formulário
+  setCpf(parsed.cpf ? formatCpf(String(parsed.cpf)) : "");
+  setEmail(parsed.email || "");
+  setTelefone(parsed.telefone ? formatPhone(String(parsed.telefone)) : "");
         // campos que não existem no banco (data nascimento, rg) ficam vazios
         setDataNascimento("");
         setRg("");
@@ -51,13 +80,24 @@ export default function Cadastro() {
     setLoading(true);
 
     // monta payload mesclando dados existentes com as alterações do formulário
+    // envia apenas dígitos para o backend (o Prisma espera strings para cpf/telefone)
     const payload = {
       ...user,
       nome: nome,
-      cpf: cpf,
+      cpf: cpf ? onlyDigits(cpf) : null,
       email: email,
-      telefone: telefone ? Number(telefone) : null,
+      telefone: telefone ? onlyDigits(telefone) : null,
     };
+
+    // se usuário forneceu nova senha, inclui no payload para substituição
+    if (senha) {
+      if (senha.length < 4) {
+        alert('A nova senha deve ter ao menos 4 caracteres.');
+        setLoading(false);
+        return;
+      }
+      payload.senha = senha;
+    }
 
     try {
       const resp = await fetch(`http://localhost:4000/user/${user.id}`, {
@@ -140,16 +180,6 @@ export default function Cadastro() {
             </div>
 
             <div className={styles.dados}>
-              <div className={styles.campo}>
-                <p>Data de nascimento</p>
-                <input
-                  type="text"
-                  placeholder="Editar data"
-                  className={styles.inputDados}
-                  value={dataNascimento}
-                  onChange={(e) => setDataNascimento(e.target.value)}
-                />
-              </div>
 
               <div className={styles.campo}>
                 <p>CPF</p>
@@ -158,20 +188,11 @@ export default function Cadastro() {
                   placeholder="Editar CPF"
                   className={styles.inputDados}
                   value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
+                  onChange={(e) => setCpf(formatCpf(e.target.value))}
                 />
               </div>
 
-              <div className={styles.campo}>
-                <p>RG</p>
-                <input
-                  type="text"
-                  placeholder="Editar RG"
-                  className={styles.inputDados}
-                  value={rg}
-                  onChange={(e) => setRg(e.target.value)}
-                />
-              </div>
+              
             </div>
 
             <div className={styles.contatos}>
@@ -193,7 +214,21 @@ export default function Cadastro() {
                   placeholder="Editar telefone"
                   className={styles.inputContatos}
                   value={telefone}
-                  onChange={(e) => setTelefone(e.target.value)}
+                  onChange={(e) => setTelefone(formatPhone(e.target.value))}
+                />
+              </div>
+            </div>
+
+            <div className={styles.senhaSection}>
+              <h3>Alterar senha</h3>
+              <div className={styles.campo}>
+                <p>Nova senha</p>
+                <input
+                  type="password"
+                  placeholder="Nova senha"
+                  className={styles.inputContatos}
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
                 />
               </div>
             </div>

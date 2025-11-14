@@ -97,8 +97,15 @@ export default function Endereco() {
           body: JSON.stringify(payload),
         });
         if (!resp.ok) {
-          console.error("Falha ao criar endereço", resp.status);
-          alert("Erro ao criar endereço.");
+          // tenta ler o corpo da resposta para depuração
+          let bodyText = "";
+          try {
+            bodyText = await resp.text();
+          } catch (e) {
+            console.error('Erro ao ler body da resposta:', e);
+          }
+          console.error("Falha ao criar endereço", resp.status, bodyText);
+          alert(`Erro ao criar endereço. status=${resp.status} body=${bodyText}`);
           return;
         }
         const data = await resp.json();
@@ -142,7 +149,7 @@ export default function Endereco() {
         const resp = await fetch("http://localhost:4000/adress/", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: endereco.id, user_id: user.id }),
+          body: JSON.stringify( {id_user_id: {id: endereco.id, user_id: user.id}}),
         });
         if (!resp.ok) {
           console.error("Falha ao deletar endereço", resp.status);
@@ -177,6 +184,17 @@ export default function Endereco() {
       novos[index] = endereco;
       setEnderecos(novos);
       setEditando(null);
+      return;
+    }
+
+    // Validações antes de enviar para o backend (campos obrigatórios no schema Prisma)
+    if (!endereco.titulo || !endereco.rua || !endereco.numero || !endereco.estado) {
+      alert('Preencha pelo menos o título, rua, número e estado antes de salvar.');
+      return;
+    }
+
+    if (isNaN(Number(endereco.numero))) {
+      alert('Número do endereço deve ser um valor numérico.');
       return;
     }
 
