@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Cadastro.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import PasswordField from "@/components/PasswordField";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -107,26 +108,16 @@ export default function Login() {
           />
 
           <p className={styles.labelsES}>Senha</p>
-          <div className={styles.senhaContainer}>
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Digite sua senha..."
-              className={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button 
-              type="button" 
-              className={styles.icone} 
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? "Ocultar senha" : "Visualizar senha"}
-            >
-              <img 
-                src={showPassword ? "/Neobyte/vizualizar-b-off.svg" : "/Neobyte/vizualizar-b.svg"} 
-                alt={showPassword ? "Ocultar senha" : "Visualizar senha"} 
-              />
-            </button>
-          </div>
+          <PasswordField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Digite sua senha..."
+            inputClass={styles.input}
+            wrapperClass={styles.senhaContainer}
+            iconClass={styles.icone}
+            iconOff="/Neobyte/vizualizar-b-off.svg"
+            iconOn="/Neobyte/vizualizar-b.svg"
+          />
 
           <button type="submit" className={styles.button} disabled={saving}>
             {saving ? "Cadastrando..." : "Cadastrar"}

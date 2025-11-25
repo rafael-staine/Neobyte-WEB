@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./Entrar.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import PasswordField from "@/components/PasswordField";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -108,29 +109,17 @@ export default function Login() {
           />
 
           <p className={styles.labelsES}>Senha</p>
-          <div className={styles.senhaContainer}>
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Digite sua senha..."
-              className={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={4}
-            />
-
-            <button 
-              type="button" 
-              className={styles.icone}
-              onClick={() => setShowPassword(!showPassword)}
-              aria-label={showPassword ? "Ocultar senha" : "Visualizar senha"}
-            >
-              <img 
-                src={showPassword ? "/Neobyte/vizualizar-off.svg" : "/Neobyte/vizualizar.svg"} 
-                alt={showPassword ? "Ocultar senha" : "Visualizar senha"} 
-              />
-            </button>
-          </div>
+          <PasswordField
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Digite sua senha..."
+            inputClass={styles.input}
+            wrapperClass={styles.senhaContainer}
+            iconClass={styles.icone}
+            minLength={4}
+            iconOff="/Neobyte/vizualizar-off.svg"
+            iconOn="/Neobyte/vizualizar.svg"
+          />
 
           <button type="submit" className={styles.button} disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}

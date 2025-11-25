@@ -1,3 +1,5 @@
+"use client"
+
 import styles from "./page.module.css";
 import Head from "next/head";
 import Header from "@/components/Header";
@@ -5,8 +7,24 @@ import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import Card from "@/components/Card";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
+  let produtos = []
+  useEffect(() => {
+    const getProdutos = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/product");
+        const data = await response.json();
+        console.log(data);
+        produtos = data.products;
+      } catch (error) {
+        console.log("Erro ao buscar produtos:", error);
+      }
+    }
+    getProdutos();
+  }, [])
+
   return (
     <>
       <Head>
@@ -26,14 +44,16 @@ export default function Home() {
           <h2 className={styles.titleHome}>Mais Vendidos</h2>
 
           <div className={styles.gridCards1}>
-            <Link href="/ProdutoPlacaMae" className={styles.linkCard}>
-              <Card
-                nomeProduto="Placa-Mãe ASUS TUF GAMING A520M-PLUS II, AMD AM4, mATX, DDR4, Preto"
-                imagemProd="/ImgProdutos/placamae1.svg"
-                desconto="788.22"
-                preco="575.99"
-              />
-            </Link>
+            {produtos.map((produto) => (
+              <Card>
+                key={produto.id},
+                nomeProduto=,
+                imagemProd={produto.capa},
+                desconto={produto.precoDesconto},
+                preco={produto.valor}
+              </Card>
+            ))
+            }
             <Card
               nomeProduto="Headset Gamer Havit, Drivers 53mm, Microfone Plugável, 3.5mm, PC, PS4, XBOX ONE, Preto"
               imagemProd="/ImgProdutos/headset1.svg"

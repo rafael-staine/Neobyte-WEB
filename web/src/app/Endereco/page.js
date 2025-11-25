@@ -149,7 +149,7 @@ export default function Endereco() {
         const resp = await fetch("http://localhost:4000/adress/", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify( {id_user_id: {id: endereco.id, user_id: user.id}}),
+          body: JSON.stringify({ id: endereco.id, user_id: user.id }),
         });
         if (!resp.ok) {
           console.error("Falha ao deletar endereço", resp.status);
