@@ -28,16 +28,16 @@ export default function Card(props) {
     <section className={styles.produto_card}>
       <div className={styles.card_produto}>
         <picture className={styles.imgCard}>
-          <img src={props.imagemProd} alt={props.nomeProduto} />
+          <img className={styles.imgCardProd}
+            src={props.imagemProd} alt={props.nomeProduto} />
         </picture>
 
         <div className={styles.infoCard}>
           <h3 className={styles.tituloProduto}>{props.nomeProduto}</h3>
 
           <p
-            className={`${styles.desconto} ${
-              !props.desconto ? styles.hidden : ""
-            }`}
+            className={`${styles.desconto} ${!props.desconto ? styles.hidden : ""
+              }`}
           >
             {props.desconto ? formatarMoeda(props.desconto) : "\u00A0"}
           </p>

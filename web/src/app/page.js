@@ -107,7 +107,7 @@ export default function Home() {
                 key={produto.id}
                 nomeProduto={produto.nome}
                 preco={produto.valor}
-                desconto={produto.valordesconto ? produto.valordesconto / 100 : null}
+                desconto={produto.valor ? produto.valor * 1.16 : null}
                 imagemProd={produto.capa || '/imagem-padrao.jpg'}
               />
             ))}

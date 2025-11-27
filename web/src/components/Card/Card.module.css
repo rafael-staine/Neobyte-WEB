@@ -28,31 +28,43 @@
 .imgCard {
     width: 200px;
     height: 200px;
-    display: block;       /* transforma em bloco */
+    display: block;
+    /* transforma em bloco */
     margin: 0 auto;
 }
 
+.imgCardProd {
+    object-fit: contain;
+}
+
 .infoCard {
-  display: flex;
-  flex-direction: column; /* empilha os itens em coluna */
-  gap: 8px;               /* espaço entre cada texto */
+    display: flex;
+    flex-direction: column;
+    /* empilha os itens em coluna */
+    gap: 8px;
+    /* espaço entre cada texto */
 }
 
 .tituloProduto {
-  font-size: 1.1rem;
-  text-align: start;
-  font-weight: 700;
-  display: -webkit-box;          /* necessário */
-  -webkit-line-clamp: 3;         /* número de linhas */
-  -webkit-box-orient: vertical;  /* orientação vertical */
-  overflow: hidden;              /* esconde o resto */
-  text-overflow: ellipsis;       /* coloca os "..." */
+    font-size: 1.1rem;
+    text-align: start;
+    font-weight: 700;
+    display: -webkit-box;
+    /* necessário */
+    -webkit-line-clamp: 3;
+    /* número de linhas */
+    -webkit-box-orient: vertical;
+    /* orientação vertical */
+    overflow: hidden;
+    /* esconde o resto */
+    text-overflow: ellipsis;
+    /* coloca os "..." */
 }
 
-.desconto { 
+.desconto {
     color: red;
-    text-decoration:line-through 1px red;
-    
+    text-decoration: line-through 1px red;
+
 }
 
 .hidden {
