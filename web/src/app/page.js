@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [produtos, setProdutos] = useState([])
   const [produtosAleatorios, setProdutosAleatorios] = useState([])
+  const [produtosAleatorios2, setProdutosAleatorios2] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(null)
 
@@ -33,7 +34,7 @@ export default function Home() {
     carregarProdutos()
   }, [])
 
-  // Função para selecionar produtos aleatórios
+  // Função para selecionar produtos aleatórios sem repetição
   const selectProdRnd = (array, quantidade) => {
     if (!array || array.length === 0) return [];
 
@@ -41,25 +42,47 @@ export default function Home() {
       return [...array];
     }
 
-    const embaralhado = [...array].sort(() => Math.random() - 0.5);
-    return embaralhado.slice(0, quantidade);
-  }
+    const selecionados = new Set();
+    while (selecionados.size < quantidade) {
+      const indexAleatorio = Math.floor(Math.random() * array.length);
+      selecionados.add(array[indexAleatorio]);
+    }
+
+    return Array.from(selecionados);
+  };
 
   // Atualiza produtos aleatórios quando os produtos carregam
   useEffect(() => {
     if (produtos.length > 0) {
-      const aleatorios = selectProdRnd(produtos, 10)
-      setProdutosAleatorios(aleatorios)
+      const aleatorios = selectProdRnd(produtos, 10);
+      setProdutosAleatorios(aleatorios);
     }
-  }, [produtos])
+  }, [produtos]);
 
-  // Função para recarregar com novos produtos aleatórios
-  const reloadRnd = () => {
-    if (produtos.length > 0) {
-      const newRnd = selectProdRnd(produtos, 10)
-      setProdutosAleatorios(newRnd)
+  const selectProdRnd2 = (array, quantidade) => {
+    if (!array || array.length === 0) return [];
+
+    if (array.length <= quantidade) {
+      return [...array];
     }
-  }
+
+    const selecionados = new Set();
+    while (selecionados.size < quantidade) {
+      const indexAleatorio = Math.floor(Math.random() * array.length);
+      selecionados.add(array[indexAleatorio]);
+    }
+
+    return Array.from(selecionados);
+  };
+
+  // Atualiza produtos aleatórios quando os produtos carregam
+  useEffect(() => {
+    if (produtos.length > 0) {
+      const aleatorios = selectProdRnd2(produtos, 10);
+      setProdutosAleatorios2(aleatorios);
+    }
+  }, [produtos]);
+
 
   if (carregando) {
     return <div className={styles.carregando}>Carregando produtos...</div>
@@ -92,24 +115,18 @@ export default function Home() {
         <div className={styles.containerCards}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.titleHome}>Mais Vendidos</h2>
-            <button
-              onClick={reloadRnd}
-              className={styles.botaoAleatorio}
-              disabled={produtos.length === 0}
-            >
-              🔄 Novas Sugestões
-            </button>
           </div>
 
           <div className={styles.gridCards1}>
             {produtosAleatorios.map((produto) => (
-              <Card
-                key={produto.id}
-                nomeProduto={produto.nome}
-                preco={produto.valor}
-                desconto={produto.valor ? produto.valor * 1.16 : null}
-                imagemProd={produto.capa || '/imagem-padrao.jpg'}
-              />
+              <Link className={styles.linkCard} key={produto.id} href={`/Produto/${produto.id}`}>
+                <Card
+                  nomeProduto={produto.nome}
+                  preco={produto.valor}
+                  desconto={produto.valor ? produto.valor * 1.16 : null}
+                  imagemProd={produto.capa || '/imagem-padrao.jpg'}
+                />
+              </Link>
             ))}
           </div>
 
@@ -122,7 +139,16 @@ export default function Home() {
           {/* Seção estática (mantida do seu código original) */}
           <h2 className={styles.titleHome}>Acabaram de Chegar</h2>
           <div className={styles.gridCards2}>
-            {/* Seus cards estáticos aqui */}
+            {produtosAleatorios2.map((produto) => (
+              <Link className={styles.linkCard} key={produto.id} href={`/Produto/${produto.id}`}>
+                <Card
+                  nomeProduto={produto.nome}
+                  preco={produto.valor}
+                  desconto={produto.valor ? produto.valor * 1.16 : null}
+                  imagemProd={produto.capa || '/imagem-padrao.jpg'}
+                />
+              </Link>
+            ))}
           </div>
         </div>
       </section>

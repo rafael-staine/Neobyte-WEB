@@ -45,7 +45,7 @@ export default function Card(props) {
           <p className={styles.preco}>{formatarMoeda(props.preco)}</p>
 
           <p className={styles.par}>
-            À vista no pix ou até {parcelas}x de{" "}
+            À vista no pix ou até {parcelas}x sem juros de{" "}
             <span className={styles.precoPar}>
               {formatarMoeda(valorParcela)}
             </span>
