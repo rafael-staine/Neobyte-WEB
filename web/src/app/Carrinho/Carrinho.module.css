@@ -17,6 +17,7 @@
   gap: 15px;
 }
 
+
 .resumo {
   width: 300px;
   background: var(--cinza);
@@ -106,27 +107,60 @@
 
 .headerCard {
   display: grid;
-  grid-template-columns: 150px 1fr 120px 200px 50px;
+  grid-template-columns: 180px 1fr 320px 190px 50px;
   width: 100%;
-  background: var(--cinza);
+  background: var(--branco);
   padding: 15px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 18px 18px 4px 4px;
   font-weight: bold;
-  border: 1px solid var(--branco);
+  border: 3px double var(--verde);
+}
+
+.linkCard p {
+  text-decoration: none;
+  color: var(--preto);
 }
 
 .headerCard span {
   text-align: center;
+  color: var(--preto);
+  font-size: 18px;
 }
 
 .pedidos {
   list-style: none;
-  padding: 0;
+  padding: 10px;
   margin: 0;
   width: 100%;
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 10px;
+  border-radius: 4px 4px 18px 18px;
+  border: 3px double var(--verde);
+  font-size: 24px;
+  background: var(--branco);
+  min-height: 410px;
+}
+
+.vazioCart {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  opacity: 0.4;
+}
+
+.vazioCartI {
+  height: 80px;
+  width: 80px;
+}
+
+.vazioCartT {
+  color: var(--cinza);
+  font-size: 20px;
 }
 
 .lixeira {
@@ -137,13 +171,16 @@
 
 .row {
   display: grid;
-  grid-template-columns: 150px 1fr 120px 200px 50px;
-  align-items: center;
-  background: var(--cinza);
-  border: 1px solid var(--branco);
+  grid-template-columns: 180px 1fr 300px 190px 50px;
+  place-items: center;
+  background: var(--branco);
+  border: 1.3px solid #c5c5c5b3;
   border-radius: 10px;
   padding: 15px;
+  color: var(--preto);
+  box-shadow: 0px 0px 7px #3f3f3f16;
 }
+
 
 .produto {
   display: flex;
@@ -173,8 +210,8 @@
 
 .quantidade button {
   background: none;
-  border: 1px solid var(--branco);
-  color: var(--branco);
+  border: 1px solid var(--verde);
+  color: var(--verde);
   width: 28px;
   height: 28px;
   border-radius: 5px;
@@ -183,6 +220,7 @@
   align-items: center;
   justify-content: center;
   font-size: 16px;
+  transition: 0.3s;
 }
 
 .quantidade span {
@@ -193,6 +231,7 @@
 .quantidade button:hover {
   background: var(--verde);
   border-color: var(--verde);
+  color: var(--branco);
 }
 
 .preco {
@@ -201,6 +240,7 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  font-size: 22px;
 }
 
 .preco p {
@@ -209,7 +249,7 @@
 }
 
 .preco small {
-  color: var(--branco);
+  color: var(--preto);
   opacity: 0.8;
   font-size: 0.8em;
 }
@@ -227,13 +267,15 @@
 }
 
 .lixeiraBtn img {
-  width: 20px;
-  height: 20px;
-  transition: opacity 0.2s;
+  width: 23px;
+  height: 23px;
+  opacity: 0.8;
+  transition: all 0.2s;
 }
 
 .lixeiraBtn:hover img {
-  opacity: 0.8;
+  transform: rotate(2deg) scale(1.13);
+  opacity: 1;
 }
 
 .cupomContainer {
@@ -311,4 +353,3 @@
 .cupomInput button:hover {
   opacity: 0.9;
 }
-  

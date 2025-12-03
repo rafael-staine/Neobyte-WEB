@@ -1,9 +1,16 @@
+.allProd {
+    background-color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
 .topProduto {
     display: flex;
     gap: 100px;
     padding: 30px;
     color: var(--preto);
-    background-color: white;
     flex-wrap: wrap;
     justify-content: space-around;
     padding-left: 70px;
@@ -16,6 +23,14 @@
     height: 4px;
     background-color: var(--verde);
     border-radius: 1px;
+    width: 100%;
+}
+
+.divisorMeio {
+    height: 4px;
+    background-color: var(--verde);
+    border-radius: 10px;
+    width: 1080px;
 }
 
 .imgProdtudo {
@@ -142,6 +157,19 @@
     display: block;
     line-height: 1;
 }
+
+.categoriaProduto {
+    font-size: 0.89rem;
+    color: var(--cinza-escuro);
+    background-color: #f5f5f5;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 5px;
+    font-weight: 600;
+    border: 1px solid #e0e0e0;
+}
+
 
 
 .botoesProduto {
@@ -390,4 +418,498 @@
         font-size: 0.8rem;
         padding: 5px 10px;
     }
+}
+
+/* Container da tabela de especificações */
+.sectionEspecs {
+    background-color: var(--branco);
+}
+
+.especsContainer {
+    padding: 2rem;
+    min-width: 800px;
+    background-color: var(--branco);
+    border-radius: 14px;
+    box-shadow: 0px 0px 30px #0a933139;
+}
+
+/* Título das especificações */
+.especsTitulo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--verde);
+}
+
+/* Container da tabela */
+.especsTable {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Linha de cada especificação */
+.especsRow {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+/* Última linha sem borda inferior */
+.especsRow:last-child {
+    border-bottom: none;
+}
+
+/* Chave da especificação (lado esquerdo) */
+.especsChave {
+    flex: 0 0 200px;
+    font-weight: 600;
+    color: #555;
+    padding-right: 1rem;
+}
+
+/* Valor da especificação (lado direito) */
+.especsValor {
+    flex: 1;
+    color: #333;
+}
+
+/* Valor único (quando não tem separação por :) */
+.especsValorUnico {
+    flex: 1;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Mensagem quando não há especificações */
+.especsNaoDisponivel {
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .especsContainer {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .especsRow {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .especsChave {
+        flex: none;
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 0.2rem;
+    }
+
+    .especsValor {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* Seção de Comentários */
+.comentarios {
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--branco);
+}
+
+.tituloSecao {
+    font-size: 1.8rem;
+    color: var(--verde);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Formulário de Comentário */
+.formComentario {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: solid 3px var(--verde);
+}
+
+.formComentario h3 {
+    margin-bottom: 1rem;
+    color: var(--cinza-escuro);
+}
+
+.avaliacaoInput {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avaliacaoInput label {
+    font-weight: 600;
+}
+
+.estrelasInput {
+    display: flex;
+    gap: 5px;
+}
+
+.estrelaBtn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.estrelaBtn:hover {
+    color: #ffd700;
+}
+
+.textareaComentario {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 1rem;
+}
+
+.btnEnviarComentario {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btnEnviarComentario:hover {
+    background-color: #009f7a;
+}
+
+/* Lista de Comentários */
+.listaComentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.semComentarios {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* Card de Comentário */
+.comentarioCard {
+    background-color: white;
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+
+    /* Estilos para informação do usuário */
+    .carregandoUsuario {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: #4a90e2;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .usuarioInfo {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: var(--verde);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 100;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btnLogout,
+    .btnLogin {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+
+    .btnLogout:hover,
+    .btnLogin:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+
+        .usuarioInfo,
+        .carregandoUsuario {
+            top: 70px;
+            right: 10px;
+            font-size: 12px;
+            padding: 6px 12px;
+            flex-direction: column;
+            gap: 5px;
+            align-items: flex-start;
+        }
+
+        .btnLogout,
+        .btnLogin {
+            align-self: stretch;
+            text-align: center;
+        }
+    }
+
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cabecalhoComentario {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.infoUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nomeUsuario {
+    font-weight: 600;
+    color: var(--cinza-escuro);
+}
+
+.estrelasComentario {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.estrelaPreenchida {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+.estrelaVazia {
+    color: #ddd;
+    font-size: 1.2rem;
+}
+
+.quantidadeEstrelas {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 0.25rem;
+}
+
+.acoesComentario {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btnEditar,
+.btnExcluir,
+.btnSalvar,
+.btnCancelar {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btnEditar {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.btnExcluir {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btnSalvar {
+    background-color: var(--verde);
+    color: white;
+}
+
+.btnCancelar {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btnEditar:hover,
+.btnExcluir:hover,
+.btnSalvar:hover,
+.btnCancelar:hover {
+    opacity: 0.9;
+}
+
+/* Edição de Comentário */
+.editarComentario {
+    margin-bottom: 1rem;
+}
+
+.textareaEditar {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 0.75rem;
+}
+
+.avaliacaoEditar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Texto do Comentário */
+.textoComentario {
+    color: var(--cinza-escuro);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.dataComentario {
+    font-size: 0.85rem;
+    color: #999;
+    text-align: right;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .comentarios {
+        padding: 1rem;
+    }
+
+    .cabecalhoComentario {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .acoesComentario {
+        align-self: flex-end;
+    }
+
+    .avaliacaoInput {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* Estilos para informação do usuário */
+.carregandoUsuario {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: #4a90e2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.usuarioInfo {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: var(--verde);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btnLogout,
+.btnLogin {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btnLogout:hover,
+.btnLogin:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+    .usuarioInfo,
+    .carregandoUsuario {
+        top: 70px;
+        right: 10px;
+        font-size: 12px;
+        padding: 6px 12px;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+
+    .btnLogout,
+    .btnLogin {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+
+.btnCarrinho:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btnCarrinho:disabled:hover {
+    background-color: #007bff;
+
 }
