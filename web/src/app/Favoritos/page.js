@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubHeader from "@/components/SubHeader";
-import styles from "./Favoritos.module.css";
 import Card from "@/components/Card";
 import Link from "next/link";
+import styles from "./Favoritos.module.css";
 
 export default function Favoritos() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
+  const [removendoId, setRemovendoId] = useState(null);
 
   useEffect(() => {
-    // Verificar usuário logado
     const userData = localStorage.getItem("neobyteUser");
     const isLoggedIn = localStorage.getItem("neobyteLoggedIn") === "true";
 
@@ -51,8 +52,13 @@ export default function Favoritos() {
     }
   };
 
-  const handleRemove = async (product_id) => {
+  const handleRemove = async (product_id, event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     if (!usuarioLogado) return;
+
+    setRemovendoId(product_id);
 
     try {
       const resp = await fetch("http://localhost:4000/favorite", {
@@ -71,11 +77,10 @@ export default function Favoritos() {
 
       // Atualizar lista local
       setFavorites((prev) => prev.filter((f) => f.produto_id !== product_id));
-
-      // Mostrar notificação
-      alert("Produto removido dos favoritos!");
     } catch (err) {
       console.error("Erro ao remover favorito", err);
+    } finally {
+      setRemovendoId(null);
     }
   };
 
@@ -83,13 +88,23 @@ export default function Favoritos() {
   if (!usuarioLogado && !loading) {
     return (
       <>
+        <Head>
+          <title>Neobyte - Favoritos</title>
+          <meta name="description" content="Seus produtos favoritos na Neobyte" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
         <Header />
         <SubHeader logo="/Neobyte/favorito.svg" title="Favoritos" />
         <section className={styles.container}>
           <div className={styles.loginMessage}>
-            <h3>Você precisa estar logado para ver seus favoritos</h3>
+            <div className={styles.heartIcon}>❤️</div>
+            <h3>Faça login para ver seus favoritos</h3>
+            <p>Entre na sua conta para visualizar e gerenciar seus produtos favoritos.</p>
             <Link href="/Login" className={styles.loginBtn}>
               Fazer Login
+            </Link>
+            <Link href="/Cadastro" className={styles.cadastroBtn}>
+              Criar Conta
             </Link>
           </div>
         </section>
@@ -100,48 +115,75 @@ export default function Favoritos() {
 
   return (
     <>
+      <Head>
+        <title>Neobyte - Favoritos</title>
+        <meta name="description" content="Seus produtos favoritos na Neobyte" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <Header />
       <SubHeader logo="/Neobyte/favorito.svg" title="Favoritos" />
       <section className={styles.container}>
-        <div className={styles.cardsContainer}>
-          {loading ? (
-            <p className={styles.loading}>Carregando favoritos...</p>
-          ) : favorites.length === 0 ? (
-            <div className={styles.emptyState}>
-              <img className={styles.vazioFav}
-                src='./logo/logomini.svg'
-                alt="Logomini"
-              />
-              <h3>Nenhum produto favoritado ainda.</h3>
-              <p>Adicione produtos aos favoritos clicando no coração na página do produto</p>
-              <Link href="/" className={styles.browseBtn}>
-                Explorar Produtos
-              </Link>
+        <div className={styles.headerContent}>
+          <h1 className={styles.tituloPagina}>
+            Meus Favoritos
+          </h1>
+          {favorites.length > 0 && (
+            <div className={styles.contador}>
+              <span className={styles.contadorNumero}>{favorites.length}</span>
+              {favorites.length === 1 ? ' produto salvo' : ' produtos salvos'}
             </div>
-          ) : (
-            favorites.map((fav) => {
+          )}
+        </div>
+
+        {loading ? (
+          <div className={styles.carregandoContainer}>
+            <div className={styles.spinner}></div>
+            <p>Carregando seus favoritos...</p>
+          </div>
+        ) : favorites.length === 0 ? (
+          <div className={styles.emptyState}>
+            <img className={styles.vazioFavI}
+              src='./logo/logomini.svg'
+              alt="Logomini"
+            />
+            <h3>Sua lista de favoritos está vazia</h3>
+            <p>Adicione produtos aos favoritos clicando no coração na página do produto.</p>
+            <Link href="/" className={styles.browseBtn}>
+              <span>🔍</span> Explorar Produtos
+            </Link>
+          </div>
+        ) : (
+          <div className={styles.gridContainer}>
+            {favorites.map((fav) => {
               const produto = fav.produto || {};
               return (
-                <div key={fav.produto_id} className={styles.cardWrapper}>
+                <div key={fav.produto_id} className={styles.cardContainer}>
                   <Link href={`/Produto/${fav.produto_id}`} className={styles.cardLink}>
                     <Card
                       nomeProduto={produto.nome || "Produto"}
                       imagemProd={produto.capa || "/ImgProdutos/placamae1.svg"}
-                      desconto={produto.valordesconto}
+                      desconto={produto.valordesconto === true ? produto.valor * 1.16 : null}
                       preco={produto.valor}
+                      temDesconto={produto.valordesconto === true}
                     />
                   </Link>
                   <button
                     className={styles.removeBtn}
-                    onClick={() => handleRemove(fav.produto_id)}
+                    onClick={(e) => handleRemove(fav.produto_id, e)}
+                    disabled={removendoId === fav.produto_id}
+                    title="Remover dos favoritos"
                   >
-                    Remover
+                    {removendoId === fav.produto_id ? (
+                      <span className={styles.removingSpinner}></span>
+                    ) : (
+                      "×"
+                    )}
                   </button>
                 </div>
               );
-            })
-          )}
-        </div>
+            })}
+          </div>
+        )}
       </section>
       <Footer />
     </>

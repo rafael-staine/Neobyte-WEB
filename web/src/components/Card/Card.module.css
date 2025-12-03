@@ -25,6 +25,11 @@
     width: 286px;
     margin: 30px 30px;
     position: relative;
+    background-color: none;
+}
+
+.produto_card_fav {
+    background-color: none;
 }
 
 .imgCard {
