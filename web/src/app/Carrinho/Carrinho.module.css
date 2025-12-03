@@ -151,8 +151,9 @@
 }
 
 .vazioCartI {
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
 }
 
 .vazioCartT {

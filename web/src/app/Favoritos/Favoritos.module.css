@@ -1,9 +1,157 @@
-.cardsContainer {
-    padding: 20px 40px;
+.container {
+  min-height: 60vh;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
 }
 
-.linkCard {
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.cardWrapper:hover {
+  transform: translateY(-5px);
+}
+
+.cardLink {
   color: inherit;
   text-decoration: none;
 }
-.linkCard:visited { color: inherit; }
+
+.cardLink:visited {
+  color: inherit;
+}
+
+.removeBtn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  align-self: center;
+  width: 100%;
+  max-width: 200px;
+}
+
+.removeBtn:hover {
+  background-color: #c0392b;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  grid-column: 1 / -1;
+  padding: 40px;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.emptyState h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.emptyState p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.browseBtn {
+  background-color: var(--verde);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.browseBtn:hover {
+  background-color: var(--verde-escuro);
+}
+
+.loginMessage {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.loginMessage h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.loginBtn {
+  background-color: var(--verde);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.loginBtn:hover {
+  background-color: #009f7a;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cardsContainer {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .container {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .cardWrapper {
+    padding: 15px;
+  }
+}
+
+.vazioFav {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+}
