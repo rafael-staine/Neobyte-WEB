@@ -11,7 +11,7 @@ export default function Produto() {
   const params = useParams(); // Obtém os parâmetros da rota
   const id = params?.id; // Extrai o ID do produto
 
-  console.log(id)
+  console.log('ID do produto:', id);
 
   const [produto, setProduto] = useState(null);
   const [carregando, setCarregando] = useState(true);
@@ -21,9 +21,10 @@ export default function Produto() {
       // Função para buscar os dados do produto
       const fetchProduto = async () => {
         try {
-          const response = await fetch(`http://localhost:4000/product/${id}`); // Substitua pela URL correta da sua API
+          const response = await fetch(`http://localhost:4000/product/${id}`);
           const data = await response.json();
-          console.log(data)
+          console.log('Dados do produto recebidos:', data);
+          console.log('valordesconto:', data.product?.valordesconto);
           setProduto(data.product);
         } catch (error) {
           console.error('Erro ao buscar produto:', error);
@@ -51,14 +52,19 @@ export default function Produto() {
     }).format(valor);
   };
 
+  // Verifica se o produto tem desconto
+  const temDesconto = produto.valordesconto === true;
+
+  // Calcula o preço original (para mostrar riscado) quando há desconto
+  const precoOriginal = temDesconto ? produto.valor * 1.16 : null;
 
   return (
     <>
       <Head>
-        <title>Neobyte</title>
+        <title>Neobyte - {produto.nome}</title>
         <meta
           name="description"
-          content="O melhor e-commerce tecnológico do mercado"
+          content={produto.descricao || "Descrição do produto"}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -96,15 +102,29 @@ export default function Produto() {
           </div>
 
           <div className={styles.caixaCompra}>
-            <p className={styles.precoDesconto}>{formatarMoeda(produto.valor * 1.16)}</p>
+            {/* Mostra o preço original riscado apenas se temDesconto for true */}
+            {temDesconto && (
+              <p className={styles.precoDesconto}>{formatarMoeda(precoOriginal)}</p>
+            )}
+
             <p className={styles.preco}>{formatarMoeda(produto.valor)}</p>
+
+            {/* Mostra a porcentagem de desconto apenas se temDesconto for true */}
             <p className={styles.precoPix}>
-              À vista no PIX com <strong>10% de desconto</strong>
+              À vista no PIX com <strong>{temDesconto ? '14%' : '10%'} de desconto</strong>
             </p>
+
             <p className={styles.precoParcelado}>
               {formatarMoeda(produto.valor)} em até 10x de {formatarMoeda(produto.valor / 10)} sem juros <br />
-              ou 1x com <strong>10% de desconto</strong> no cartão
+              ou 1x com <strong>{temDesconto ? '14%' : '10%'} de desconto</strong> no cartão
             </p>
+
+            {/* Badge de desconto visível apenas se temDesconto for true */}
+            {temDesconto && (
+              <div className={styles.badgeDescontoProduto}>
+                <span className={styles.textoBadgeProduto}>-14% OFF</span>
+              </div>
+            )}
 
             <div className={styles.botoesProduto}>
               <a href="/Pagamento" onClick={(e) => { if (!requireAuth(e)) return; }}>
@@ -134,7 +154,7 @@ export default function Produto() {
 
         <div className={styles.divisor}></div>
         <section>
-
+          {/* Outras seções do produto podem vir aqui */}
         </section>
       </section>
       <Footer />

@@ -8,8 +8,7 @@ export default function Card(props) {
     }).format(valor);
   };
 
-  const calcProd = Number((props.preco / 10).toFixed(2));
-
+  // Calcula o preço das parcelas
   let parcelas = 1;
   let valorParcela = props.preco;
 
@@ -27,20 +26,30 @@ export default function Card(props) {
   return (
     <section className={styles.produto_card}>
       <div className={styles.card_produto}>
+        {/* Adiciona badge de desconto se temDesconto for true */}
+        {props.temDesconto && (
+          <div className={styles.badge_desconto}>
+            <span className={styles.texto_badge}>-16%</span>
+          </div>
+        )}
+
         <picture className={styles.imgCard}>
-          <img className={styles.imgCardProd}
-            src={props.imagemProd} alt={props.nomeProduto} />
+          <img
+            className={styles.imgCardProd}
+            src={props.imagemProd}
+            alt={props.nomeProduto}
+          />
         </picture>
 
         <div className={styles.infoCard}>
           <h3 className={styles.tituloProduto}>{props.nomeProduto}</h3>
 
-          <p
-            className={`${styles.desconto} ${!props.desconto ? styles.hidden : ""
-              }`}
-          >
-            {props.desconto ? formatarMoeda(props.desconto) : "\u00A0"}
-          </p>
+          {/* Mostra o preço original com desconto se temDesconto for true */}
+          {props.temDesconto && (
+            <p className={styles.desconto}>
+              {formatarMoeda(props.desconto)}
+            </p>
+          )}
 
           <p className={styles.preco}>{formatarMoeda(props.preco)}</p>
 

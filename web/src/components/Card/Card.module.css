@@ -1,5 +1,6 @@
+/* Card.module.css */
 .card_produto {
-    height: 500px;
+    height: 480px;
     position: relative;
     padding: 20px 15px;
     display: flex;
@@ -23,26 +24,27 @@
 .produto_card {
     width: 286px;
     margin: 30px 30px;
+    position: relative;
 }
 
 .imgCard {
     width: 200px;
     height: 200px;
     display: block;
-    /* transforma em bloco */
     margin: 0 auto;
 }
 
 .imgCardProd {
     object-fit: contain;
+    width: 100%;
+    height: 100%;
 }
 
 .infoCard {
     display: flex;
     flex-direction: column;
-    /* empilha os itens em coluna */
-    gap: 8px;
-    /* espaço entre cada texto */
+    gap: 4px;
+    margin-bottom: 30px;
 }
 
 .tituloProduto {
@@ -50,41 +52,80 @@
     text-align: start;
     font-weight: 700;
     display: -webkit-box;
-    /* necessário */
-    -webkit-line-clamp: 3;
-    /* número de linhas */
     -webkit-box-orient: vertical;
-    /* orientação vertical */
     overflow: hidden;
-    /* esconde o resto */
     text-overflow: ellipsis;
-    /* coloca os "..." */
+    margin-bottom: 8px;
+    /* Altura mínima para uniformizar */
+}
+
+.badge_desconto {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #ff4444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.texto_badge {
+    display: block;
+    line-height: 1;
 }
 
 .desconto {
-    color: red;
-    text-decoration: line-through 1px red;
-
-}
-
-.hidden {
-    visibility: hidden;
+    color: #666;
+    text-decoration: line-through 1px #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 2px;
 }
 
 .preco {
     font-weight: 800;
     font-size: 1.3rem;
     color: var(--verde);
+    margin-bottom: 4px;
 }
 
 .par {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--cinza);
     font-weight: 600;
+    margin-top: 4px;
 }
 
 .precoPar {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--cinza);
     font-weight: 700;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .produto_card {
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    .card_produto {
+        height: auto;
+        min-height: 450px;
+    }
+
+    .badge_desconto {
+        top: 10px;
+        left: 10px;
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+
+    .tituloProduto {
+        min-height: 50px;
+    }
 }

@@ -17,12 +17,15 @@ export default function Home() {
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(null)
 
+  // Dentro do useEffect que carrega os produtos
   useEffect(() => {
     async function carregarProdutos() {
       try {
         setCarregando(true)
         setErro(null)
         const produtosDoBanco = await getProdutos()
+        console.log('Produtos carregados:', produtosDoBanco) // Adicione esta linha
+        console.log('Produtos com desconto:', produtosDoBanco.filter(p => p.valordesconto === true)) // Verifique produtos com desconto
         setProdutos(produtosDoBanco)
       } catch (error) {
         setErro('Erro ao carregar produtos')
@@ -123,8 +126,10 @@ export default function Home() {
                 <Card
                   nomeProduto={produto.nome}
                   preco={produto.valor}
-                  desconto={produto.valor ? produto.valor * 1.16 : null}
+                  // Se valordesconto for 1, calcula o preço original (aumenta 16% para mostrar como "preço antigo")
+                  desconto={produto.valordesconto === true ? produto.valor * 1.16 : null}
                   imagemProd={produto.capa || '/imagem-padrao.jpg'}
+                  temDesconto={produto.valordesconto === true} // Adiciona nova prop para controlar o desconto
                 />
               </Link>
             ))}
@@ -144,8 +149,10 @@ export default function Home() {
                 <Card
                   nomeProduto={produto.nome}
                   preco={produto.valor}
-                  desconto={produto.valor ? produto.valor * 1.16 : null}
+                  // Se valordesconto for 1, calcula o preço original (aumenta 16% para mostrar como "preço antigo")
+                  desconto={produto.valordesconto === true ? produto.valor * 1.16 : null}
                   imagemProd={produto.capa || '/imagem-padrao.jpg'}
+                  temDesconto={produto.valordesconto === true} // Adiciona nova prop para controlar o desconto
                 />
               </Link>
             ))}
