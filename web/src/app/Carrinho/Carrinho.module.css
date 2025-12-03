@@ -111,15 +111,12 @@
   width: 100%;
   background: var(--branco);
   padding: 15px;
+  place-items: center;
   border-radius: 18px 18px 4px 4px;
   font-weight: bold;
   border: 3px double var(--verde);
 }
 
-.linkCard p {
-  text-decoration: none;
-  color: var(--preto);
-}
 
 .headerCard span {
   text-align: center;
@@ -170,7 +167,7 @@
 }
 
 .row {
-  display: grid;
+  display: inline-grid;
   grid-template-columns: 180px 1fr 300px 190px 50px;
   place-items: center;
   background: var(--branco);
@@ -179,6 +176,29 @@
   padding: 15px;
   color: var(--preto);
   box-shadow: 0px 0px 7px #3f3f3f16;
+}
+
+.descGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--branco);
+}
+
+.descricao p {
+  margin: 0;
+  text-align: center;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.linkCard p {
+  text-decoration: none;
+  color: var(--preto);
+}
+
+.linkCard:hover p {
+  text-decoration: underline;
 }
 
 
@@ -192,13 +212,6 @@
   height: 120px;
   object-fit: contain;
   border-radius: 8px;
-}
-
-.descricao p {
-  margin: 0;
-  text-align: left;
-  font-size: 0.9em;
-  line-height: 1.4;
 }
 
 .quantidade {

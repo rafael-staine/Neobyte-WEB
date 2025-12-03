@@ -8,6 +8,7 @@ import Footer from '../../../components/Footer';
 import styles from './Produto.module.css';
 import ToastNotification from '../../../components/ToastNotification';
 import ConfirmationModal from '../../../components/ConfirmationModal';
+import { useRef } from 'react';
 
 export default function Produto() {
   const params = useParams();
@@ -24,8 +25,12 @@ export default function Produto() {
   const [editandoComentario, setEditandoComentario] = useState(null);
   const [usuarioLogado, setUsuarioLogado] = useState(null);
   const [carregandoComentarios, setCarregandoComentarios] = useState(true);
+  const [mediaAvaliacoes, setMediaAvaliacoes] = useState(0);
+  const [totalAvaliacoes, setTotalAvaliacoes] = useState(0);
+  const [estrelaHover, setEstrelaHover] = useState(0);
   const [carregandoUsuario, setCarregandoUsuario] = useState(true);
   const [adicionandoAoCarrinho, setAdicionandoAoCarrinho] = useState(false);
+  const comentariosRef = useRef(null);
 
 
   const [notification, setNotification] = useState({
@@ -133,6 +138,7 @@ export default function Produto() {
     if (id) {
       fetchProduto();
       fetchComentarios();
+      calcularMediaAvaliacoes();
     }
   }, [id]);
 
@@ -242,6 +248,12 @@ export default function Produto() {
           }
         };
         setComentarios([novoComentarioComUsuario, ...comentarios]);
+
+        const novaSoma = comentarios.reduce((total, c) => total + c.estrela, 0) + novoComentario.estrela;
+        const novaMedia = novaSoma / (comentarios.length + 1);
+        setMediaAvaliacoes(novaMedia);
+        setTotalAvaliacoes(comentarios.length + 1);
+
         setNovoComentario({ texto: '', estrela: 5 });
         showNotification('Comentário adicionado com sucesso!', 'success');
       } else {
@@ -309,10 +321,20 @@ export default function Produto() {
           const data = await response.json();
 
           if (response.ok) {
-            setComentarios(comentarios.filter(c => c.id !== comentarioId));
+            const novosComentarios = comentarios.filter(c => c.id !== comentarioId);
+            setComentarios(novosComentarios);
+
+            // Atualiza a média se ainda houver comentários
+            if (novosComentarios.length > 0) {
+              const novaSoma = novosComentarios.reduce((total, c) => total + c.estrela, 0);
+              const novaMedia = novaSoma / novosComentarios.length;
+              setMediaAvaliacoes(novaMedia);
+            } else {
+              setMediaAvaliacoes(0);
+            }
+            setTotalAvaliacoes(novosComentarios.length);
+
             showNotification('Comentário excluído com sucesso!', 'success');
-          } else {
-            showNotification(data.message || 'Erro ao excluir comentário', 'error');
           }
         } catch (error) {
           console.error('Erro ao excluir comentário:', error);
@@ -321,6 +343,15 @@ export default function Produto() {
       },
       commentId: comentarioId
     });
+  };
+
+  const scrollToComentarios = () => {
+    if (comentariosRef.current) {
+      comentariosRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
 
   const confirmarEdicao = async () => {
@@ -334,6 +365,61 @@ export default function Produto() {
           await handleEditarComentario(editandoComentario.id);
         }
       }
+    });
+  };
+
+  const calcularMediaAvaliacoes = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/comment/product/${id}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.comment && Array.isArray(data.comment) && data.comment.length > 0) {
+        // Calcula a soma das estrelas
+        const somaEstrelas = data.comment.reduce((total, comentario) => {
+          return total + (comentario.estrela || 0);
+        }, 0);
+
+        // Calcula a média
+        const media = somaEstrelas / data.comment.length;
+        setMediaAvaliacoes(media);
+        setTotalAvaliacoes(data.comment.length);
+      } else {
+        setMediaAvaliacoes(0);
+        setTotalAvaliacoes(0);
+      }
+    } catch (error) {
+      console.error('Erro ao calcular média de avaliações:', error);
+      setMediaAvaliacoes(0);
+      setTotalAvaliacoes(0);
+    }
+  };
+
+  const renderEstrelasMedia = (media) => {
+    // Arredonda para baixo em incrementos de 0.5
+    const mediaArredondada = Math.floor(media * 2) / 2;
+
+    return Array.from({ length: 5 }, (_, index) => {
+      const estrelaValor = index + 1;
+      let className = styles.estrelaVazia;
+
+      if (estrelaValor <= Math.floor(mediaArredondada)) {
+        // Estrela completamente cheia
+        className = styles.estrelaPreenchida;
+      } else if (estrelaValor - 0.5 === mediaArredondada) {
+        // Meia estrela
+        className = styles.estrelaMeia;
+      }
+
+      return (
+        <span key={index} className={className}>
+          ★
+        </span>
+      );
     });
   };
 
@@ -525,12 +611,26 @@ export default function Produto() {
 
           <div className={styles.sobreProduto}>
             <div className={styles.avaliacao}>
-              <div className={styles.estrelas}>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>☆</span>
+              <div className={styles.avaliacaoInfo}>
+                <div className={styles.mediaContainer}>
+                  <div className={styles.mediaNota} onClick={scrollToComentarios}>
+                    <span className={styles.notaNumero}>
+                      {mediaAvaliacoes.toFixed(1)}
+                    </span>
+                    <div className={styles.estrelasMedia}>
+                      {renderEstrelasMedia(mediaAvaliacoes)}
+                    </div>
+                    <div className={styles.totalAvaliacoes}>
+                      {totalAvaliacoes === 0 ? (
+                        <span className={styles.semAvaliacoes}>Sem avaliações ainda</span>
+                      ) : (
+                        <span className={styles.contadorAvaliacoes}>
+                          {totalAvaliacoes} {totalAvaliacoes === 1 ? 'avaliação' : 'avaliações'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -625,7 +725,7 @@ export default function Produto() {
         <div className={styles.divisorMeio}></div>
 
         {/* Seção de Comentários */}
-        <section className={styles.comentarios}>
+        <section className={styles.comentarios} ref={comentariosRef}>
           <h2 className={styles.tituloSecao}>Avaliações dos Clientes</h2>
 
           {/* Formulário para novo comentário */}
@@ -641,12 +741,20 @@ export default function Produto() {
                       type="button"
                       className={styles.estrelaBtn}
                       onClick={() => setNovoComentario({ ...novoComentario, estrela })}
+                      onMouseEnter={() => setEstrelaHover(estrela)}
+                      onMouseLeave={() => setEstrelaHover(0)}
                     >
-                      {estrela <= novoComentario.estrela ? '★' : '☆'}
+                      <span className={
+                        estrela <= (estrelaHover || novoComentario.estrela)
+                          ? styles.estrelaPreenchida
+                          : styles.estrelaVazia
+                      }>
+                        ★
+                      </span>
                     </button>
                   ))}
                 </div>
-                <span>{novoComentario.estrela} estrelas</span>
+                <span>{estrelaHover || novoComentario.estrela} estrelas</span>
               </div>
 
               <textarea
@@ -741,8 +849,16 @@ export default function Produto() {
                               type="button"
                               className={styles.estrelaBtn}
                               onClick={() => setEditandoComentario({ ...editandoComentario, estrela })}
+                              onMouseEnter={() => setEstrelaHover(estrela)}
+                              onMouseLeave={() => setEstrelaHover(0)}
                             >
-                              {estrela <= editandoComentario.estrela ? '★' : '☆'}
+                              <span className={
+                                estrela <= (estrelaHover || editandoComentario.estrela)
+                                  ? styles.estrelaPreenchida
+                                  : styles.estrelaVazia
+                              }>
+                                ★
+                              </span>
                             </button>
                           ))}
                         </div>

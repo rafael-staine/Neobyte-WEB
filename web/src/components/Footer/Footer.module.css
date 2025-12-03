@@ -3,6 +3,9 @@
     color: #fff;
     padding: 0 0 32px 0;
     position: relative;
+    width: 100%;
+    bottom: 0;
+    margin-top: auto;
 }
 
 .contentWrapper {

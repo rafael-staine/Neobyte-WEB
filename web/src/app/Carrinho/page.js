@@ -238,11 +238,13 @@ export default function Carrinho() {
                         alt={produto.nome}
                       />
                     </div>
-                    <Link className={styles.linkCard} key={produto.id} href={`/Produto/${produto.id}`}>
-                      <div className={styles.descricao}>
-                        <p>{produto.nome}</p>
-                      </div>
-                    </Link>
+                    <section className={styles.descGrid}>
+                      <Link className={styles.linkCard} key={produto.id} href={`/Produto/${produto.id}`}>
+                        <div className={styles.descricao}>
+                          <p>{produto.nome}</p>
+                        </div>
+                      </Link>
+                    </section>
                     <div className={styles.quantidade}>
                       <button onClick={() => changeQuantity(produtoId, Math.max(1, quantidade - 1))}>-</button>
                       <span>{quantidade}</span>
